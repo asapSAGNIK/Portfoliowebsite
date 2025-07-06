@@ -7,7 +7,8 @@ import Link from "next/link"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
 import BackgroundParticles from "@/components/BackgroundParticles"
-import ResumeDialog from '@/components/ResumeDialog'
+import ResumeDialog from "@/components/ResumeDialog"
+
 
 export default function Portfolio() {
   const skills = [
@@ -20,26 +21,45 @@ export default function Portfolio() {
     "Supabase",
     "Tailwind CSS",
     "C",
+    "SQL",
+    "PostgreSQL",
+    "C#",
+    "React Native",
+    "Next.js",
+    "FastAPI",
+    "Node.js",
+    "Express.js",
+    "Git",
+    "GitHub",
+    "Docker",
+    "MongoDB",
+    "MySQL",
+    "Redux",
   ]
 
   const projects = [
     {
       title: "Rocket Adventures, A Unity Game",
-      description: "Pilot your rocket, avoid obstacles, and land safely to progress through levels!",
+      description: "A 3D rocket navigation game developed in Unity using C#, featuring physics-based controls, level progression, and dynamic camera movement with immersive particle effects.",
       
       github: "https://github.com/asapSAGNIK/Rocket-Adventures-3D-A-Unity-Game",
       
     },
     {
       title: "Smart Playlist Mobile App",
-      description: "A mobile application that uses AI to generate personalized music playlists based on your descriptions and preferences",
+      description: "A React Native mobile application powered by Groq AI, generating personalized music playlists. Features include export to Spotify , performance optimization, and is built with TypeScript, Redux Toolkit, React Query, and Expo.",
      
       github: "https://github.com/asapSAGNIK/SmartPlaylistApp",
       
     },
     {
+      title: "P.L.A.T.E (Personalized learning and Assistance for Taste Enhancement)",
+      description: "A full-stack AI-powered web app that recommends personalized recipes using Google Gemini, built with Next.js 14, Tailwind CSS, Redux Toolkit, Node.js, Express, Supabase, Redis, and integrated with Spoonacular API, all containerized with Docker.",
+      github: "https://github.com/asapSAGNIK/P.L.A.T.E",
+    },
+    {
       title: "Snake Game",
-      description: "A classic Snake Game with 3 difficulty modes",
+      description: "A classic Snake game created with Python and Pygame, featuring modern visuals, multiple difficulty modes with high score tracking, and comprehensive game controls.",
       
       github: "https://github.com/asapSAGNIK/Snake_Game",
       
@@ -146,17 +166,19 @@ export default function Portfolio() {
               <CardContent className="flex-1">
                 <div className="space-y-4">
                   {projects.map((project, index) => (
-                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
-                      <CardContent>
-                        <div className="py-2">
-                          <Link href={project.github} target="_blank" className="flex items-center text-lg font-semibold hover:underline">
-                            {project.title}
-                            <ExternalLink className="w-4 h-4 ml-2" />
-                          </Link>
-                          <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
+                    <Link key={index} href={project.github} target="_blank" className="block">
+                      <Card className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
+                        <CardContent>
+                          <div className="py-2">
+                            <div className="flex items-center text-lg font-semibold hover:underline">
+                              {project.title}
+                              <ExternalLink className="w-4 h-4 ml-2" />
+                            </div>
+                            <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
+                          </div>
+                        </CardContent>
+                      </Card>
+                    </Link>
                   ))}
                 </div>
 

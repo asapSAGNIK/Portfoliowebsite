@@ -20,7 +20,7 @@ const ResumeDialog = () => {
         <div className="flex-grow overflow-hidden">
           {/* Using iframe to display the PDF */}
           <iframe
-            src="/resume.pdf"
+            src="/resume.pdf#toolbar=0&navpanes=0"
             width="100%"
             height="100%"
             className="border-none"
