@@ -177,25 +177,25 @@ export default function Portfolio() {
                           <div className="flex gap-2">
                             {project.isDeployed ? (
                               <>
-                                <Button asChild size="sm" className="flex-1">
+                                <Button asChild size="sm" variant="outline" className="text-xs px-3 py-1 h-7">
                                   <Link href={project.website} target="_blank">
-                                    <ExternalLink className="w-4 h-4 mr-2" />
+                                    <ExternalLink className="w-3 h-3 mr-1" />
                                     Visit Website
                                   </Link>
                                 </Button>
-                                <Button asChild variant="outline" size="sm" className="flex-1">
+                                <Button asChild size="sm" variant="ghost" className="text-xs px-3 py-1 h-7">
                                   <Link href={project.github} target="_blank">
-                                    <Github className="w-4 h-4 mr-2" />
+                                    <Github className="w-3 h-3 mr-1" />
                                     View Code
                                   </Link>
                                 </Button>
                               </>
                             ) : (
-                              <Button asChild size="sm" className="w-full">
+                              <Button asChild size="sm" variant="ghost" className="text-xs px-3 py-1 h-7 w-full">
                                 <Link href={project.github} target="_blank">
-                                  <Github className="w-4 h-4 mr-2" />
+                                  <Github className="w-3 h-3 mr-1" />
                                   View Code
-                                  <ExternalLink className="w-4 h-4 ml-2" />
+                                  <ExternalLink className="w-3 h-3 ml-1" />
                                 </Link>
                               </Button>
                             )}
