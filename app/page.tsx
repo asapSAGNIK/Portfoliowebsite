@@ -174,7 +174,7 @@ export default function Portfolio() {
                             )}
                           </div>
                           <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
-                          <div className="flex gap-2 mt-2">
+                          <div className="flex gap-2 mt-2 justify-center">
                             {project.isDeployed ? (
                               <>
                                 <Button asChild variant="outline" className="text-xs px-2 py-1 h-6 text-xs">
@@ -191,7 +191,7 @@ export default function Portfolio() {
                                 </Button>
                               </>
                             ) : (
-                              <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 w-full text-xs">
+                              <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 text-xs">
                                 <Link href={project.github} target="_blank">
                                   <Github className="w-3 h-3 mr-1" />
                                   View Code
