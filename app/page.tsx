@@ -174,16 +174,16 @@ export default function Portfolio() {
                             )}
                           </div>
                           <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
-                          <div className="flex gap-2">
+                          <div className="flex gap-2 mt-2">
                             {project.isDeployed ? (
                               <>
-                                <Button asChild size="sm" variant="outline" className="text-xs px-3 py-1 h-7">
+                                <Button asChild variant="outline" className="text-xs px-2 py-1 h-6 text-xs">
                                   <Link href={project.website} target="_blank">
                                     <ExternalLink className="w-3 h-3 mr-1" />
                                     Visit Website
                                   </Link>
                                 </Button>
-                                <Button asChild size="sm" variant="ghost" className="text-xs px-3 py-1 h-7">
+                                <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 text-xs">
                                   <Link href={project.github} target="_blank">
                                     <Github className="w-3 h-3 mr-1" />
                                     View Code
@@ -191,7 +191,7 @@ export default function Portfolio() {
                                 </Button>
                               </>
                             ) : (
-                              <Button asChild size="sm" variant="ghost" className="text-xs px-3 py-1 h-7 w-full">
+                              <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 w-full text-xs">
                                 <Link href={project.github} target="_blank">
                                   <Github className="w-3 h-3 mr-1" />
                                   View Code
