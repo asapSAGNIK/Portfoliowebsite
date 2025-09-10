@@ -50,7 +50,7 @@ export default function Portfolio() {
       title: "Sunder Garments",
       company: "Sunder Garments", 
       type: "Freelance",
-      date: "AUgust 2025",
+      date: "August 2025",
       description: "An end-to-end e-commerce platform supporting web and mobile storefronts with cart, checkout, and order management. I engineered the full workflow from product listing to secure transactions and deployment.",
       website: "https://www.sundergarments.in/",
     },
