@@ -64,7 +64,7 @@ export default function Portfolio() {
     },
     {
       title: "Smart Playlist",
-      description: "An AI-powered music discovery platform that creates personalized playlists from natural language prompts. Simply describe your mood or desired vibe, and get curated music recommendations tailored to your preferences.",
+      description: "An AI-powered music discovery platform that creates personalized playlists from natural language promptsed. Simply describe your mood or desired vibe, and get curated music recommendations tailored to your preferences.",
       github: "https://github.com/srijantelang-work/Smartplaylist",
       website: "https://smartplaylist.software/",
       isDeployed: true,
@@ -186,7 +186,7 @@ export default function Portfolio() {
               <CardContent>
                 <div className="space-y-4">
                   {workExperience.map((work, index) => (
-                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
+                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent cursor-pointer" onClick={() => window.open(work.website, '_blank')}>
                       <CardContent>
                         <div className="py-2">
                           <div className="flex items-center justify-between">
@@ -195,7 +195,7 @@ export default function Portfolio() {
                               <Badge variant="secondary" className="ml-2 text-xs">
                                 {work.type}
                               </Badge>
-                              <Button asChild variant="ghost" className="ml-2 px-3 py-2 h-8">
+                              <Button asChild variant="ghost" className="ml-2 px-3 py-2 h-8" onClick={(e) => e.stopPropagation()}>
                                 <Link href={work.website} target="_blank">
                                   <ExternalLink className="w-4 h-4" />
                                 </Link>
