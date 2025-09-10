@@ -61,6 +61,8 @@ export default function Portfolio() {
       title: "Rocket Adventures, A Unity Game",
       description: "A 3D rocket navigation game developed in Unity using C#, featuring physics-based controls, level progression, and dynamic camera movement with immersive particle effects.",
       github: "https://github.com/asapSAGNIK/Rocket-Adventures-3D-A-Unity-Game",
+      website: "https://rocket-adventures.vercel.app/",
+      isDeployed: true,
     },
     {
       title: "Smart Playlist",
