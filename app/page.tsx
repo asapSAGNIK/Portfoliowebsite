@@ -225,14 +225,14 @@ export default function Portfolio() {
               <CardContent className="flex-1">
                 <div className="space-y-4">
                   {projects.map((project, index) => (
-                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
+                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent cursor-pointer" onClick={() => window.open(project.website || project.github, '_blank')}>
                       <CardContent>
                         <div className="py-2">
                           <div className="flex items-center justify-between">
                             <div className="text-lg font-semibold">
                               {project.title}
                             </div>
-                            <div className="flex gap-2">
+                            <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
                               {project.isDeployed ? (
                                 <>
                                   <Button asChild variant="ghost" className="px-3 py-2 h-8">
