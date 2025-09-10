@@ -2,7 +2,7 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ExternalLink, Code, User, Briefcase, GraduationCap } from "lucide-react"
+import { Github, Linkedin, Mail, ExternalLink, Code, User, Briefcase, GraduationCap, FolderOpen } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 import React, { useEffect, useState } from "react"
@@ -35,6 +35,25 @@ export default function Portfolio() {
     "MongoDB",
     "MySQL",
     "Redux",
+  ]
+
+  const workExperience = [
+    {
+      title: "Skyline Properties",
+      company: "Skyline Properties",
+      type: "Freelance",
+      date: "May 2025",
+      description: "A fully responsive real estate website with dynamic property listings and search capability. I implemented the UI architecture, optimized load times, and ensured smooth navigation across devices.",
+      website: "https://skyline-properties-portfolio.vercel.app/",
+    },
+    {
+      title: "Sunder Garments",
+      company: "Sunder Garments", 
+      type: "Freelance",
+      date: "May 2025",
+      description: "An end-to-end e-commerce platform supporting web and mobile storefronts with cart, checkout, and order management. I engineered the full workflow from product listing to secure transactions and deployment.",
+      website: "https://www.sundergarments.in/",
+    },
   ]
 
   const projects = [
@@ -97,9 +116,14 @@ export default function Portfolio() {
                 <CardTitle className="text-3xl font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>SAGNIK CHOWDHURY</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <p className="text-lg text-muted-foreground text-center">
-                  Hello!! Sagnik here. This is my developer profile. I am here showcasing my digital experience as well expecting newer challenges that keep me driven and help me grow along the way.
-                </p>
+                <div className="text-sm text-muted-foreground space-y-2">
+                  <p>• <strong>22-year-old Full-Stack Developer from Kolkata</strong></p>
+                  <p>• <strong>Passionate about crafting scalable applications with React, Next.js, and modern web technologies</strong></p>
+                  <p>• <strong>Built cross-platform e-commerce solutions and real estate portfolio platforms</strong></p>
+                  <p>• <strong>Currently developing Android and iOS apps for Sundar Garments' e-commerce platform</strong></p>
+                  <p>• <strong>Building cross-platform solutions with React Native</strong></p>
+                  <p>• <strong>Seeking new challenges that push boundaries and drive personal growth in the tech world</strong></p>
+                </div>
                 <div className="flex justify-center space-x-4">
                   <Button variant="outline" size="sm" asChild>
                     <a 
@@ -149,13 +173,52 @@ export default function Portfolio() {
             </Card>
           </div>
 
-          {/* Middle & Right Columns - Projects and Education/Experience */}
-          <div className="lg:col-span-2 flex flex-col gap-0">
+          {/* Middle & Right Columns - Work Experience, Projects and Education/Experience */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
+            {/* Work Experience Section */}
+            <Card>
+              <CardHeader>
+                <CardTitle className="flex items-center">
+                  <Briefcase className="w-5 h-5 mr-2" />
+                  Work Experience
+                </CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-4">
+                  {workExperience.map((work, index) => (
+                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
+                      <CardContent>
+                        <div className="py-2">
+                          <div className="flex items-center justify-between">
+                            <div className="flex items-center text-lg font-semibold">
+                              {work.title}
+                              <Badge variant="secondary" className="ml-2 text-xs">
+                                {work.type}
+                              </Badge>
+                              <Button asChild variant="ghost" className="ml-2 px-3 py-2 h-8">
+                                <Link href={work.website} target="_blank">
+                                  <ExternalLink className="w-4 h-4" />
+                                </Link>
+                              </Button>
+                            </div>
+                            <div className="text-sm text-muted-foreground">
+                              {work.date}
+                            </div>
+                          </div>
+                          <p className="text-sm text-muted-foreground mt-3">{work.description}</p>
+                        </div>
+                      </CardContent>
+                    </Card>
+                  ))}
+                </div>
+              </CardContent>
+            </Card>
+
             {/* Projects, Education & Experience - All in one Card */}
             <Card className="h-full flex flex-col justify-between">
               <CardHeader>
                 <CardTitle className="flex items-center">
-                  <Briefcase className="w-5 h-5 mr-2" />
+                  <FolderOpen className="w-5 h-5 mr-2" />
                   Projects
                 </CardTitle>
               </CardHeader>
@@ -165,41 +228,34 @@ export default function Portfolio() {
                     <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent">
                       <CardContent>
                         <div className="py-2">
-                          <div className="flex items-center text-lg font-semibold">
-                            {project.title}
-                            {project.isDeployed && (
-                              <Badge variant="secondary" className="ml-2 text-xs">
-                                Live Demo
-                              </Badge>
-                            )}
-                          </div>
-                          <p className="text-sm text-muted-foreground mb-3">{project.description}</p>
-                          <div className="flex gap-2 mt-2 justify-center">
-                            {project.isDeployed ? (
-                              <>
-                                <Button asChild variant="outline" className="text-xs px-2 py-1 h-6 text-xs">
-                                  <Link href={project.website} target="_blank">
-                                    <ExternalLink className="w-3 h-3 mr-1" />
-                                    Visit Website
-                                  </Link>
-                                </Button>
-                                <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 text-xs">
+                          <div className="flex items-center justify-between">
+                            <div className="text-lg font-semibold">
+                              {project.title}
+                            </div>
+                            <div className="flex gap-2">
+                              {project.isDeployed ? (
+                                <>
+                                  <Button asChild variant="ghost" className="px-3 py-2 h-8">
+                                    <Link href={project.website} target="_blank">
+                                      <ExternalLink className="w-4 h-4" />
+                                    </Link>
+                                  </Button>
+                                  <Button asChild variant="ghost" className="px-3 py-2 h-8">
+                                    <Link href={project.github} target="_blank">
+                                      <Github className="w-4 h-4" />
+                                    </Link>
+                                  </Button>
+                                </>
+                              ) : (
+                                <Button asChild variant="ghost" className="px-3 py-2 h-8">
                                   <Link href={project.github} target="_blank">
-                                    <Github className="w-3 h-3 mr-1" />
-                                    View Code
+                                    <Github className="w-4 h-4" />
                                   </Link>
                                 </Button>
-                              </>
-                            ) : (
-                              <Button asChild variant="ghost" className="text-xs px-2 py-1 h-6 text-xs">
-                                <Link href={project.github} target="_blank">
-                                  <Github className="w-3 h-3 mr-1" />
-                                  View Code
-                                  <ExternalLink className="w-3 h-3 ml-1" />
-                                </Link>
-                              </Button>
-                            )}
+                              )}
+                            </div>
                           </div>
+                          <p className="text-sm text-muted-foreground mt-3">{project.description}</p>
                         </div>
                       </CardContent>
                     </Card>
