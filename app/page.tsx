@@ -64,14 +64,14 @@ export default function Portfolio() {
     },
     {
       title: "Smart Playlist",
-      description: "An AI-powered playlist generation application that creates personalized music playlists based on natural language prompts. Features include audio analysis, Supabase integration, and modern UI built with React, TypeScript, and Tailwind CSS.",
+      description: "An AI-powered music discovery platform that creates personalized playlists from natural language prompts. Simply describe your mood or desired vibe, and get curated music recommendations tailored to your preferences.",
       github: "https://github.com/srijantelang-work/Smartplaylist",
       website: "https://smartplaylist.software/",
       isDeployed: true,
     },
     {
       title: "P.L.A.T.E (Personalized learning and Assistance for Taste Enhancement)",
-      description: "A full-stack AI-powered web app that recommends personalized recipes using Google Gemini, built with Next.js 14, Tailwind CSS, Redux Toolkit, Node.js, Express, Supabase, Redis, and integrated with Spoonacular API, all containerized with Docker.",
+      description: "An AI-powered recipe recommendation platform that helps you discover new dishes based on your preferences. Features include Fridge Mode for recipes using available ingredients and Explore Mode for discovering new cuisines and cooking styles tailored to your taste profile.",
       github: "https://github.com/asapSAGNIK/P.L.A.T.E",
     },
     {
