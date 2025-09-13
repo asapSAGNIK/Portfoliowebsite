@@ -75,6 +75,8 @@ export default function Portfolio() {
       title: "P.L.A.T.E (Personalized learning and Assistance for Taste Enhancement)",
       description: "An AI-powered recipe recommendation platform that helps you discover new dishes based on your preferences. Features include Fridge Mode for recipes using available ingredients and Explore Mode for discovering new cuisines and cooking styles tailored to your taste profile.",
       github: "https://github.com/asapSAGNIK/P.L.A.T.E",
+      website: "https://plate-liard.vercel.app/",
+      isDeployed: true,
     },
     {
       title: "Snake Game",
