@@ -117,10 +117,10 @@ export default function Portfolio() {
                     priority
                   />
                 </div>
-                <CardTitle className="text-3xl font-bold" style={{ fontFamily: 'Poppins, sans-serif' }}>SAGNIK CHOWDHURY</CardTitle>
+                <CardTitle className="text-3xl font-bold" style={{ fontFamily: 'Urbanosta, sans-serif' }}>Sagnik Chowdhury</CardTitle>
               </CardHeader>
               <CardContent className="space-y-4">
-                <div className="text-sm text-muted-foreground space-y-2">
+                <div className="text-sm text-muted-foreground space-y-2" style={{ fontFamily: 'Potlab, sans-serif' }}>
                   <p>• <strong>22-year-old Full-Stack Developer from Kolkata</strong></p>
                   <p>• <strong>Passionate about crafting scalable applications with React, Next.js, and modern web technologies</strong></p>
                   <p>• <strong>Built cross-platform e-commerce solutions and real estate portfolio platforms</strong></p>
@@ -160,7 +160,7 @@ export default function Portfolio() {
             {/* Skills Section */}
             <Card>
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
                   <Code className="w-5 h-5 mr-2" />
                   Skills
                 </CardTitle>
@@ -180,9 +180,9 @@ export default function Portfolio() {
           {/* Middle & Right Columns - Work Experience, Projects and Education/Experience */}
           <div className="lg:col-span-2 flex flex-col gap-6">
             {/* Work Experience Section */}
-            <Card>
+            <Card className="border-0">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
                   <Briefcase className="w-5 h-5 mr-2" />
                   Work Experience
                 </CardTitle>
@@ -194,22 +194,17 @@ export default function Portfolio() {
                       <CardContent>
                         <div className="py-2">
                           <div className="flex items-center justify-between">
-                            <div className="flex items-center text-lg font-semibold">
+                            <div className="flex items-center text-lg font-semibold" style={{ fontFamily: 'Potlab, sans-serif' }}>
                               {work.title}
                               <Badge variant="secondary" className="ml-2 text-xs">
                                 {work.type}
                               </Badge>
-                              <Button asChild variant="ghost" className="ml-2 px-3 py-2 h-8" onClick={(e) => e.stopPropagation()}>
-                                <Link href={work.website} target="_blank">
-                                  <ExternalLink className="w-4 h-4" />
-                                </Link>
-                              </Button>
                             </div>
                             <div className="text-sm text-muted-foreground">
                               {work.date}
                             </div>
                           </div>
-                          <p className="text-sm text-muted-foreground mt-3">{work.description}</p>
+                          <p className="text-sm text-muted-foreground mt-3" style={{ fontFamily: 'Potlab, sans-serif' }}>{work.description}</p>
                         </div>
                       </CardContent>
                     </Card>
@@ -219,9 +214,9 @@ export default function Portfolio() {
             </Card>
 
             {/* Projects, Education & Experience - All in one Card */}
-            <Card className="h-full flex flex-col justify-between">
+            <Card className="h-full flex flex-col justify-between border-0">
               <CardHeader>
-                <CardTitle className="flex items-center">
+                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
                   <FolderOpen className="w-5 h-5 mr-2" />
                   Projects
                 </CardTitle>
@@ -233,23 +228,16 @@ export default function Portfolio() {
                       <CardContent>
                         <div className="py-2">
                           <div className="flex items-center justify-between">
-                            <div className="text-lg font-semibold">
+                            <div className="text-lg font-semibold" style={{ fontFamily: 'Potlab, sans-serif' }}>
                               {project.title}
                             </div>
                             <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
                               {project.isDeployed ? (
-                                <>
-                                  <Button asChild variant="ghost" className="px-3 py-2 h-8">
-                                    <Link href={project.website} target="_blank">
-                                      <ExternalLink className="w-4 h-4" />
-                                    </Link>
-                                  </Button>
-                                  <Button asChild variant="ghost" className="px-3 py-2 h-8">
-                                    <Link href={project.github} target="_blank">
-                                      <Github className="w-4 h-4" />
-                                    </Link>
-                                  </Button>
-                                </>
+                                <Button asChild variant="ghost" className="px-3 py-2 h-8">
+                                  <Link href={project.github} target="_blank">
+                                    <Github className="w-4 h-4" />
+                                  </Link>
+                                </Button>
                               ) : (
                                 <Button asChild variant="ghost" className="px-3 py-2 h-8">
                                   <Link href={project.github} target="_blank">
@@ -259,7 +247,7 @@ export default function Portfolio() {
                               )}
                             </div>
                           </div>
-                          <p className="text-sm text-muted-foreground mt-3">{project.description}</p>
+                          <p className="text-sm text-muted-foreground mt-3" style={{ fontFamily: 'Potlab, sans-serif' }}>{project.description}</p>
                         </div>
                       </CardContent>
                     </Card>
@@ -267,7 +255,7 @@ export default function Portfolio() {
                 </div>
 
                 {/* GitHub Note */}
-                <p className="text-center text-sm text-muted-foreground mt-4">
+                <p className="text-center text-sm text-muted-foreground mt-4" style={{ fontFamily: 'Potlab, sans-serif' }}>
                   Feel free to visit my github for more open source projects
                 </p>
 
@@ -275,16 +263,16 @@ export default function Portfolio() {
                 <div className="mt-8">
                   <div className="flex items-center mb-2">
                     <GraduationCap className="w-5 h-5 mr-2" />
-                    <span className="text-xl font-bold">Education</span>
+                    <span className="text-xl font-bold" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>Education</span>
                   </div>
                   <div className="space-y-2 ml-7">
-                    <h4 className="font-medium">Bachelor of Computer Science</h4>
-                    <p className="text-sm text-muted-foreground">SRM University, Delhi NCR, Sonepat, Haryana • 2021-2025</p>
+                    <h4 className="font-medium" style={{ fontFamily: 'Potlab, sans-serif' }}>Bachelor of Computer Science</h4>
+                    <p className="text-sm text-muted-foreground" style={{ fontFamily: 'Potlab, sans-serif' }}>SRM University, Delhi NCR, Sonepat, Haryana • 2021-2025</p>
                   </div>
                 </div>
               </CardContent>
               {/* Footer */}
-              <div className="border-t px-6 py-3 flex justify-between text-sm text-muted-foreground">
+              <div className="border-t px-6 py-3 flex justify-between text-sm text-muted-foreground" style={{ fontFamily: 'Potlab, sans-serif' }}>
                 <span>© 2025 Sagnik Chowdhury</span>
                 <span>Kolkata | {time}</span>
               </div>

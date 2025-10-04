@@ -2,11 +2,37 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Urbanosta Font */
+@font-face {
+  font-family: 'Urbanosta';
+  src: url('/fonts/Urbanosta-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Potlab Fonts */
+@font-face {
+  font-family: 'Potlab';
+  src: url('/fonts/Potlab-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Potlab';
+  src: url('/fonts/Potlab-ExtraBold.ttf') format('truetype');
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Enable dark mode via class strategy for Tailwind */
 /* (Add this to your tailwind.config.js if not already present: darkMode: 'class') */
 
 body {
-  font-family: Arial, Helvetica, marcellus;
+  font-family: 'Potlab', Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
