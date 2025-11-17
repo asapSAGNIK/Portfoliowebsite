@@ -1,17 +1,23 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, ReactNode } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { VisuallyHidden } from '@radix-ui/react-visually-hidden';
 
-const ResumeDialog = () => {
+type ResumeDialogProps = {
+  children?: ReactNode;
+  variant?: "default" | "outline" | "ghost" | "link" | "destructive" | "secondary";
+  className?: string;
+};
+
+const ResumeDialog = ({ children, variant = "outline", className }: ResumeDialogProps) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
     <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger asChild>
-        <Button variant="outline">View Resume</Button>
+        {children || <Button variant={variant} className={className}>View Resume</Button>}
       </DialogTrigger>
       <DialogContent className="max-w-4xl w-full h-[90vh] p-0 flex flex-col">
         <VisuallyHidden>

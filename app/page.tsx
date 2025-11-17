@@ -1,91 +1,19 @@
 "use client"
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { Github, Linkedin, Mail, ExternalLink, Code, User, Briefcase, GraduationCap, FolderOpen } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import React, { useEffect, useState } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import BackgroundParticles from "@/components/BackgroundParticles"
 import ResumeDialog from "@/components/ResumeDialog"
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 
-
-export default function Portfolio() {
-  const skills = [
-    "JavaScript",
-    "MERN Stack", 
-    "TypeScript",
-    "Python",
-    "HTML/CSS",
-    "Unity",
-    "Supabase",
-    "Tailwind CSS",
-    "C",
-    "SQL",
-    "PostgreSQL",
-    "C#",
-    "React Native",
-    "Next.js",
-    "FastAPI",
-    "Node.js",
-    "Express.js",
-    "Git",
-    "GitHub",
-    "Docker",
-    "MongoDB",
-    "MySQL",
-    "Redux",
-  ]
-
-  const workExperience = [
-    {
-      title: "Skyline Properties",
-      company: "Skyline Properties",
-      type: "Freelance",
-      date: "May 2025",
-      description: "A fully responsive real estate website with dynamic property listings and search capability. I implemented the UI architecture, optimized load times, and ensured smooth navigation across devices.",
-      website: "https://skyline-properties-portfolio.vercel.app/",
-    },
-    {
-      title: "Sunder Garments",
-      company: "Sunder Garments", 
-      type: "Freelance",
-      date: "August 2025",
-      description: "An end-to-end e-commerce platform supporting web and mobile storefronts with cart, checkout, and order management. I engineered the full workflow from product listing to secure transactions and deployment.",
-      website: "https://www.sundergarments.in/",
-    },
-  ]
-
-  const projects = [
-    {
-      title: "Rocket Adventures, A Unity Game",
-      description: "A 3D rocket navigation game developed in Unity using C#, featuring physics-based controls, level progression, and dynamic camera movement with immersive particle effects.",
-      github: "https://github.com/asapSAGNIK/Rocket-Adventures-3D-A-Unity-Game",
-      website: "https://rocket-adventures.vercel.app/",
-      isDeployed: true,
-    },
-    {
-      title: "Smart Playlist",
-      description: "An AI-powered music discovery platform that creates personalized playlists from natural language promptsed. Simply describe your mood or desired vibe, and get curated music recommendations tailored to your preferences.",
-      github: "https://github.com/srijantelang-work/Smartplaylist",
-      website: "https://smartplaylist.software/",
-      isDeployed: true,
-    },
-    {
-      title: "P.L.A.T.E (Personalized learning and Assistance for Taste Enhancement)",
-      description: "An AI-powered recipe recommendation platform that helps you discover new dishes based on your preferences. Features include Fridge Mode for recipes using available ingredients and Explore Mode for discovering new cuisines and cooking styles tailored to your taste profile.",
-      github: "https://github.com/asapSAGNIK/P.L.A.T.E",
-      website: "https://plate-liard.vercel.app/",
-      isDeployed: true,
-    },
-    {
-      title: "Snake Game",
-      description: "A classic Snake game created with Python and Pygame, featuring modern visuals, multiple difficulty modes with high score tracking, and comprehensive game controls.",
-      github: "https://github.com/asapSAGNIK/Snake_Game",
-    },
-  ]
-
+export default function Home() {
   const [time, setTime] = useState("");
+  const [imageLoaded, setImageLoaded] = useState(false);
+  const [isDiscSpinning, setIsDiscSpinning] = useState(false);
+  const audioRef = useRef<HTMLAudioElement>(null);
+  
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
@@ -94,191 +22,292 @@ export default function Portfolio() {
       setTime(`${hours}:${minutes}`);
     };
     updateTime();
-    const interval = setInterval(updateTime, 1000 * 10); // update every 10 seconds
+    const interval = setInterval(updateTime, 1000 * 10);
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (audioRef.current) {
+      if (isDiscSpinning) {
+        audioRef.current.currentTime = 5; // Start from 7th second
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+        audioRef.current.currentTime = 7; // Reset to 7th second when stopped
+      }
+    }
+  }, [isDiscSpinning]);
+
+  useEffect(() => {
+    // Trigger animation after component mounts
+    const timer = setTimeout(() => {
+      setImageLoaded(true);
+    }, 50);
+    return () => clearTimeout(timer);
   }, []);
 
   return (
     <>
       <BackgroundParticles />
-      <div className="min-h-screen bg-transparent p-4 md:p-8">
-        <div className="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6 h-screen lg:h-auto">
-          {/* Left Column - About & Contact */}
-          <div className="space-y-6">
-            {/* Profile Section */}
-            <Card>
-              <CardHeader className="text-center">
-                <div className="w-60 h-60 mx-auto mb-4 overflow-hidden relative rounded-xl">
-                  <Image
-                    src="/prf.jpg"
-                    alt="Sagnik Chowdhury"
-                    fill
-                    className="object-cover rounded-xl"
-                    priority
-                  />
-                </div>
-                <CardTitle className="text-3xl font-bold" style={{ fontFamily: 'Urbanosta, sans-serif' }}>Sagnik Chowdhury</CardTitle>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="text-sm text-muted-foreground space-y-2" style={{ fontFamily: 'Potlab, sans-serif' }}>
-                  <p>• <strong>22-year-old Full-Stack Developer from Kolkata</strong></p>
-                  <p>• <strong>Passionate about crafting scalable applications with React, Next.js, and modern web technologies</strong></p>
-                  <p>• <strong>Built cross-platform e-commerce solutions and real estate portfolio platforms</strong></p>
-                  <p>• <strong>Currently developing Android and iOS apps for Sundar Garments' e-commerce platform</strong></p>
-                  <p>• <strong>Building cross-platform solutions with React Native</strong></p>
-                  <p>• <strong>Seeking new challenges that push boundaries and drive personal growth in the tech world</strong></p>
-                </div>
-                <div className="flex justify-center space-x-4">
-                  <Button variant="outline" size="sm" asChild>
-                    <a 
-                      href="mailto:sagnikwork20@gmail.com" 
-                      className="inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-input bg-background hover:bg-accent hover:text-accent-foreground h-9 px-3"
-                    >
-                      <Mail className="w-4 h-4 mr-2" />
-                      Email
-                    </a>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="https://github.com/asapSAGNIK" target="_blank">
-                      <Github className="w-4 h-4 mr-2" />
-                      GitHub
-                    </Link>
-                  </Button>
-                  <Button variant="outline" size="sm" asChild>
-                    <Link href="https://www.linkedin.com/in/sagnik-chowdhury-252035251/" target="_blank">
-                      <Linkedin className="w-4 h-4 mr-2" />
-                      LinkedIn
-                    </Link>
-                  </Button>
-                </div>
-                <div className="flex justify-center mt-4">
-                  <ResumeDialog />
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Skills Section */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
-                  <Code className="w-5 h-5 mr-2" />
-                  Skills
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="flex flex-wrap gap-2">
-                  {skills.map((skill) => (
-                    <Badge key={skill} variant="secondary" className="text-sm px-3 py-1">
-                      {skill}
-                    </Badge>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
+      <div className="min-h-screen bg-transparent">
+        {/* Header Navigation */}
+        <header className="w-full p-6 md:p-8">
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
+            <Link href="/" className="text-4xl font-bold" style={{ fontFamily: 'Urbanosta, sans-serif', color: ' #fde047' }}>
+              Sagnik Chowdhury
+            </Link>
+            <nav className="flex items-center gap-3">
+              <Link href="/projects">
+                <button className="ui-btn">
+                  <span>Work Life</span>
+                </button>
+              </Link>
+              <ResumeDialog>
+                <button className="ui-btn">
+                  <span>Resume</span>
+                </button>
+              </ResumeDialog>
+              <TooltipProvider>
+                <Tooltip delayDuration={200}>
+                  <TooltipTrigger asChild>
+                    <div className="ml-4 cursor-pointer" onClick={() => setIsDiscSpinning(!isDiscSpinning)}>
+                      <div className="relative">
+                        <svg
+                          width="64"
+                          height="64"
+                          viewBox="0 0 128 128"
+                          className={`border-2 rounded-full shadow-md border-zinc-400 transition-all duration-300 ${isDiscSpinning ? 'animate-spin-slow' : ''}`}
+                        >
+                          <rect width="128" height="128" fill="black"></rect>
+                          <circle cx="30" cy="20" r="2" fill="white"></circle>
+                          <circle cx="50" cy="30" r="2" fill="white"></circle>
+                          <circle cx="60" cy="10" r="2" fill="white"></circle>
+                          <circle cx="80" cy="40" r="2" fill="white"></circle>
+                          <circle cx="100" cy="20" r="2" fill="white"></circle>
+                          <circle cx="120" cy="50" r="2" fill="white"></circle>
+                          <circle cx="90" cy="30" r="10" fill="white" fillOpacity="0.5"></circle>
+                          <circle cx="90" cy="30" r="8" fill="white"></circle>
+                          <path d="M0 128 Q32 64 64 128 T128 128" fill="purple" stroke="black" strokeWidth="1"></path>
+                          <path d="M0 128 Q32 48 64 128 T128 128" fill="mediumpurple" stroke="black" strokeWidth="1"></path>
+                          <path d="M0 128 Q32 32 64 128 T128 128" fill="rebeccapurple" stroke="black" strokeWidth="1"></path>
+                          <path d="M0 128 Q16 64 32 128 T64 128" fill="purple" stroke="black" strokeWidth="1"></path>
+                          <path d="M64 128 Q80 64 96 128 T128 128" fill="mediumpurple" stroke="black" strokeWidth="1"></path>
+                        </svg>
+                        <div className="absolute top-6 left-6 w-4 h-4 bg-white border-2 rounded-full shadow-sm border-zinc-400"></div>
+                      </div>
+                    </div>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Sure!! Why not</p>
+                  </TooltipContent>
+                </Tooltip>
+              </TooltipProvider>
+            </nav>
           </div>
+        </header>
 
-          {/* Middle & Right Columns - Work Experience, Projects and Education/Experience */}
-          <div className="lg:col-span-2 flex flex-col gap-6">
-            {/* Work Experience Section */}
-            <Card className="border-0">
-              <CardHeader>
-                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
-                  <Briefcase className="w-5 h-5 mr-2" />
-                  Work Experience
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="space-y-4">
-                  {workExperience.map((work, index) => (
-                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent cursor-pointer" onClick={() => window.open(work.website, '_blank')}>
-                      <CardContent>
-                        <div className="py-2">
-                          <div className="flex items-center justify-between">
-                            <div className="flex items-center text-lg font-semibold" style={{ fontFamily: 'Potlab, sans-serif' }}>
-                              {work.title}
-                              <Badge variant="secondary" className="ml-2 text-xs">
-                                {work.type}
-                              </Badge>
-                            </div>
-                            <div className="text-sm text-muted-foreground">
-                              {work.date}
-                            </div>
-                          </div>
-                          <p className="text-sm text-muted-foreground mt-3" style={{ fontFamily: 'Potlab, sans-serif' }}>{work.description}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-
-            {/* Projects, Education & Experience - All in one Card */}
-            <Card className="h-full flex flex-col justify-between border-0">
-              <CardHeader>
-                <CardTitle className="flex items-center" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>
-                  <FolderOpen className="w-5 h-5 mr-2" />
-                  Projects
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1">
-                <div className="space-y-4">
-                  {projects.map((project, index) => (
-                    <Card key={index} className="transition-transform duration-300 hover:scale-105 hover:shadow-2xl hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent cursor-pointer" onClick={() => window.open(project.website || project.github, '_blank')}>
-                      <CardContent>
-                        <div className="py-2">
-                          <div className="flex items-center justify-between">
-                            <div className="text-lg font-semibold" style={{ fontFamily: 'Potlab, sans-serif' }}>
-                              {project.title}
-                            </div>
-                            <div className="flex gap-2" onClick={(e) => e.stopPropagation()}>
-                              {project.isDeployed ? (
-                                <Button asChild variant="ghost" className="px-3 py-2 h-8">
-                                  <Link href={project.github} target="_blank">
-                                    <Github className="w-4 h-4" />
-                                  </Link>
-                                </Button>
-                              ) : (
-                                <Button asChild variant="ghost" className="px-3 py-2 h-8">
-                                  <Link href={project.github} target="_blank">
-                                    <Github className="w-4 h-4" />
-                                  </Link>
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                          <p className="text-sm text-muted-foreground mt-3" style={{ fontFamily: 'Potlab, sans-serif' }}>{project.description}</p>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-
-                {/* GitHub Note */}
-                <p className="text-center text-sm text-muted-foreground mt-4" style={{ fontFamily: 'Potlab, sans-serif' }}>
-                  Feel free to visit my github for more open source projects
-                </p>
-
-                {/* Education Section - Plain Content, No Box */}
-                <div className="mt-8">
-                  <div className="flex items-center mb-2">
-                    <GraduationCap className="w-5 h-5 mr-2" />
-                    <span className="text-xl font-bold" style={{ fontFamily: 'Potlab, sans-serif', fontWeight: 800 }}>Education</span>
-                  </div>
-                  <div className="space-y-2 ml-7">
-                    <h4 className="font-medium" style={{ fontFamily: 'Potlab, sans-serif' }}>Bachelor of Computer Science</h4>
-                    <p className="text-sm text-muted-foreground" style={{ fontFamily: 'Potlab, sans-serif' }}>SRM University, Delhi NCR, Sonepat, Haryana • 2021-2025</p>
-                  </div>
-                </div>
-              </CardContent>
-              {/* Footer */}
-              <div className="border-t px-6 py-3 flex justify-between text-sm text-muted-foreground" style={{ fontFamily: 'Potlab, sans-serif' }}>
-                <span>© 2025 Sagnik Chowdhury</span>
-                <span>Kolkata | {time}</span>
+        {/* Main Content */}
+        <main className="max-w-7xl mx-auto px-6 md:px-8 pb-12">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center min-h-[calc(100vh-200px)]">
+            {/* Left Column - Text Content */}
+            <div className="space-y-6">
+              <div>
+                
               </div>
-            </Card>
+
+              <div className="space-y-3 text-white text-xl" style={{ fontFamily: 'Satoshi Medium, sans-serif' }}>
+                <p className="flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span>I'm a <strong className="text-white">23 y/o Full-Stack Developer</strong> from Kolkata, India</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span>Crafting intuitive, responsive web and mobile apps with a focus on clean design and seamless UX.</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span>I have experience of working with clients and have provided solutions to their problems.</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span>I am actively developing <Link href="https://plate-liard.vercel.app/" target="_blank" className="inline-block cursor-pointer"><strong className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 bg-clip-text text-transparent animate-gradient bg-[length:200%_auto]">P.L.A.T.E</strong></Link> (Personalized learning and Assistance for Taste Enhancement)</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className="text-yellow-500 mt-1">•</span>
+                  <span className="flex items-center gap-2 flex-wrap">
+                    <span>When I'm not building products, you'll usually find me:</span>
+                    <TooltipProvider>
+                      <div className="flex items-center -space-x-2">
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="hover:scale-110 transition-transform duration-200 z-[1] relative">
+                              <Image 
+                                src="/icons/basketball.svg" 
+                                alt="Basketball" 
+                                width={28} 
+                                height={28}
+                                className="drop-shadow-sm"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Hooping </p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="hover:scale-110 transition-transform duration-200 z-[2] relative">
+                              <Image 
+                                src="/icons/soccer-ball.svg" 
+                                alt="Football" 
+                                width={28} 
+                                height={28}
+                                className="drop-shadow-sm"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p> Defending like my life depends on it</p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="hover:scale-110 transition-transform duration-200 z-[3] relative">
+                              <Image 
+                                src="/icons/rekord.svg" 
+                                alt="Rekordbox" 
+                                width={28} 
+                                height={28}
+                                className="drop-shadow-sm"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Learning to DJ on Rekordbox</p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="hover:scale-110 transition-transform duration-200 z-[4] relative">
+                              <Image 
+                                src="/icons/CSicon.svg" 
+                                alt="CS2" 
+                                width={28} 
+                                height={28}
+                                className="drop-shadow-sm"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Queued up in CS2</p>
+                          </TooltipContent>
+                        </Tooltip>
+                        <Tooltip>
+                          <TooltipTrigger asChild>
+                            <div className="hover:scale-110 transition-transform duration-200 z-[5] relative">
+                              <Image 
+                                src="/icons/FIFA.svg" 
+                                alt="FIFA" 
+                                width={28} 
+                                height={28}
+                                className="drop-shadow-sm"
+                              />
+                            </div>
+                          </TooltipTrigger>
+                          <TooltipContent>
+                            <p>Thrashing people in FIFA</p>
+                          </TooltipContent>
+                        </Tooltip>
+                      </div>
+                    </TooltipProvider>
+                    
+                  </span>
+                </p>
+                
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex gap-4 pt-4">
+                <Link href="/projects">
+                  <button className="btn-shake btn-shine">
+                    <span>VIEW PROJECTS</span>
+                  </button>
+                </Link>
+                <a href="/resume.pdf" download="Sagnik_Chowdhury_Resume.pdf">
+                  <button className="btn-shake btn-shine">
+                    <span>DOWNLOAD</span>
+                  </button>
+                </a>
+              </div>
+
+              {/* Social Media Icons */}
+              <div className="flex gap-4 pt-2">
+                <Link href="https://www.linkedin.com/in/sagnik-chowdhury-252035251/" target="_blank" className="social-button" aria-label="LinkedIn">
+                  <div className="button-box">
+                    <div className="button-elem">
+                      <Linkedin className="w-5 h-5" />
+                    </div>
+                    <div className="button-elem">
+                      <Linkedin className="w-5 h-5" />
+                    </div>
+                  </div>
+                </Link>
+                <Link href="https://github.com/asapSAGNIK" target="_blank" className="social-button" aria-label="GitHub">
+                  <div className="button-box">
+                    <div className="button-elem">
+                      <Github className="w-5 h-5" />
+                    </div>
+                    <div className="button-elem">
+                      <Github className="w-5 h-5" />
+                    </div>
+                  </div>
+                </Link>
+                <a href="mailto:sagnikwork20@gmail.com" className="social-button" aria-label="Email">
+                  <div className="button-box">
+                    <div className="button-elem">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                    <div className="button-elem">
+                      <Mail className="w-5 h-5" />
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+
+            {/* Right Column - Profile Picture */}
+            <div className="flex justify-center lg:justify-end">
+              <div 
+                className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border-2 border-green-500/30 shadow-2xl shadow-green-500/20 group"
+              >
+                <Image
+                  src="/prf.jpg"
+                  alt="Sagnik Chowdhury"
+                  fill
+                  className="object-cover image-reveal group-hover:scale-105"
+                  priority
+                  onLoad={() => setImageLoaded(true)}
+                />
+              </div>
+            </div>
           </div>
-        </div>
+        </main>
+
+        {/* Footer */}
+        <footer className="w-full px-6 md:px-8 py-4 border-t border-border/40">
+          <div className="max-w-7xl mx-auto flex justify-between text-sm text-muted-foreground" style={{ fontFamily: 'Satoshi Medium, sans-serif' }}>
+            <span>© 2025 Sagnik Chowdhury</span>
+            <span>Kolkata | {time}</span>
+          </div>
+        </footer>
+
+        {/* Hidden audio element for music playback */}
+        <audio
+          ref={audioRef}
+          src="/gtatheme.mp3"
+          loop
+          preload="none"
+        />
       </div>
     </>
   )
