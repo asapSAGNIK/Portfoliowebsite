@@ -168,7 +168,7 @@ export default function Home() {
                 </p>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>Crafting intuitive, responsive web and mobile apps with a focus on clean design and seamless UX.</span>
+                  <span>Crafting intuitive, responsive web and mobile apps with a focus on clean design and seamless UI/UX.</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
