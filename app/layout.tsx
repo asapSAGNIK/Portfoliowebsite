@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import Head from "next/head"
+import { AudioProvider } from '../contexts/AudioContext'
 
 export const metadata: Metadata = {
   title: 'Sagnik Chowdhury',
@@ -19,7 +20,11 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet" />
         <link rel="icon" href="/favicon.ico" />
       </head>
-      <body>{children}</body>
+      <body>
+        <AudioProvider>
+          {children}
+        </AudioProvider>
+      </body>
     </html>
   )
 }

@@ -1,5 +1,5 @@
 "use client";
-import { useEffect } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import { loadLinksPreset } from "@tsparticles/preset-links";
 import { tsParticles } from "@tsparticles/engine";
 import Particles from "@tsparticles/react";
@@ -15,9 +15,10 @@ type BackgroundParticlesProps = {
   interactiveMode?: "repulse" | "connect";
   backgroundColor?: string;
   darkMode?: boolean;
+  visible?: boolean;
 };
 
-export default function BackgroundParticles({
+const BackgroundParticles = React.memo(function BackgroundParticles({
   number = 80,
   color,
   linkColor,
@@ -27,11 +28,16 @@ export default function BackgroundParticles({
   interactiveMode = "repulse",
   backgroundColor,
   darkMode,
+  visible = true,
 }: BackgroundParticlesProps) {
-  // Load the links preset globally
-  useEffect(() => {
+  // Initialize particles library (stable callback)
+  const initializeParticles = useCallback(() => {
     loadLinksPreset(tsParticles);
   }, []);
+
+  useEffect(() => {
+    initializeParticles();
+  }, [initializeParticles]);
 
   // Detect dark mode if not explicitly set
   const isDark =
@@ -45,7 +51,7 @@ export default function BackgroundParticles({
   const particleLinkColor = linkColor || (isDark ? "#ffffff" : "#222831");
   const bgColor = backgroundColor || "transparent";
 
-  const options: ISourceOptions = {
+  const options: ISourceOptions = useMemo(() => ({
     preset: "links",
     fullScreen: { enable: false },
     background: { color: { value: bgColor } },
@@ -85,11 +91,24 @@ export default function BackgroundParticles({
       },
     },
     detectRetina: true,
-  };
+  }), [number, particleColor, particleLinkColor, linkDistance, linkOpacity, linkWidth, interactiveMode, bgColor]);
 
   return (
-    <div className="fixed inset-0 -z-10 w-full h-full pointer-events-none blur-sm">
-      <Particles id="tsparticles" options={options} />
+    <div
+      className={`fixed inset-0 -z-10 w-full h-full transition-opacity duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}
+      style={{ pointerEvents: visible ? 'none' : 'none' }} // Always disable pointer events
+    >
+      <div className="blur-sm">
+        <Particles
+          key="background-particles" // Stable key to prevent recreation
+          id="tsparticles"
+          options={options}
+        />
+      </div>
     </div>
   );
-} 
+});
+
+BackgroundParticles.displayName = 'BackgroundParticles';
+
+export default BackgroundParticles; 

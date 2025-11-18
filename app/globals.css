@@ -2,28 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Urbanosta Font */
+/* Hoover Font */
 @font-face {
-  font-family: 'Urbanosta';
-  src: url('/fonts/Urbanosta-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* Potlab Fonts */
-@font-face {
-  font-family: 'Potlab';
-  src: url('/fonts/Potlab-Regular.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Potlab';
-  src: url('/fonts/Potlab-ExtraBold.ttf') format('truetype');
-  font-weight: 800;
+  font-family: 'Hoover';
+  src: url('/fonts/Hoover-Variable.ttf') format('truetype');
+  font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
@@ -41,7 +24,7 @@
 /* (Add this to your tailwind.config.js if not already present: darkMode: 'class') */
 
 body {
-  font-family: 'Potlab', Arial, Helvetica, sans-serif;
+  font-family: 'Satoshi Medium', Arial, Helvetica, sans-serif;
 }
 
 @layer utilities {
@@ -192,7 +175,7 @@ body {
     }
   }
 
-  /* Social Button Animation - From Uiverse.io by xopc333 */
+  /* Social Button - Simplified */
   .social-button {
     display: block;
     position: relative;
@@ -205,44 +188,14 @@ body {
     cursor: pointer;
     border: 0;
     text-decoration: none;
-  }
-
-  .social-button:before,
-  .social-button:after {
-    content: "";
-    position: absolute;
     border-radius: 50%;
-    inset: 7px;
+    border: 2px solid var(--social-border-color, #3A5FFF);
+    transition: border-color 0.3s ease;
   }
 
-  .social-button:before {
-    border: 4px solid #f0eeef;
-    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
-      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
-  }
-
-  .social-button:after {
-    border: 4px solid #fde047;
-    transform: scale(1.3);
-    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0;
-  }
-
-  .social-button:hover:before,
-  .social-button:focus:before {
-    opacity: 0;
-    transform: scale(0.7);
-    transition: opacity 0.4s cubic-bezier(0.165, 0.84, 0.44, 1),
-      transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  }
-
-  .social-button:hover:after,
-  .social-button:focus:after {
-    opacity: 1;
-    transform: scale(1);
-    transition: opacity 0.4s cubic-bezier(0.77, 0, 0.175, 1) 80ms,
-      transform 0.5s cubic-bezier(0.455, 0.03, 0.515, 0.955) 80ms;
+  .social-button:hover,
+  .social-button:focus {
+    border-color: #fde047;
   }
 
   .button-box {
@@ -251,8 +204,8 @@ body {
     top: 0;
     left: 0;
     align-items: center;
-    justify-content: flex-start;
-    width: 200%;
+    justify-content: center;
+    width: 100%;
     height: 100%;
   }
 
@@ -260,22 +213,78 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 56px;
-    height: 56px;
-    flex-shrink: 0;
+    width: 100%;
+    height: 100%;
   }
 
   .button-elem svg {
     fill: none;
-    color: #f0eeef;
-    stroke: #f0eeef;
+    color: var(--social-icon-color, #3A5FFF);
+    stroke: var(--social-icon-color, #3A5FFF);
     stroke-width: 2;
+    transition: color 0.3s ease, stroke 0.3s ease;
   }
 
-  .social-button:hover .button-box,
-  .social-button:focus .button-box {
-    transition: 0.4s;
-    transform: translateX(-56px);
+  .social-button:hover .button-elem svg,
+  .social-button:focus .button-elem svg {
+    color: #fde047;
+    stroke: #fde047;
+  }
+
+  /* Smaller social buttons */
+  .social-button-small {
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 40px;
+    margin: 0;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    cursor: pointer;
+    border: 0;
+    text-decoration: none;
+    border-radius: 50%;
+    border: 2px solid var(--social-border-color, #3A5FFF);
+    transition: border-color 0.3s ease;
+  }
+
+  .social-button-small:hover,
+  .social-button-small:focus {
+    border-color: #fde047;
+  }
+
+  .social-button-small .button-box {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .social-button-small .button-elem {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .social-button-small .button-elem svg {
+    fill: none;
+    color: var(--social-icon-color, #3A5FFF);
+    stroke: var(--social-icon-color, #3A5FFF);
+    stroke-width: 2;
+    transition: color 0.3s ease, stroke 0.3s ease;
+  }
+
+  .social-button-small:hover .button-elem svg,
+  .social-button-small:focus .button-elem svg {
+    color: #fde047;
+    stroke: #fde047;
   }
 }
 
@@ -440,7 +449,7 @@ body {
 }
 
 .ui-btn:hover span::before, .ui-btn:focus span::before {
-  animation: chitchat linear both var(--btn-animation-duration);
+  /* Animation removed */
 }
 
 @keyframes chitchat {
@@ -516,4 +525,15 @@ body {
     content: "";
     right: 0;
   }
+}
+
+/* Typography - Hoover for headings, Satoshi for body */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Hoover', Arial, Helvetica, sans-serif;
+}
+
+/* Custom text selection color */
+::selection {
+  background-color: #FFF2C6;
+  color: #2D3748;
 }
