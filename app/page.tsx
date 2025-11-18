@@ -140,7 +140,7 @@ export default function Home() {
                       </div>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent>
+                  <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
                     <p>Sure!! Why not</p>
                   </TooltipContent>
                 </Tooltip>
@@ -182,38 +182,38 @@ export default function Home() {
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
                   <span className="flex items-center gap-2 flex-wrap">
                     <span>When I'm not building products, you'll usually find me:</span>
-                    <TooltipProvider>
+                    <TooltipProvider delayDuration={100} skipDelayDuration={0}>
                       <div className="flex items-center -space-x-2">
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <div className="hover:scale-110 transition-transform duration-200 z-[1] relative">
-                              <Image 
-                                src="/icons/basketball.svg" 
-                                alt="Basketball" 
-                                width={28} 
+                              <Image
+                                src="/icons/basketball.svg"
+                                alt="Basketball"
+                                width={28}
                                 height={28}
                                 className="drop-shadow-sm"
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
-                            <p>Hooping </p>
+                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                            <p>Hooping</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
                             <div className="hover:scale-110 transition-transform duration-200 z-[2] relative">
-                              <Image 
-                                src="/icons/soccer-ball.svg" 
-                                alt="Football" 
-                                width={28} 
+                              <Image
+                                src="/icons/soccer-ball.svg"
+                                alt="Football"
+                                width={28}
                                 height={28}
                                 className="drop-shadow-sm"
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
-                            <p> Defending like my life depends on it</p>
+                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                            <p>Defending like my life depends on it</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
@@ -228,7 +228,7 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
                             <p>Learning to DJ on Rekordbox</p>
                           </TooltipContent>
                         </Tooltip>
@@ -244,7 +244,7 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
                             <p>Queued up in CS2</p>
                           </TooltipContent>
                         </Tooltip>
@@ -260,7 +260,7 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent>
+                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
                             <p>Thrashing people in FIFA</p>
                           </TooltipContent>
                         </Tooltip>
