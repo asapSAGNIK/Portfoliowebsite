@@ -140,7 +140,7 @@ export default function Home() {
                       </div>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                  <TooltipContent side="top" align="center" sideOffset={8}>
                     <p>Sure!! Why not</p>
                   </TooltipContent>
                 </Tooltip>
@@ -182,11 +182,11 @@ export default function Home() {
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
                   <span className="flex items-center gap-2 flex-wrap">
                     <span>When I'm not building products, you'll usually find me:</span>
-                    <TooltipProvider delayDuration={100} skipDelayDuration={0}>
-                      <div className="flex items-center -space-x-2">
+                    <TooltipProvider delayDuration={50} skipDelayDuration={0}>
+                      <div className="flex items-center gap-1">
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[1] relative">
+                            <div className="hover:scale-110 transition-transform duration-200 z-[1] relative p-1">
                               <Image
                                 src="/icons/basketball.svg"
                                 alt="Basketball"
@@ -196,13 +196,13 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                          <TooltipContent side="top" align="center" sideOffset={8}>
                             <p>Hooping</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[2] relative">
+                            <div className="hover:scale-110 transition-transform duration-200 z-[2] relative p-1">
                               <Image
                                 src="/icons/soccer-ball.svg"
                                 alt="Football"
@@ -212,13 +212,13 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                          <TooltipContent side="top" align="center" sideOffset={8}>
                             <p>Defending like my life depends on it</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[3] relative">
+                            <div className="hover:scale-110 transition-transform duration-200 z-[3] relative p-1">
                               <Image 
                                 src="/icons/rekord.svg" 
                                 alt="Rekordbox" 
@@ -228,13 +228,13 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                          <TooltipContent side="top" align="center" sideOffset={8}>
                             <p>Learning to DJ on Rekordbox</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[4] relative">
+                            <div className="hover:scale-110 transition-transform duration-200 z-[4] relative p-1">
                               <Image 
                                 src="/icons/CSicon.svg" 
                                 alt="CS2" 
@@ -244,13 +244,13 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                          <TooltipContent side="top" align="center" sideOffset={8}>
                             <p>Queued up in CS2</p>
                           </TooltipContent>
                         </Tooltip>
                         <Tooltip>
                           <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[5] relative">
+                            <div className="hover:scale-110 transition-transform duration-200 z-[5] relative p-1">
                               <Image 
                                 src="/icons/FIFA.svg" 
                                 alt="FIFA" 
@@ -260,7 +260,7 @@ export default function Home() {
                               />
                             </div>
                           </TooltipTrigger>
-                          <TooltipContent side="top" sideOffset={5} avoidCollisions={true}>
+                          <TooltipContent side="top" align="center" sideOffset={8}>
                             <p>Thrashing people in FIFA</p>
                           </TooltipContent>
                         </Tooltip>
@@ -324,7 +324,11 @@ export default function Home() {
             {/* Right Column - Profile Picture */}
             <div className="flex flex-col items-center lg:items-end space-y-2">
               <div
-                className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border-2 border-green-500/30 shadow-2xl shadow-green-500/20 group"
+                className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border-2 shadow-2xl group"
+                style={{
+                  borderColor: '#FFF2C6',
+                  boxShadow: '0 25px 50px -12px rgba(255, 242, 198, 0.25), 0 0 0 1px rgba(255, 242, 198, 0.3)'
+                }}
               >
                 <Image
                   src="/prf.jpg"
