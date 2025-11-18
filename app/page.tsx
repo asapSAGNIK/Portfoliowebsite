@@ -164,7 +164,7 @@ export default function Home() {
               <div className={`space-y-3 text-lg ${isPlaying ? 'text-white' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>I'm a 23 y/o Full-Stack Developer from Kolkata, India</span>
+                  <span>I'm a 23 y/o Full-Stack Developer from India</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
