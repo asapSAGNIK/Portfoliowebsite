@@ -172,7 +172,11 @@ export default function Home() {
                 </p>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>I have experience of working with clients and have provided solutions to their problems.</span>
+                  <span>I have experience of working with clients and have provided solutions, over multiple domains, to their problems.</span>
+                </p>
+                <p className="flex items-start gap-2">
+                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
+                  <span> I am actively developing automation bots (Telegram) and Voice Calling Agents for <Link href="https://www.dagagroups.com/" target="_blank" className="inline-block cursor-pointer"><strong className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? 'bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400' : 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700'}`}>Daga Groups, Surat, India</strong></Link>.</span>
                 </p>
                 <p className="flex items-start gap-2">
                   <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
