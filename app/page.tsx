@@ -281,46 +281,47 @@ export default function Home() {
                 <h2 className={`text-2xl font-bold mb-6 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
                   WorkEx
                 </h2>
-                <Card className="border-0 bg-transparent">
-                  <CardContent className="p-0">
-                    <div className="flex flex-col lg:flex-row gap-4">
-                      {workExperience.map((work, index) => (
-                        <Card
-                          key={index}
-                          className={`flex-1 transition-transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border ${isPlaying ? 'hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent border-gray-700/50' : 'border-gray-300/50'}`}
-                          style={{
-                            backgroundColor: isPlaying ? 'transparent' : '#FFF8DE'
-                          }}
-                          onMouseEnter={(e) => {
-                            if (!isPlaying) {
-                              e.currentTarget.style.backgroundColor = '#FFF2C6';
-                            }
-                          }}
-                          onMouseLeave={(e) => {
-                            if (!isPlaying) {
-                              e.currentTarget.style.backgroundColor = '#FFF8DE';
-                            }
-                          }}
-                          onClick={() => window.open(work.website, '_blank')}
+                <div className="flex flex-col gap-6 pl-1">
+                  {workExperience.map((work, index) => (
+                    <div
+                      key={index}
+                      className="group flex flex-col cursor-pointer transition-transform duration-200 hover:translate-x-1"
+                      onClick={() => window.open(work.website, '_blank')}
+                    >
+                      <div className="flex items-center gap-2">
+                        <span 
+                          className={`text-lg font-bold transition-colors ${isPlaying ? 'text-white group-hover:text-yellow-400' : 'group-hover:text-[#3A5FFF]'}`} 
+                          style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}
                         >
-                          <CardContent className="p-4">
-                            <div className="flex items-center justify-between">
-                              <div className={`flex items-center text-lg font-semibold ${isPlaying ? 'text-white' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
-                                {work.title}
-                              </div>
-                              <div className={`text-sm ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ color: isPlaying ? undefined : '#6B8CE8' }}>
-                                {work.date}
-                              </div>
-                            </div>
-                            <p className={`text-sm mt-3 ${isPlaying ? 'text-gray-300' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
-                              {work.description}
-                            </p>
-                          </CardContent>
-                        </Card>
-                      ))}
+                          {work.title}
+                        </span>
+                        <svg 
+                          xmlns="http://www.w3.org/2000/svg" 
+                          viewBox="0 0 24 24" 
+                          fill="none" 
+                          stroke="currentColor" 
+                          strokeWidth="2.5" 
+                          strokeLinecap="round" 
+                          strokeLinejoin="round" 
+                          className={`w-4 h-4 transition-all opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isPlaying ? 'text-yellow-400' : 'text-[#3A5FFF]'}`}
+                        >
+                          <path d="M15 3h6v6" />
+                          <path d="M10 14 21 3" />
+                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                        </svg>
+                        <span className={`text-xs ml-auto ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ color: isPlaying ? undefined : '#6B8CE8' }}>
+                          {work.date}
+                        </span>
+                      </div>
+                      <p 
+                        className={`text-sm mt-1 leading-relaxed ${isPlaying ? 'text-gray-300' : ''}`} 
+                        style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}
+                      >
+                        {work.description}
+                      </p>
                     </div>
-                  </CardContent>
-                </Card>
+                  ))}
+                </div>
               </div>
 
             </div>

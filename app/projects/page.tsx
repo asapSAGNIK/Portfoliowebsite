@@ -163,26 +163,23 @@ export default function ProjectsPage() {
                       }}
                       onClick={() => window.open(project.website || project.github, '_blank')}
                     >
-                      {/* Image section — zooms on hover */}
+                      {/* Image section — zooms on hover, uses object-contain to prevent cropping */}
                       {project.image && (
-                        <div className="relative w-full overflow-hidden" style={{ height: '180px' }}>
+                        <div className="relative w-full overflow-hidden bg-[#0c0c0e]" style={{ height: '180px' }}>
                           <Image
                             src={project.image}
                             alt={project.title}
                             fill
-                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            className="object-contain transition-transform duration-500 group-hover:scale-110"
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                           />
                           {/* subtle gradient overlay at bottom for readability */}
-                          <div className={`absolute inset-x-0 bottom-0 h-10 ${isPlaying ? 'bg-gradient-to-t from-black/40 to-transparent' : 'bg-gradient-to-t from-[#FFF8DE]/60 to-transparent'}`} />
+                          <div className={`absolute inset-x-0 bottom-0 h-10 ${isPlaying ? 'bg-gradient-to-t from-black/40 to-transparent' : 'bg-gradient-to-t from-[#FFF8DE]/10 to-transparent'}`} />
                         </div>
                       )}
 
                       {/* Text section */}
                       <div className="flex flex-col flex-1 p-4">
-                        <p className={`text-xs uppercase tracking-widest font-semibold mb-1 ${isPlaying ? 'text-yellow-400/70' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#3A5FFF99' }}>
-                          Project
-                        </p>
                         <h3 className={`text-base font-bold leading-snug mb-3 ${isPlaying ? 'text-yellow-300' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
                           {project.title}
                         </h3>
