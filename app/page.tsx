@@ -281,11 +281,11 @@ export default function Home() {
                 <h2 className={`text-2xl font-bold mb-6 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
                   WorkEx
                 </h2>
-                <div className="flex flex-col gap-6 pl-1">
+                <div className="flex flex-col gap-4 pl-1">
                   {workExperience.map((work, index) => (
                     <div
                       key={index}
-                      className="group flex flex-col cursor-pointer transition-transform duration-200 hover:translate-x-1"
+                      className={`group flex flex-col cursor-pointer transition-all duration-200 hover:translate-x-1 p-4 rounded-xl border ${isPlaying ? 'border-transparent hover:border-white/10 hover:bg-white/5' : 'border-transparent hover:border-blue-200/60 hover:bg-[#FFF2C6]/30'}`}
                       onClick={() => window.open(work.website, '_blank')}
                     >
                       <div className="flex items-center gap-2">

@@ -163,14 +163,17 @@ export default function ProjectsPage() {
                       }}
                       onClick={() => window.open(project.website || project.github, '_blank')}
                     >
-                      {/* Image section — zooms on hover, uses object-contain to prevent cropping */}
+                      {/* Image section — zooms on hover */}
                       {project.image && (
-                        <div className="relative w-full overflow-hidden bg-[#0c0c0e]" style={{ height: '180px' }}>
+                        <div 
+                          className={`relative w-full overflow-hidden ${project.title === 'Smart Playlist' ? 'bg-[#0c0c0e]' : ''}`} 
+                          style={{ height: '180px' }}
+                        >
                           <Image
                             src={project.image}
                             alt={project.title}
                             fill
-                            className="object-contain transition-transform duration-500 group-hover:scale-110"
+                            className={`transition-transform duration-500 group-hover:scale-110 ${project.title === 'Smart Playlist' ? 'object-contain' : 'object-cover'}`}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
                           />
                           {/* subtle gradient overlay at bottom for readability */}
