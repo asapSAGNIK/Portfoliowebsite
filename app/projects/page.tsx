@@ -5,6 +5,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Github, Linkedin, Mail, ArrowLeft } from "lucide-react"
 import Link from "next/link"
+import Image from "next/image"
 import React, { useEffect, useRef, useState } from "react"
 import BackgroundParticles from "@/components/BackgroundParticles"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
@@ -14,11 +15,12 @@ export default function ProjectsPage() {
 
   const projects = [
     {
-      title: "Rocket Adventures, A Unity Game",
-      description: "A 3D rocket navigation game developed in Unity using C#, featuring physics-based controls, level progression, and dynamic camera movement with immersive particle effects.",
-      github: "https://github.com/asapSAGNIK/Rocket-Adventures-3D-A-Unity-Game",
-      website: "https://rocket-adventures.vercel.app/",
+      title: "The Teatime",
+      description: "The Teatime is an experimental, autonomous news service that eliminates human editors. It uses a high-intelligence AI pipeline to discover, research, write, and verify news stories in real-time based on global social and search trends.",
+      github: "https://teatime-ivory.vercel.app/",
+      website: "https://teatime-ivory.vercel.app/",
       isDeployed: true,
+      image: "/teatimeicon.png",
     },
     {
       title: "Smart Playlist",
@@ -26,6 +28,7 @@ export default function ProjectsPage() {
       github: "https://github.com/srijantelang-work/Smartplaylist",
       website: "https://smartplaylist.software/",
       isDeployed: true,
+      image: "/smartplaylisticon.png",
     },
     {
       title: "P.L.A.T.E (Personalized learning and Assistance for Taste Enhancement)",
@@ -33,11 +36,15 @@ export default function ProjectsPage() {
       github: "https://github.com/asapSAGNIK/P.L.A.T.E",
       website: "https://plate-liard.vercel.app/",
       isDeployed: true,
+      image: "/Plateicon.png",
     },
     {
-      title: "Mini Project Management System",
-      description: " A full-stack project management tool built featuring organization-based multi-tenancy.",
-      github: "https://github.com/asapSAGNIK/Mini-Project-Management-System",
+      title: "Rocket Adventures, A Unity Game",
+      description: "A 3D rocket navigation game developed in Unity using C#, featuring physics-based controls, level progression, and dynamic camera movement with immersive particle effects.",
+      github: "https://github.com/asapSAGNIK/Rocket-Adventures-3D-A-Unity-Game",
+      website: "https://rocket-adventures.vercel.app/",
+      isDeployed: true,
+      image: "/rocketicon.png",
     },
   ]
 
@@ -136,13 +143,13 @@ export default function ProjectsPage() {
             <h2 className={`text-2xl font-bold mb-4 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
               Projects
             </h2>
-            <div className="flex flex-col lg:flex-row gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                   {projects.map((project, index) => (
-                    <Card
+                    <div
                       key={index}
-                      className={`flex-1 transition-transform duration-300 hover:scale-105 hover:shadow-2xl cursor-pointer border ${isPlaying ? 'hover:bg-gradient-to-r from-transparent via-gray-800/50 to-transparent border-gray-700/50' : 'border-gray-300/50'}`}
+                      className={`group flex flex-col rounded-xl overflow-hidden cursor-pointer border transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl ${isPlaying ? 'border-gray-700/50 hover:border-gray-500/60' : 'border-gray-300/60 hover:border-blue-300/80'}`}
                       style={{
-                        backgroundColor: isPlaying ? 'transparent' : '#FFF8DE'
+                        backgroundColor: isPlaying ? 'rgba(255,255,255,0.04)' : '#FFF8DE'
                       }}
                       onMouseEnter={(e) => {
                         if (!isPlaying) {
@@ -156,24 +163,39 @@ export default function ProjectsPage() {
                       }}
                       onClick={() => window.open(project.website || project.github, '_blank')}
                     >
-                      <CardContent>
-                        <div className="py-2">
-                          <div className="flex items-center justify-between">
-                            <div className={`text-lg font-semibold ${isPlaying ? '' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
-                              {project.title}
-                            </div>
-                          </div>
-                          <p className={`text-sm mt-3 ${isPlaying ? 'text-gray-300' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
-                            {project.description}
-                          </p>
+                      {/* Image section — zooms on hover */}
+                      {project.image && (
+                        <div className="relative w-full overflow-hidden" style={{ height: '180px' }}>
+                          <Image
+                            src={project.image}
+                            alt={project.title}
+                            fill
+                            className="object-cover transition-transform duration-500 group-hover:scale-110"
+                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
+                          />
+                          {/* subtle gradient overlay at bottom for readability */}
+                          <div className={`absolute inset-x-0 bottom-0 h-10 ${isPlaying ? 'bg-gradient-to-t from-black/40 to-transparent' : 'bg-gradient-to-t from-[#FFF8DE]/60 to-transparent'}`} />
                         </div>
-                      </CardContent>
-                    </Card>
+                      )}
+
+                      {/* Text section */}
+                      <div className="flex flex-col flex-1 p-4">
+                        <p className={`text-xs uppercase tracking-widest font-semibold mb-1 ${isPlaying ? 'text-yellow-400/70' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#3A5FFF99' }}>
+                          Project
+                        </p>
+                        <h3 className={`text-base font-bold leading-snug mb-3 ${isPlaying ? 'text-yellow-300' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
+                          {project.title}
+                        </h3>
+                        <p className={`text-sm leading-relaxed ${isPlaying ? 'text-gray-300' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
+                          {project.description}
+                        </p>
+                      </div>
+                    </div>
                   ))}
                 </div>
 
               {/* GitHub Note */}
-              <p className={`text-center text-sm mt-4 ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
+              <p className={`text-center text-sm mt-6 ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
                 Feel free to visit my github for more open source projects
               </p>
           </div>
