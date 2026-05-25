@@ -537,3 +537,9 @@ h1, h2, h3, h4, h5, h6 {
   background-color: #FFF2C6;
   color: #2D3748;
 }
+
+/* Ensure particle canvas never blocks click events in any browser */
+#tsparticles,
+#tsparticles canvas {
+  pointer-events: none !important;
+}

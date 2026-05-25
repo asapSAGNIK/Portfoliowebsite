@@ -96,15 +96,14 @@ const BackgroundParticles = React.memo(function BackgroundParticles({
   return (
     <div
       className={`fixed inset-0 -z-10 w-full h-full transition-opacity duration-1000 ${visible ? 'opacity-100' : 'opacity-0'}`}
-      style={{ pointerEvents: visible ? 'none' : 'none' }} // Always disable pointer events
+      style={{ pointerEvents: 'none' }}
     >
-      <div className="blur-sm">
-        <Particles
-          key="background-particles" // Stable key to prevent recreation
-          id="tsparticles"
-          options={options}
-        />
-      </div>
+      <Particles
+        key="background-particles" // Stable key to prevent recreation
+        id="tsparticles"
+        options={options}
+        style={{ pointerEvents: 'none' }}
+      />
     </div>
   );
 });
