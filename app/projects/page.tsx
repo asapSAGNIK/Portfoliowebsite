@@ -196,7 +196,7 @@ export default function ProjectsPage() {
 
               {/* GitHub Note */}
               <p className={`text-center text-sm mt-6 ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
-                Feel free to visit my github for more open source projects
+                Feel free to visit my <Link href="https://github.com/asapSAGNIK" target="_blank" className="underline underline-offset-2 hover:opacity-70">github</Link> for more open source projects
               </p>
           </div>
         </div>

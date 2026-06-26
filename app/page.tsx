@@ -1,14 +1,19 @@
-"use client"
-import { Button } from "@/components/ui/button"
-import { useAudio } from '../contexts/AudioContext'
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Linkedin, Mail, Briefcase } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import React, { useEffect, useRef, useState } from "react"
-import BackgroundParticles from "@/components/BackgroundParticles"
-import ResumeDialog from "@/components/ResumeDialog"
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
+"use client";
+import { Button } from "@/components/ui/button";
+import { useAudio } from "../contexts/AudioContext";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Github, Linkedin, Mail, Briefcase } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import React, { useEffect, useState } from "react";
+import BackgroundParticles from "@/components/BackgroundParticles";
+import ResumeDialog from "@/components/ResumeDialog";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 
 export default function Home() {
   const [time, setTime] = useState("");
@@ -19,35 +24,36 @@ export default function Home() {
 
   const workExperience = [
     {
-      title: "Skyline Properties",
-      company: "Skyline Properties",
+      title: "Bill Processor Bot (@ Daga Groups)",
+      company: "Bill Processor Bot (@ Daga Groups)",
       type: "Freelance",
       date: "May 2025",
-      description: "A fully responsive real estate website with dynamic property listings and search capability. I implemented the UI architecture, optimized load times, and ensured smooth navigation across devices.",
-      website: "https://skyline-properties-portfolio.vercel.app/",
+      description:
+        "A Telegram bot that extracts structured data from bill and invoice images using Google Gemini Vision AI, classifies them by entry type, and saves the results to Google Sheets. Built for the textile industry, handling grey purchase, yarn purchase, finish purchase, GRN, and ledger documents.",
+      website: "https://github.com/asapSAGNIK/daga",
     },
     {
       title: "Sunder Garments",
       company: "Sunder Garments",
       type: "Freelance",
       date: "August 2025",
-      description: "An end-to-end e-commerce platform supporting web and mobile storefronts with cart, checkout, and order management. I engineered the full workflow from product listing to secure transactions and deployment.",
+      description:
+        "An end-to-end e-commerce platform supporting web and mobile storefronts with cart, checkout, and order management. I engineered the full workflow from product listing to secure transactions and deployment.",
       website: "https://www.sundergarments.in/",
     },
   ];
-  
+
   useEffect(() => {
     const updateTime = () => {
       const now = new Date();
-      const hours = String(now.getHours()).padStart(2, '0');
-      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, "0");
+      const minutes = String(now.getMinutes()).padStart(2, "0");
       setTime(`${hours}:${minutes}`);
     };
     updateTime();
     const interval = setInterval(updateTime, 1000 * 10);
     return () => clearInterval(interval);
   }, []);
-
 
   // Typing animation effect
   useEffect(() => {
@@ -73,7 +79,7 @@ export default function Home() {
   // Blinking cursor effect
   useEffect(() => {
     const cursorInterval = setInterval(() => {
-      setShowCursor(prev => !prev);
+      setShowCursor((prev) => !prev);
     }, 500); // Blink every 500ms
 
     return () => clearInterval(cursorInterval);
@@ -89,24 +95,57 @@ export default function Home() {
 
   return (
     <>
-      <div className="fixed inset-0 -z-10 w-full h-full" style={{ backgroundColor: isPlaying ? 'transparent' : '#FFF8DE' }} />
+      <div
+        className="fixed inset-0 -z-10 w-full h-full"
+        style={{ backgroundColor: isPlaying ? "transparent" : "#FFF8DE" }}
+      />
       <BackgroundParticles visible={isPlaying} />
-      <div className="min-h-screen bg-transparent">
+      <div className="h-screen overflow-hidden bg-transparent">
         {/* Header Navigation */}
-        <header className="w-full pt-6 md:pt-8">
-          <div className="max-w-7xl mx-auto px-6 md:px-8 flex justify-between items-center">
-            <Link href="/" className="text-4xl font-bold" style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? ' #fde047' : '#3A5FFF' }}>
+        <header className="w-full pt-2 md:pt-3">
+          <div className="max-w-6xl mx-auto px-6 md:px-8 flex justify-between items-center">
+            <Link
+              href="/"
+              className="text-4xl font-bold"
+              style={{
+                fontFamily: "Hoover, sans-serif",
+                color: isPlaying ? " #fde047" : "#3A5FFF",
+              }}
+            >
               {typedText}
-              <span style={{ opacity: showCursor ? 1 : 0, transition: 'opacity 0.1s' }}>|</span>
+              <span
+                style={{
+                  opacity: showCursor ? 1 : 0,
+                  transition: "opacity 0.1s",
+                }}
+              >
+                |
+              </span>
             </Link>
             <nav className="flex items-center gap-3">
               <Link href="/projects">
-                <button className="ui-btn" style={{ '--default-btn-color': isPlaying ? '#fff' : '#3A5FFF', '--hover-btn-color': isPlaying ? '#FAC921' : '#3A5FFF' } as React.CSSProperties}>
+                <button
+                  className="ui-btn"
+                  style={
+                    {
+                      "--default-btn-color": isPlaying ? "#fff" : "#3A5FFF",
+                      "--hover-btn-color": isPlaying ? "#FAC921" : "#3A5FFF",
+                    } as React.CSSProperties
+                  }
+                >
                   <span>Projects</span>
                 </button>
               </Link>
               <ResumeDialog>
-                <button className="ui-btn" style={{ '--default-btn-color': isPlaying ? '#fff' : '#3A5FFF', '--hover-btn-color': isPlaying ? '#FAC921' : '#3A5FFF' } as React.CSSProperties}>
+                <button
+                  className="ui-btn"
+                  style={
+                    {
+                      "--default-btn-color": isPlaying ? "#fff" : "#3A5FFF",
+                      "--hover-btn-color": isPlaying ? "#FAC921" : "#3A5FFF",
+                    } as React.CSSProperties
+                  }
+                >
                   <span>Resume</span>
                 </button>
               </ResumeDialog>
@@ -119,7 +158,7 @@ export default function Home() {
                           width="64"
                           height="64"
                           viewBox="0 0 128 128"
-                          className={`border-2 rounded-full shadow-md border-zinc-400 transition-all duration-300 ${isPlaying ? 'animate-spin-slow' : ''}`}
+                          className={`border-2 rounded-full shadow-md border-zinc-400 transition-all duration-300 ${isPlaying ? "animate-spin-slow" : ""}`}
                         >
                           <rect width="128" height="128" fill="black"></rect>
                           <circle cx="30" cy="20" r="2" fill="white"></circle>
@@ -128,13 +167,44 @@ export default function Home() {
                           <circle cx="80" cy="40" r="2" fill="white"></circle>
                           <circle cx="100" cy="20" r="2" fill="white"></circle>
                           <circle cx="120" cy="50" r="2" fill="white"></circle>
-                          <circle cx="90" cy="30" r="10" fill="white" fillOpacity="0.5"></circle>
+                          <circle
+                            cx="90"
+                            cy="30"
+                            r="10"
+                            fill="white"
+                            fillOpacity="0.5"
+                          ></circle>
                           <circle cx="90" cy="30" r="8" fill="white"></circle>
-                          <path d="M0 128 Q32 64 64 128 T128 128" fill="purple" stroke="black" strokeWidth="1"></path>
-                          <path d="M0 128 Q32 48 64 128 T128 128" fill="mediumpurple" stroke="black" strokeWidth="1"></path>
-                          <path d="M0 128 Q32 32 64 128 T128 128" fill="rebeccapurple" stroke="black" strokeWidth="1"></path>
-                          <path d="M0 128 Q16 64 32 128 T64 128" fill="purple" stroke="black" strokeWidth="1"></path>
-                          <path d="M64 128 Q80 64 96 128 T128 128" fill="mediumpurple" stroke="black" strokeWidth="1"></path>
+                          <path
+                            d="M0 128 Q32 64 64 128 T128 128"
+                            fill="purple"
+                            stroke="black"
+                            strokeWidth="1"
+                          ></path>
+                          <path
+                            d="M0 128 Q32 48 64 128 T128 128"
+                            fill="mediumpurple"
+                            stroke="black"
+                            strokeWidth="1"
+                          ></path>
+                          <path
+                            d="M0 128 Q32 32 64 128 T128 128"
+                            fill="rebeccapurple"
+                            stroke="black"
+                            strokeWidth="1"
+                          ></path>
+                          <path
+                            d="M0 128 Q16 64 32 128 T64 128"
+                            fill="purple"
+                            stroke="black"
+                            strokeWidth="1"
+                          ></path>
+                          <path
+                            d="M64 128 Q80 64 96 128 T128 128"
+                            fill="mediumpurple"
+                            stroke="black"
+                            strokeWidth="1"
+                          ></path>
                         </svg>
                         <div className="absolute top-6 left-6 w-4 h-4 bg-white border-2 rounded-full shadow-sm border-zinc-400"></div>
                       </div>
@@ -150,251 +220,413 @@ export default function Home() {
         </header>
 
         {/* Main Content */}
-        <main className="w-full pt-6 md:pt-8 pb-12">
-          <div className="max-w-7xl mx-auto px-6 md:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start min-h-[calc(100vh-300px)]">
-            {/* Left Column - Text Content */}
-            <div className="space-y-2">
-              <div>
-                <h2 className={`text-2xl font-bold mb-4 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
-                  Summary
-                </h2>
-              </div>
+        <main className="w-full pt-2 md:pt-3 pb-4">
+          <div className="max-w-6xl mx-auto px-6 md:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-3 items-start">
+              {/* Left Column - Text Content */}
+              <div className="space-y-2">
+                <div>
+                  <h2
+                    className={`text-2xl font-bold mb-1.5 ${isPlaying ? "text-yellow-500" : ""}`}
+                    style={{
+                      fontFamily: "Hoover, sans-serif",
+                      color: isPlaying ? undefined : "#3A5FFF",
+                    }}
+                  >
+                    Summary
+                  </h2>
+                </div>
 
-              <div className={`space-y-3 text-lg ${isPlaying ? 'text-white' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>I'm a 23 y/o Full-Stack Developer from India</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>Crafting intuitive, responsive web and mobile apps with a focus on clean design and seamless UI/UX.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>I have experience of working with clients and have provided solutions, over multiple domains, to their problems.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span> I am actively developing automation bots (Telegram) and Voice Calling Agents for <Link href="https://www.dagagroups.com/" target="_blank" className="inline-block cursor-pointer"><strong className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? 'bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400' : 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700'}`}>Daga Groups, Surat, India</strong></Link>.</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span>I am actively developing <Link href="https://plate-liard.vercel.app/" target="_blank" className="inline-block cursor-pointer"><strong className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? 'bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400' : 'bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700'}`}>P.L.A.T.E</strong></Link> (Personalized learning and Assistance for Taste Enhancement)</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ color: isPlaying ? undefined : '#3A5FFF' }}>•</span>
-                  <span className="flex items-center gap-2 flex-wrap">
-                    <span>When I'm not building products, you'll usually find me:</span>
-                    <TooltipProvider delayDuration={50} skipDelayDuration={0}>
-                      <div className="flex items-center gap-1">
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[1] relative p-1">
-                              <Image
-                                src="/icons/basketball.svg"
-                                alt="Basketball"
-                                width={28}
-                                height={28}
-                                className="drop-shadow-sm"
-                              />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" align="center" sideOffset={8}>
-                            <p>Hooping</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[2] relative p-1">
-                              <Image
-                                src="/icons/soccer-ball.svg"
-                                alt="Football"
-                                width={28}
-                                height={28}
-                                className="drop-shadow-sm"
-                              />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" align="center" sideOffset={8}>
-                            <p>Defending like my life depends on it</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[3] relative p-1">
-                              <Image 
-                                src="/icons/rekord.svg" 
-                                alt="Rekordbox" 
-                                width={28} 
-                                height={28}
-                                className="drop-shadow-sm"
-                              />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" align="center" sideOffset={8}>
-                            <p>Learning to DJ on Rekordbox</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[4] relative p-1">
-                              <Image 
-                                src="/icons/CSicon.svg" 
-                                alt="CS2" 
-                                width={28} 
-                                height={28}
-                                className="drop-shadow-sm"
-                              />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" align="center" sideOffset={8}>
-                            <p>Queued up in CS2</p>
-                          </TooltipContent>
-                        </Tooltip>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <div className="hover:scale-110 transition-transform duration-200 z-[5] relative p-1">
-                              <Image 
-                                src="/icons/FIFA.svg" 
-                                alt="FIFA" 
-                                width={28} 
-                                height={28}
-                                className="drop-shadow-sm"
-                              />
-                            </div>
-                          </TooltipTrigger>
-                          <TooltipContent side="top" align="center" sideOffset={8}>
-                            <p>Thrashing people in FIFA</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </div>
-                    </TooltipProvider>
-                    
-                  </span>
-                </p>
-
-              </div>
-
-              {/* Work Experience Section */}
-              <div className="mt-8">
-                <h2 className={`text-2xl font-bold mb-6 ${isPlaying ? 'text-yellow-500' : ''}`} style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}>
-                  WorkEx
-                </h2>
-                <div className="flex flex-col gap-4 pl-1">
-                  {workExperience.map((work, index) => (
-                    <div
-                      key={index}
-                      className={`group flex flex-col cursor-pointer transition-all duration-200 hover:translate-x-1 p-4 rounded-xl border ${isPlaying ? 'border-transparent hover:border-white/10 hover:bg-white/5' : 'border-transparent hover:border-blue-200/60 hover:bg-[#FFF2C6]/30'}`}
-                      onClick={() => window.open(work.website, '_blank')}
+                <div
+                  className={`space-y-1 text-sm ${isPlaying ? "text-white" : ""}`}
+                  style={{
+                    fontFamily: "Satoshi Medium, sans-serif",
+                    color: isPlaying ? undefined : "#6B8CE8",
+                  }}
+                >
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
                     >
-                      <div className="flex items-center gap-2">
-                        <span 
-                          className={`text-lg font-bold transition-colors ${isPlaying ? 'text-white group-hover:text-yellow-400' : 'group-hover:text-[#3A5FFF]'}`} 
-                          style={{ fontFamily: 'Hoover, sans-serif', color: isPlaying ? undefined : '#3A5FFF' }}
-                        >
-                          {work.title}
-                        </span>
-                        <svg 
-                          xmlns="http://www.w3.org/2000/svg" 
-                          viewBox="0 0 24 24" 
-                          fill="none" 
-                          stroke="currentColor" 
-                          strokeWidth="2.5" 
-                          strokeLinecap="round" 
-                          strokeLinejoin="round" 
-                          className={`w-4 h-4 transition-all opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isPlaying ? 'text-yellow-400' : 'text-[#3A5FFF]'}`}
-                        >
-                          <path d="M15 3h6v6" />
-                          <path d="M10 14 21 3" />
-                          <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                        </svg>
-                        <span className={`text-xs ml-auto ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ color: isPlaying ? undefined : '#6B8CE8' }}>
-                          {work.date}
-                        </span>
-                      </div>
-                      <p 
-                        className={`text-sm mt-1 leading-relaxed ${isPlaying ? 'text-gray-300' : ''}`} 
-                        style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}
+                      •
+                    </span>
+                    <span>I'm a 23 y/o Full-Stack Developer from India</span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
+                    >
+                      •
+                    </span>
+                    <span>
+                      Crafting intuitive, responsive web and mobile apps with a
+                      focus on clean design and seamless UI/UX.
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
+                    >
+                      •
+                    </span>
+                    <span>
+                      I have experience of working with clients and have
+                      provided solutions, over multiple domains, to their
+                      problems.
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
+                    >
+                      •
+                    </span>
+                    <span>
+                      {" "}
+                      I am actively developing automation bots (Telegram) and
+                      Voice Calling Agents for{" "}
+                      <Link
+                        href="https://www.dagagroups.com/"
+                        target="_blank"
+                        className="inline-block cursor-pointer"
                       >
-                        {work.description}
-                      </p>
-                    </div>
-                  ))}
+                        <strong
+                          className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400" : "bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700"}`}
+                        >
+                          Daga Groups, Surat, India
+                        </strong>
+                      </Link>
+                      .
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
+                    >
+                      •
+                    </span>
+                    <span>
+                      I am actively developing{" "}
+                      <Link
+                        href="https://plate-liard.vercel.app/"
+                        target="_blank"
+                        className="inline-block cursor-pointer"
+                      >
+                        <strong
+                          className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? "bg-gradient-to-r from-yellow-400 via-amber-500 to-orange-400" : "bg-gradient-to-r from-blue-500 via-blue-600 to-blue-700"}`}
+                        >
+                          P.L.A.T.E
+                        </strong>
+                      </Link>{" "}
+                      (Personalized learning and Assistance for Taste
+                      Enhancement)
+                    </span>
+                  </p>
+                  <p className="flex items-start gap-2">
+                    <span
+                      className={`inline-block w-2 text-center flex-shrink-0 ${isPlaying ? "text-yellow-500" : ""}`}
+                      style={{ color: isPlaying ? undefined : "#3A5FFF" }}
+                    >
+                      •
+                    </span>
+                    <span className="flex items-center gap-2 flex-wrap">
+                      <span>
+                        When I'm not building products, you'll usually find me:
+                      </span>
+                      <TooltipProvider delayDuration={50} skipDelayDuration={0}>
+                        <div className="flex items-center -space-x-[12px]">
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="hover:scale-110 transition-transform duration-200 z-[1] relative p-1">
+                                <Image
+                                  src="/icons/basketball.svg"
+                                  alt="Basketball"
+                                  width={28}
+                                  height={28}
+                                  className="drop-shadow-sm"
+                                />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              align="center"
+                              sideOffset={8}
+                            >
+                              <p>Hooping</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="hover:scale-110 transition-transform duration-200 z-[2] relative p-1">
+                                <Image
+                                  src="/icons/soccer-ball.svg"
+                                  alt="Football"
+                                  width={28}
+                                  height={28}
+                                  className="drop-shadow-sm"
+                                />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              align="center"
+                              sideOffset={8}
+                            >
+                              <p>Defending like my life depends on it</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="hover:scale-110 transition-transform duration-200 z-[3] relative p-1">
+                                <Image
+                                  src="/icons/rekord.svg"
+                                  alt="Rekordbox"
+                                  width={28}
+                                  height={28}
+                                  className="drop-shadow-sm"
+                                />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              align="center"
+                              sideOffset={8}
+                            >
+                              <p>Learning to DJ on Rekordbox</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="hover:scale-110 transition-transform duration-200 z-[4] relative p-1">
+                                <Image
+                                  src="/icons/CSicon.svg"
+                                  alt="CS2"
+                                  width={28}
+                                  height={28}
+                                  className="drop-shadow-sm"
+                                />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              align="center"
+                              sideOffset={8}
+                            >
+                              <p>Queued up in CS2</p>
+                            </TooltipContent>
+                          </Tooltip>
+                          <Tooltip>
+                            <TooltipTrigger asChild>
+                              <div className="hover:scale-110 transition-transform duration-200 z-[5] relative p-1">
+                                <Image
+                                  src="/icons/FIFA.svg"
+                                  alt="FIFA"
+                                  width={28}
+                                  height={28}
+                                  className="drop-shadow-sm"
+                                />
+                              </div>
+                            </TooltipTrigger>
+                            <TooltipContent
+                              side="top"
+                              align="center"
+                              sideOffset={8}
+                            >
+                              <p>Thrashing people in FIFA</p>
+                            </TooltipContent>
+                          </Tooltip>
+                        </div>
+                      </TooltipProvider>
+                    </span>
+                  </p>
+                </div>
+
+                {/* Work Experience Section */}
+                <div className="mt-3">
+                  <h2
+                    className={`text-2xl font-bold mb-2 ${isPlaying ? "text-yellow-500" : ""}`}
+                    style={{
+                      fontFamily: "Hoover, sans-serif",
+                      color: isPlaying ? undefined : "#3A5FFF",
+                    }}
+                  >
+                    WorkEx
+                  </h2>
+                  <div className="flex flex-col gap-2 pl-1">
+                    {workExperience.map((work, index) => (
+                      <div
+                        key={index}
+                        className={`group flex flex-col cursor-pointer transition-all duration-200 hover:translate-x-1 p-4 rounded-xl border ${isPlaying ? "border-transparent hover:border-white/10 hover:bg-white/5" : "border-transparent hover:border-blue-200/60 hover:bg-[#FFF2C6]/30"}`}
+                        onClick={() => window.open(work.website, "_blank")}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span
+                            className={`text-lg font-bold transition-colors ${isPlaying ? "text-white group-hover:text-yellow-400" : "group-hover:text-[#3A5FFF]"}`}
+                            style={{
+                              fontFamily: "Hoover, sans-serif",
+                              color: isPlaying ? undefined : "#3A5FFF",
+                            }}
+                          >
+                            {work.title}
+                          </span>
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2.5"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            className={`w-4 h-4 transition-all opacity-60 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 ${isPlaying ? "text-yellow-400" : "text-[#3A5FFF]"}`}
+                          >
+                            <path d="M15 3h6v6" />
+                            <path d="M10 14 21 3" />
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                          </svg>
+                          <span
+                            className={`text-xs ml-auto ${isPlaying ? "text-muted-foreground" : ""}`}
+                            style={{ color: isPlaying ? undefined : "#6B8CE8" }}
+                          >
+                            {work.date}
+                          </span>
+                        </div>
+                        <p
+                          className={`text-sm mt-1 leading-relaxed ${isPlaying ? "text-gray-300" : ""}`}
+                          style={{
+                            fontFamily: "Satoshi Medium, sans-serif",
+                            color: isPlaying ? undefined : "#6B8CE8",
+                          }}
+                        >
+                          {work.description}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
 
-            </div>
+              {/* Right Column - Profile Picture */}
+              <div className="flex flex-col items-center lg:items-end space-y-2">
+                <div
+                  className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border-2 shadow-2xl group"
+                  style={{
+                    borderColor: "#FFF2C6",
+                    boxShadow:
+                      "0 25px 50px -12px rgba(255, 242, 198, 0.25), 0 0 0 1px rgba(255, 242, 198, 0.3)",
+                  }}
+                >
+                  <Image
+                    src="/prf.jpg"
+                    alt="Sagnik Chowdhury"
+                    fill
+                    className="object-cover image-reveal"
+                    priority
+                    onLoad={() => setImageLoaded(true)}
+                  />
+                </div>
 
-            {/* Right Column - Profile Picture */}
-            <div className="flex flex-col items-center lg:items-end space-y-2">
-              <div
-                className="relative w-full max-w-sm aspect-[3/4] rounded-2xl overflow-hidden border-2 shadow-2xl group"
-                style={{
-                  borderColor: '#FFF2C6',
-                  boxShadow: '0 25px 50px -12px rgba(255, 242, 198, 0.25), 0 0 0 1px rgba(255, 242, 198, 0.3)'
-                }}
-              >
-                <Image
-                  src="/prf.jpg"
-                  alt="Sagnik Chowdhury"
-                  fill
-                  className="object-cover image-reveal"
-                  priority
-                  onLoad={() => setImageLoaded(true)}
-                />
-              </div>
-
-              {/* Social Media Icons */}
-              <div className="flex gap-4 pt-2" style={{
-                '--social-border-color': isPlaying ? '#f0eeef' : '#3A5FFF',
-                '--social-icon-color': isPlaying ? '#f0eeef' : '#3A5FFF'
-              } as React.CSSProperties}>
-                <Link href="https://www.linkedin.com/in/sagnik-chowdhury-252035251/" target="_blank" className="social-button" aria-label="LinkedIn" style={{
-                  '--social-border-color': isPlaying ? '#f0eeef' : '#3A5FFF',
-                  '--social-icon-color': isPlaying ? '#f0eeef' : '#3A5FFF'
-                } as React.CSSProperties}>
-                  <div className="button-box">
-                    <div className="button-elem">
-                      <Linkedin className="w-5 h-5" />
+                {/* Social Media Icons */}
+                <div
+                  className="flex gap-4 pt-0.5"
+                  style={
+                    {
+                      "--social-border-color": isPlaying
+                        ? "#f0eeef"
+                        : "#3A5FFF",
+                      "--social-icon-color": isPlaying ? "#f0eeef" : "#3A5FFF",
+                    } as React.CSSProperties
+                  }
+                >
+                  <Link
+                    href="https://www.linkedin.com/in/sagnik-chowdhury-252035251/"
+                    target="_blank"
+                    className="social-button"
+                    aria-label="LinkedIn"
+                    style={
+                      {
+                        "--social-border-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                        "--social-icon-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <div className="button-box">
+                      <div className="button-elem">
+                        <Linkedin className="w-5 h-5" />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-                <Link href="https://github.com/asapSAGNIK" target="_blank" className="social-button" aria-label="GitHub" style={{
-                  '--social-border-color': isPlaying ? '#f0eeef' : '#3A5FFF',
-                  '--social-icon-color': isPlaying ? '#f0eeef' : '#3A5FFF'
-                } as React.CSSProperties}>
-                  <div className="button-box">
-                    <div className="button-elem">
-                      <Github className="w-5 h-5" />
+                  </Link>
+                  <Link
+                    href="https://github.com/asapSAGNIK"
+                    target="_blank"
+                    className="social-button"
+                    aria-label="GitHub"
+                    style={
+                      {
+                        "--social-border-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                        "--social-icon-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <div className="button-box">
+                      <div className="button-elem">
+                        <Github className="w-5 h-5" />
+                      </div>
                     </div>
-                  </div>
-                </Link>
-                <a href="mailto:sagnikwork20@gmail.com" className="social-button" aria-label="Email" style={{
-                  '--social-border-color': isPlaying ? '#f0eeef' : '#3A5FFF',
-                  '--social-icon-color': isPlaying ? '#f0eeef' : '#3A5FFF'
-                } as React.CSSProperties}>
-                  <div className="button-box">
-                    <div className="button-elem">
-                      <Mail className="w-5 h-5" />
+                  </Link>
+                  <a
+                    href="mailto:sagnikwork20@gmail.com"
+                    className="social-button"
+                    aria-label="Email"
+                    style={
+                      {
+                        "--social-border-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                        "--social-icon-color": isPlaying
+                          ? "#f0eeef"
+                          : "#3A5FFF",
+                      } as React.CSSProperties
+                    }
+                  >
+                    <div className="button-box">
+                      <div className="button-elem">
+                        <Mail className="w-5 h-5" />
+                      </div>
                     </div>
-                  </div>
-                </a>
+                  </a>
+                </div>
               </div>
             </div>
-          </div>
           </div>
         </main>
 
         {/* Footer */}
-        <footer className="w-full pt-4 pb-4 border-t border-border/40">
-          <div className={`max-w-7xl mx-auto px-6 md:px-8 flex justify-between text-sm ${isPlaying ? 'text-muted-foreground' : ''}`} style={{ fontFamily: 'Satoshi Medium, sans-serif', color: isPlaying ? undefined : '#6B8CE8' }}>
+        <footer className="w-full pt-2 pb-2 border-t border-border/40">
+          <div
+            className={`max-w-6xl mx-auto px-6 md:px-8 flex justify-between text-sm ${isPlaying ? "text-muted-foreground" : ""}`}
+            style={{
+              fontFamily: "Satoshi Medium, sans-serif",
+              color: isPlaying ? undefined : "#6B8CE8",
+            }}
+          >
             <span>© 2025 Sagnik Chowdhury</span>
             <span>Kolkata | {time}</span>
           </div>
         </footer>
-
       </div>
     </>
-  )
+  );
 }
