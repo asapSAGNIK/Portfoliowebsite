@@ -5,7 +5,7 @@ import React, { createContext, useContext, useEffect, useRef, useState, ReactNod
 interface AudioContextType {
   isPlaying: boolean;
   toggleAudio: () => void;
-  audioRef: React.RefObject<HTMLAudioElement>;
+  audioRef: React.RefObject<HTMLAudioElement | null>;
 }
 
 const AudioContext = createContext<AudioContextType | undefined>(undefined);
@@ -23,7 +23,7 @@ interface AudioProviderProps {
 }
 
 export const AudioProvider: React.FC<AudioProviderProps> = ({ children }) => {
-  const [isPlaying, setIsPlaying] = useState(() => {
+  const [isPlaying, setIsPlaying] = useState<boolean>(() => {
     if (typeof window !== 'undefined') {
       const saved = localStorage.getItem('musicState');
       return saved ? JSON.parse(saved) : false;
