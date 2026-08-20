@@ -44,7 +44,7 @@ export default function Home() {
       title: "Bill Processor Bot (@ Daga Groups)",
       company: "Bill Processor Bot (@ Daga Groups)",
       type: "Freelance",
-      date: "May 2025",
+      date: "February 2026",
       description:
         "A Telegram bot that extracts structured data from bill and invoice images using Google Gemini Vision AI, classifies them by entry type, and saves the results to Google Sheets. Built for the textile industry, handling grey purchase, yarn purchase, finish purchase, GRN, and ledger documents.",
       website: "https://github.com/asapSAGNIK/daga",
@@ -116,7 +116,7 @@ export default function Home() {
     ankara.current = new Audio("/ankara.mp3");
     [swishhh.current, cs.current, ea.current, dj.current, ankara.current].forEach(
       (audio) => {
-        if (audio) audio.volume = 0.6;
+        if (audio) audio.volume = 0.4;
       }
     );
   }, []);
