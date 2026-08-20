@@ -6,6 +6,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Github, Linkedin, Mail, MapPin, Phone, Clock, Code } from "lucide-react";
 import BackgroundParticles from "@/components/BackgroundParticles";
+import ParticleTunnel from "@/components/ParticleTunnel";
 import ResumeDialog from "@/components/ResumeDialog";
 import TechIcon from "@/components/TechIcon";
 import {
@@ -204,6 +205,18 @@ export default function Home() {
       <div
         className="fixed inset-0 -z-10 w-full h-full"
         style={{ backgroundColor: "#000000" }}
+      />
+      <ParticleTunnel
+        x={50}
+        y={35}
+        radius={120}
+        density={26}
+        gap={30}
+        particleSize={5.2}
+        direction="inside"
+        speed={1}
+        colors={["#A7D129"]}
+        className="fixed inset-0 -z-[4] w-full h-full pointer-events-none"
       />
       <ParallaxBackground />
       <div
