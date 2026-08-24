@@ -3,7 +3,6 @@
 import React, { useEffect, useMemo, useRef } from "react";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
 import {
-  drawGridPlane,
   drawParticles,
   drawPolyWireframe,
   drawRing,
@@ -45,13 +44,7 @@ type LayerProps = {
 const getCtx = (canvasRef: React.RefObject<HTMLCanvasElement | null>) =>
   canvasRef.current?.getContext("2d") ?? null;
 
-const GridPlane = ({ canvasRef, progress }: LayerProps) => {
-  useEffect(() => {
-    const ctx = getCtx(canvasRef);
-    if (ctx) drawGridPlane(ctx, BG_WIDTH, BG_HEIGHT, progress);
-  }, [canvasRef, progress]);
-  return null;
-};
+
 
 const ParticleField = ({
   canvasRef,
@@ -214,8 +207,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
         style={{ width: "100%", height: "100%" }}
       />
 
-      {/* BACKGROUND depth â€” grid + particles */}
-      <GridPlane canvasRef={canvasRef} frame={frame} progress={progress} />
+      {/* BACKGROUND depth — particles only */}
       <ParticleField
         canvasRef={canvasRef}
         frame={frame}
@@ -238,7 +230,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spin={1.2}
             tilt={0.5}
             color={LIME}
-            alpha={0.3}
+            alpha={0.21}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -253,7 +245,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={1}
             spin={0.6}
             color={LIME}
-            alpha={0.2}
+            alpha={0.14}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -268,7 +260,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={-1}
             spin={-0.5}
             color={GRAY_GREEN}
-            alpha={0.3}
+            alpha={0.21}
           />
 
           {/* MIDGROUND â€” right: small globe + ring */}
@@ -284,7 +276,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spin={-1.5}
             tilt={0.3}
             color={GRAY_GREEN}
-            alpha={0.24}
+            alpha={0.168}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -299,7 +291,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={-1}
             spin={-0.7}
             color={LIME}
-            alpha={0.2}
+            alpha={0.14}
           />
           <WireframeSphere
             canvasRef={canvasRef}
@@ -313,7 +305,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spin={0.8}
             tilt={-0.4}
             color={DARK_GRAY}
-            alpha={0.22}
+            alpha={0.154}
           />
 
           {/* FOREGROUND â€” geometric shapes */}
@@ -331,7 +323,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spinY={1.4}
             spinZ={0.5}
             color={LIME}
-            alpha={0.3}
+            alpha={0.21}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -346,7 +338,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={-1}
             spin={0.8}
             color={GRAY_GREEN}
-            alpha={0.24}
+            alpha={0.168}
           />
           <FloatingGeometry
             canvasRef={canvasRef}
@@ -362,7 +354,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spinY={1.6}
             spinZ={0.3}
             color={GRAY_GREEN}
-            alpha={0.3}
+            alpha={0.21}
           />
           <FloatingGeometry
             canvasRef={canvasRef}
@@ -378,7 +370,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spinY={0.8}
             spinZ={0.6}
             color={DARK_GRAY}
-            alpha={0.24}
+            alpha={0.168}
           />
           {!isTablet && (
             <>
@@ -396,7 +388,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
                 spinY={0.9}
                 spinZ={0.4}
                 color={LIME}
-                alpha={0.2}
+                alpha={0.14}
               />
               <FloatingGeometry
                 canvasRef={canvasRef}
@@ -412,7 +404,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
                 spinY={1.2}
                 spinZ={0.5}
                 color={GRAY_GREEN}
-                alpha={0.2}
+                alpha={0.14}
               />
             </>
           )}
@@ -434,7 +426,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spin={0.9}
             tilt={0.5}
             color={LIME}
-            alpha={0.24}
+            alpha={0.168}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -449,7 +441,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={-1}
             spin={-0.6}
             color={GRAY_GREEN}
-            alpha={0.2}
+            alpha={0.14}
           />
         </>
       )}

@@ -9,6 +9,9 @@ import BackgroundParticles from "@/components/BackgroundParticles";
 import ParticleTunnel from "@/components/ParticleTunnel";
 import ResumeDialog from "@/components/ResumeDialog";
 import TechIcon from "@/components/TechIcon";
+import ScrollCapsuleNav from "@/components/ScrollCapsuleNav";
+
+const GravityGallery = dynamic(() => import("@/components/GravityGallery"), { ssr: false });
 import {
   Tooltip,
   TooltipContent,
@@ -24,6 +27,10 @@ const ParallaxBackground = dynamic(
 export default function Home() {
   const [time, setTime] = useState("");
   const [imageLoaded, setImageLoaded] = useState(false);
+  const [skillsHover, setSkillsHover] = useState(false);
+  const skillsAnchorRef = useRef<HTMLSpanElement>(null);
+  const [skillsBoxPos, setSkillsBoxPos] = useState<{ left: number; top: number } | null>(null);
+  const [skillsBoxSide, setSkillsBoxSide] = useState<"left" | "right">("left");
 
   // Safety net: the photo must always end up sharp, even if onLoad is missed
   useEffect(() => {
@@ -199,6 +206,36 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
+  // position gravity box to the left of skills text, clamp to viewport
+  useEffect(() => {
+    if (!skillsHover) return;
+    const updatePos = () => {
+      const el = skillsAnchorRef.current;
+      if (!el) return;
+      const rect = el.getBoundingClientRect();
+      const boxW = 280;
+      const boxH = 184;
+      let left = rect.left - boxW - 16;
+      let side: "left" | "right" = "left";
+      if (left < 8) {
+        left = rect.right + 16;
+        side = "right";
+      }
+      const top = rect.top + rect.height / 2 - boxH / 2;
+      const clampedLeft = Math.max(8, Math.min(left, window.innerWidth - boxW - 8));
+      const clampedTop = Math.max(8, Math.min(top, window.innerHeight - boxH - 8));
+      setSkillsBoxPos({ left: clampedLeft, top: clampedTop });
+      setSkillsBoxSide(side);
+    };
+    updatePos();
+    window.addEventListener("resize", updatePos);
+    window.addEventListener("scroll", updatePos, true);
+    return () => {
+      window.removeEventListener("resize", updatePos);
+      window.removeEventListener("scroll", updatePos, true);
+    };
+  }, [skillsHover]);
+
   return (
     <React.Fragment>
       <BackgroundParticles visible={isPlaying} />
@@ -219,6 +256,7 @@ export default function Home() {
         className="fixed inset-0 -z-[4] w-full h-full pointer-events-none"
       />
       <ParallaxBackground />
+      <ScrollCapsuleNav />
       <div
         id="scroll-container"
         className="min-h-screen overflow-y-auto overflow-x-clip bg-transparent"
@@ -227,7 +265,10 @@ export default function Home() {
         <main className="w-full pt-6 md:pt-10 pb-4">
           <div className="max-w-2xl mx-auto px-4 sm:px-6">
             {/* ===== HERO SECTION — IMAGE LEFT, TEXT RIGHT ===== */}
-            <div className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8 md:mb-10">
+            <div
+              id="hero"
+              className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8 md:mb-10 scroll-mt-6"
+            >
               {/* Profile Image - 0.75:1 Aspect Ratio */}
               <div className="flex-shrink-0">
                 <div
@@ -319,7 +360,8 @@ export default function Home() {
 
             {/* ===== SUMMARY SECTION (Moved below Hero) ===== */}
             <div
-              className="space-y-1.5 text-sm text-left mb-8 md:mb-10 text-[#616F39]"
+              id="about"
+              className="space-y-1.5 text-sm text-left mb-8 md:mb-10 text-[#616F39] scroll-mt-6"
               style={{
                 fontFamily: "Satoshi Medium, sans-serif",
                 color: "#616F39",
@@ -344,16 +386,45 @@ export default function Home() {
                     focus on clean design and seamless UI/UX.
                   </span>
                 </p>
-                <p className="flex items-start gap-2">
+                {/* skills — gravity gallery on hover (originkit) */}
+                <p
+                  className="group/skills relative flex items-start gap-2"
+                  onMouseEnter={() => setSkillsHover(true)}
+                  onMouseLeave={() => setSkillsHover(false)}
+                >
                   <span
                     className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
                   >
                     •
                   </span>
-                  <span>
-                    I have experience of working with clients and have
-                    provided solutions, over multiple domains, to their
-                    problems.
+                  <span className="relative inline-flex items-center">
+                    <span
+                      ref={skillsAnchorRef}
+                      className={`cursor-pointer underline decoration-dotted underline-offset-4 transition-colors ${skillsHover ? "decoration-[#A7D129] text-[#A7D129]" : "decoration-[#A7D129]/60"}`}
+                    >
+                      skills
+                    </span>
+                    <span className={`ml-1 text-xs transition-opacity ${skillsHover ? "opacity-0" : "opacity-60"}`}>↖ hover</span>
+                  </span>
+                  {/* fixed gravity box — to the left of skills, clamped to viewport, not clipped by overflow */}
+                  <span
+                    className={`fixed z-40 hidden md:block transition-all duration-300 ${skillsHover ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                    style={
+                      skillsBoxPos
+                        ? { left: skillsBoxPos.left, top: skillsBoxPos.top }
+                        : { left: -9999, top: -9999, visibility: "hidden" as const }
+                    }
+                    aria-hidden
+                  >
+                    <span className="block w-[280px] h-[184px] rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden relative">
+                      <span className="absolute inset-0">
+                        {skillsHover ? <GravityGallery key="gravity" /> : null}
+                      </span>
+                    </span>
+                    {/* arrow — glass to match jar */}
+                    <span
+                      className={`absolute top-1/2 -translate-y-1/2 w-3 h-3 rotate-45 backdrop-blur-xl ${skillsBoxSide === "left" ? "-right-1.5 border-r border-t border-white/15 bg-white/[0.06]" : "-left-1.5 border-l border-b border-white/15 bg-white/[0.06]"}`}
+                    />
                   </span>
                 </p>
                 <p className="flex items-start gap-2">
@@ -404,7 +475,7 @@ export default function Home() {
                   </span>
                 </p>
                 {/* ===== HOBBIES SECTION ===== */}
-            <div className="mb-8 md:mb-10 text-center">
+            <div id="hobbies" className="mb-8 md:mb-10 text-center scroll-mt-6">
               <h2
                 className="text-2xl font-bold mb-2 text-[#A7D129]"
                 style={{ fontFamily: "Hoover, sans-serif" }}
@@ -440,11 +511,6 @@ export default function Home() {
                     height={48}
                     className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
                   />
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.15s]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.3s]" />
-                  </span>
                 </div>
                 {/* Football */}
                 <div
@@ -453,20 +519,17 @@ export default function Home() {
                     if (ankara.current) {
                       if (ankaraTimer.current !== null) {
                         window.clearTimeout(ankaraTimer.current);
-                        ankaraTimer.current = null;
                       }
                       ankara.current.currentTime = 6;
                       ankara.current.play().catch(() => {});
-                    }
-                  }}
-                  onMouseLeave={() => {
-                    if (ankara.current && ankaraTimer.current === null) {
                       ankaraTimer.current = window.setTimeout(() => {
                         ankara.current?.pause();
+                        if (ankara.current) ankara.current.currentTime = 6;
                         ankaraTimer.current = null;
                       }, 2000);
                     }
                   }}
+                  onMouseLeave={() => {}}
                 >
                   <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
                     <span
@@ -485,11 +548,6 @@ export default function Home() {
                     height={48}
                     className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
                   />
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.15s]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.3s]" />
-                  </span>
                 </div>
                 {/* Rekordbox */}
                 <div
@@ -516,11 +574,6 @@ export default function Home() {
                     height={48}
                     className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
                   />
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.15s]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.3s]" />
-                  </span>
                 </div>
                 {/* CS2 */}
                 <div
@@ -547,11 +600,6 @@ export default function Home() {
                     height={48}
                     className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
                   />
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.15s]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.3s]" />
-                  </span>
                 </div>
                 {/* FIFA */}
                 <div
@@ -578,25 +626,20 @@ export default function Home() {
                     height={48}
                     className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
                   />
-                  <span className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex items-end gap-[2px] opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.15s]" />
-                    <span className="w-[3px] h-3 rounded-full bg-[#A7D129] origin-bottom animate-[eq-bounce_0.9s_ease-in-out_infinite] [animation-delay:0.3s]" />
-                  </span>
                 </div>
               </div>
             </div>
             </div>
 
             {/* ===== WORK EXPERIENCE SECTION ===== */}
-            <div className="mb-8 md:mb-10 text-center">
+            <div id="work" className="mb-8 md:mb-10 text-center scroll-mt-6">
               <h2
                 className="text-2xl font-bold mb-3 text-[#A7D129]"
                 style={{ fontFamily: "Hoover, sans-serif" }}
               >
                 WorkEx
               </h2>
-              <div className="flex flex-col gap-2 pl-1 text-left max-w-2xl mx-auto">
+              <div className="flex flex-col gap-3 pl-1 text-left max-w-2xl mx-auto">
                 {workExperience.map((work, index) => (
                   <div
                     key={index}
@@ -646,14 +689,14 @@ export default function Home() {
             </div>
 
             {/* ===== PROJECTS SECTION — INLINE ===== */}
-            <div className="mb-8 md:mb-10 text-center">
+            <div id="projects" className="mb-8 md:mb-10 text-center scroll-mt-6">
               <h2
                 className="text-2xl font-bold mb-3 text-[#A7D129]"
                 style={{ fontFamily: "Hoover, sans-serif" }}
               >
                 Projects
               </h2>
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-5 text-left">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
                 {projects.map((project, index) => (
                   <div
                     key={index}

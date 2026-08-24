@@ -20,6 +20,15 @@
   font-display: swap;
 }
 
+/* Silkscreen Bold Font - for typing animation title */
+@font-face {
+  font-family: 'Silkscreen-Bold';
+  src: url('/fonts/Silkscreen-Bold.ttf') format('truetype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 /* Enable dark mode via class strategy for Tailwind */
 /* (Add this to your tailwind.config.js if not already present: darkMode: 'class') */
 

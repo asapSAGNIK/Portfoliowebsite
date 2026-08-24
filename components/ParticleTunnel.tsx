@@ -43,7 +43,6 @@ export default function ParticleTunnel({
   const sizeRef = useRef<{ w: number; h: number; dpr: number }>({ w: 0, h: 0, dpr: 1 });
   const rangeRef = useRef<number>(1);
   const perSpokeRef = useRef<number>(0);
-  const maxDistRef = useRef<number>(0);
 
   const clampX = Math.max(0, Math.min(100, x));
   const clampY = Math.max(0, Math.min(100, y));
@@ -53,8 +52,27 @@ export default function ParticleTunnel({
   const clampSize = Math.max(1, particleSize);
   const clampSpeed = Math.max(0, speed);
   const palette = colors.length ? colors : DEFAULT_COLORS;
-  // single colour for smooth look
   const singleColor = palette[0];
+
+  // keep live refs so the rAF loop never needs to restart on prop changes
+  const clampXRef = useRef(clampX);
+  const clampYRef = useRef(clampY);
+  const clampRadiusRef = useRef(clampRadius);
+  const clampDensityRef = useRef(clampDensity);
+  const clampGapRef = useRef(clampGap);
+  const clampSizeRef = useRef(clampSize);
+  const clampSpeedRef = useRef(clampSpeed);
+  const directionRef = useRef(direction);
+  const singleColorRef = useRef(singleColor);
+  clampXRef.current = clampX;
+  clampYRef.current = clampY;
+  clampRadiusRef.current = clampRadius;
+  clampDensityRef.current = clampDensity;
+  clampGapRef.current = clampGap;
+  clampSizeRef.current = clampSize;
+  clampSpeedRef.current = clampSpeed;
+  directionRef.current = direction;
+  singleColorRef.current = singleColor;
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -63,40 +81,60 @@ export default function ParticleTunnel({
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    let reduced = false;
+    const reducedRef = { current: false };
     try {
-      reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      reducedRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     } catch {}
-    const effSpeed = reduced ? clampSpeed * 0.35 : clampSpeed;
 
     const build = (W: number, H: number) => {
-      const cx = (W * clampX) / 100;
-      const cy = (H * clampY) / 100;
+      const cx = (W * clampXRef.current) / 100;
+      const cy = (H * clampYRef.current) / 100;
       const dx = Math.max(cx, W - cx);
       const dy = Math.max(cy, H - cy);
-      const needed = Math.hypot(dx, dy) + clampGap * 2;
-      const rangeNeeded = Math.max(1, needed - clampRadius);
-      const perSpoke = Math.ceil(rangeNeeded / clampGap);
-      // seamless range = perSpoke * gap (no remainder gap)
-      const range = perSpoke * clampGap;
-      const maxDist = clampRadius + range;
+      const needed = Math.hypot(dx, dy) + clampGapRef.current * 2;
+      const rangeNeeded = Math.max(1, needed - clampRadiusRef.current);
+      const perSpoke = Math.ceil(rangeNeeded / clampGapRef.current);
+      const range = perSpoke * clampGapRef.current;
       perSpokeRef.current = perSpoke;
       rangeRef.current = range;
-      maxDistRef.current = maxDist;
       const out: Template[] = [];
-      for (let i = 0; i < clampDensity; i++) {
-        const angle = (Math.PI * 2 * i) / clampDensity;
+      for (let i = 0; i < clampDensityRef.current; i++) {
+        const angle = (Math.PI * 2 * i) / clampDensityRef.current;
         for (let j = 0; j < perSpoke; j++) {
-          out.push({ angle, baseOffset: j * clampGap });
+          out.push({ angle, baseOffset: j * clampGapRef.current });
         }
       }
       templatesRef.current = out;
     };
 
+    let resizePending = false;
     const resize = () => {
+      if (resizePending) return;
+      resizePending = true;
+      requestAnimationFrame(() => {
+        resizePending = false;
+        const r = wrapper.getBoundingClientRect();
+        const W = Math.max(1, Math.round(r.width));
+        const H = Math.max(1, Math.round(r.height));
+        const dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const prev = sizeRef.current;
+        // skip rebuild if size unchanged (prevents ResizeObserver spam → flicker)
+        if (prev.w === W && prev.h === H && prev.dpr === dpr) return;
+        sizeRef.current = { w: W, h: H, dpr };
+        canvas.width = Math.round(W * dpr);
+        canvas.height = Math.round(H * dpr);
+        canvas.style.width = `${W}px`;
+        canvas.style.height = `${H}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+        build(W, H);
+      });
+    };
+
+    // initial sizing
+    {
       const r = wrapper.getBoundingClientRect();
-      const W = Math.max(1, r.width);
-      const H = Math.max(1, r.height);
+      const W = Math.max(1, Math.round(r.width));
+      const H = Math.max(1, Math.round(r.height));
       const dpr = Math.min(window.devicePixelRatio || 1, 2);
       sizeRef.current = { w: W, h: H, dpr };
       canvas.width = Math.round(W * dpr);
@@ -105,16 +143,15 @@ export default function ParticleTunnel({
       canvas.style.height = `${H}px`;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       build(W, H);
-    };
+    }
 
-    resize();
     const ro = new ResizeObserver(resize);
     ro.observe(wrapper);
     window.addEventListener("resize", resize);
 
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onMq = (e: MediaQueryListEvent) => {
-      reduced = e.matches;
+      reducedRef.current = e.matches;
     };
     try {
       mq.addEventListener("change", onMq);
@@ -123,58 +160,59 @@ export default function ParticleTunnel({
       mq.addListener(onMq);
     }
 
-    // absolute time offset for perfectly smooth, never-breaking flow
     const speedFactor = 0.06; // px per ms per speed unit (tuned for buttery)
-    let start = performance.now();
+    let start: number | null = null;
 
     const draw = (now: number) => {
+      if (start === null) start = now;
       const elapsed = now - start;
       const { w: W, h: H } = sizeRef.current;
       if (W === 0 || H === 0) {
         animRef.current = requestAnimationFrame(draw);
         return;
       }
-      const baseCx = (W * clampX) / 100;
-      const baseCy = (H * clampY) / 100;
+      const cxBase = clampXRef.current;
+      const cyBase = clampYRef.current;
+      const baseCx = (W * cxBase) / 100;
+      const baseCy = (H * cyBase) / 100;
       const range = rangeRef.current;
-      // seamless global offset from absolute time — no dt jitter, no accumulation drift
+      const cSpeed = clampSpeedRef.current;
+      const effSpeed = reducedRef.current ? cSpeed * 0.35 : cSpeed;
       const rawOffset = (elapsed * effSpeed * speedFactor) % range;
-      const offset = direction === "inside" ? rawOffset : range - rawOffset;
+      const offset = directionRef.current === "inside" ? rawOffset : range - rawOffset;
 
-      // gentle upward drift of the whole tunnel — sine-based so never breaks/jumps
-      // combines a slow sine (±7px) + a very slow upward creep (-4px avg) for "move a bit like upwards"
-      const driftY = Math.sin(now * 0.00042) * 7 - ((elapsed * 0.003) % 8) * 0.5 + 2;
-      const driftX = Math.cos(now * 0.00022) * 3;
+      // smooth continuous drift — pure sine, no modulo sawtooth
+      const driftY = Math.sin(now * 0.00035) * 6;
+      const driftX = Math.cos(now * 0.00022) * 2.5;
       const cx = baseCx + driftX;
       const cy = baseCy + driftY;
 
       ctx.clearRect(0, 0, W, H);
 
       const templates = templatesRef.current;
-      // draw back-to-front: deepest (near void) first
-      // compute dists then sort —  ~500 items, cheap
-      // we can compute and sort in one go
+      const cRadius = clampRadiusRef.current;
+      const cSize = clampSizeRef.current;
+      const col = singleColorRef.current;
+
+      // compute wrapped distances
       const drawables = new Array(templates.length);
       for (let k = 0; k < templates.length; k++) {
         const t = templates[k];
-        // seamless wrap: (baseOffset - offset) mod range
         let mod = t.baseOffset - offset;
         mod %= range;
         if (mod < 0) mod += range;
-        const dist = clampRadius + mod;
+        const dist = cRadius + mod;
         drawables[k] = { angle: t.angle, dist };
       }
+      // back-to-front for correct overlap
       drawables.sort((a: any, b: any) => a.dist - b.dist);
 
-      // single colour, smooth alpha curve
-      ctx.fillStyle = singleColor;
+      ctx.fillStyle = col;
       for (const p of drawables) {
-        const t = (p.dist - clampRadius) / range; // 0 at void, 1 at outer
+        const t = (p.dist - cRadius) / range;
         const scale = 0.24 + 0.76 * Math.pow(t, 1.08);
-        const size = clampSize * scale;
-        // opacity: very subtle near void, stronger outer — smooth pow
+        const size = cSize * scale;
         const opacity = 0.07 + 0.62 * Math.pow(t, 0.9);
-        // soften both ends to avoid any visible pop at wrap / void
         const fadeIn = t < 0.08 ? t / 0.08 : 1;
         const fadeOut = t > 0.88 ? (1 - t) / 0.12 : 1;
         const alpha = opacity * fadeIn * fadeOut;
@@ -184,16 +222,15 @@ export default function ParticleTunnel({
         if (px < -size || px > W + size || py < -size || py > H + size) continue;
         ctx.globalAlpha = alpha;
         ctx.beginPath();
-        // keep circles for all sizes — no rect pop at threshold
         ctx.arc(px, py, size * 0.5, 0, Math.PI * 2);
         ctx.fill();
       }
       ctx.globalAlpha = 1;
 
-      if (clampRadius > 0.5) {
+      if (cRadius > 0.5) {
         ctx.fillStyle = "#000000";
         ctx.beginPath();
-        ctx.arc(cx, cy, clampRadius, 0, Math.PI * 2);
+        ctx.arc(cx, cy, cRadius, 0, Math.PI * 2);
         ctx.fill();
         ctx.strokeStyle = "rgba(167,209,41,0.07)";
         ctx.lineWidth = 1;
@@ -216,7 +253,7 @@ export default function ParticleTunnel({
         mq.removeListener(onMq);
       }
     };
-  }, [clampX, clampY, clampRadius, clampDensity, clampGap, clampSize, direction, clampSpeed, singleColor]);
+  }, []);
 
   return (
     <div
