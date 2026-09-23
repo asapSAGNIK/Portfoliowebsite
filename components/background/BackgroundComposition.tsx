@@ -388,7 +388,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
                 spinY={0.9}
                 spinZ={0.4}
                 color={LIME}
-                alpha={0.14}
+                alpha={0.06}
               />
               <FloatingGeometry
                 canvasRef={canvasRef}
@@ -404,7 +404,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
                 spinY={1.2}
                 spinZ={0.5}
                 color={GRAY_GREEN}
-                alpha={0.14}
+                alpha={0.06}
               />
             </>
           )}
@@ -426,7 +426,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             spin={0.9}
             tilt={0.5}
             color={LIME}
-            alpha={0.168}
+            alpha={0.07}
           />
           <OrbitalRing
             canvasRef={canvasRef}
@@ -441,7 +441,7 @@ export const BackgroundComposition: React.FC<Props> = ({ mode = "desktop" }) => 
             dir={-1}
             spin={-0.6}
             color={GRAY_GREEN}
-            alpha={0.14}
+            alpha={0.06}
           />
         </>
       )}

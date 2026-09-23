@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useAudio } from "../contexts/AudioContext";
 import Link from "next/link";
 import Image from "next/image";
-import { Github, Linkedin, Mail, MapPin, Phone, Clock, Code } from "lucide-react";
+import { Github, Linkedin, Mail, MapPin, Clock, Code } from "lucide-react";
 import BackgroundParticles from "@/components/BackgroundParticles";
 import ParticleTunnel from "@/components/ParticleTunnel";
 import ResumeDialog from "@/components/ResumeDialog";
@@ -30,7 +30,17 @@ export default function Home() {
   const [skillsHover, setSkillsHover] = useState(false);
   const skillsAnchorRef = useRef<HTMLSpanElement>(null);
   const [skillsBoxPos, setSkillsBoxPos] = useState<{ left: number; top: number } | null>(null);
-  const [skillsBoxSide, setSkillsBoxSide] = useState<"left" | "right">("left");
+  const [skillsBoxSide, setSkillsBoxSide] = useState<"left" | "right">("right");
+  const [isMobile, setIsMobile] = useState(false);
+
+  // detect mobile (Tailwind md breakpoint = 768px)
+  useEffect(() => {
+    const mql = window.matchMedia("(max-width: 767px)");
+    const onChange = () => setIsMobile(mql.matches);
+    onChange();
+    mql.addEventListener("change", onChange);
+    return () => mql.removeEventListener("change", onChange);
+  }, []);
 
   // Safety net: the photo must always end up sharp, even if onLoad is missed
   useEffect(() => {
@@ -206,20 +216,21 @@ export default function Home() {
     return () => clearTimeout(timer);
   }, []);
 
-  // position gravity box to the left of skills text, clamp to viewport
+  // position gravity box — desktop: to the left/right of anchor, mobile: centered overlay (no calc needed)
   useEffect(() => {
     if (!skillsHover) return;
+    if (window.matchMedia("(max-width: 767px)").matches) return; // mobile uses centered sheet
     const updatePos = () => {
       const el = skillsAnchorRef.current;
       if (!el) return;
       const rect = el.getBoundingClientRect();
       const boxW = 280;
       const boxH = 184;
-      let left = rect.left - boxW - 16;
-      let side: "left" | "right" = "left";
-      if (left < 8) {
-        left = rect.right + 16;
-        side = "right";
+      let left = rect.right + 16;
+      let side: "left" | "right" = "right";
+      if (left + boxW > window.innerWidth - 8) {
+        left = rect.left - boxW - 16;
+        side = "left";
       }
       const top = rect.top + rect.height / 2 - boxH / 2;
       const clampedLeft = Math.max(8, Math.min(left, window.innerWidth - boxW - 8));
@@ -235,6 +246,16 @@ export default function Home() {
       window.removeEventListener("scroll", updatePos, true);
     };
   }, [skillsHover]);
+
+  // close on outside tap / Escape for mobile bottom-sheet
+  useEffect(() => {
+    if (!skillsHover || !isMobile) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setSkillsHover(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [skillsHover, isMobile]);
 
   return (
     <React.Fragment>
@@ -267,7 +288,7 @@ export default function Home() {
             {/* ===== HERO SECTION — IMAGE LEFT, TEXT RIGHT ===== */}
             <div
               id="hero"
-              className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-8 md:mb-10 scroll-mt-6"
+              className="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12 md:mb-16 scroll-mt-6"
             >
               {/* Profile Image - 0.75:1 Aspect Ratio */}
               <div className="flex-shrink-0">
@@ -302,6 +323,7 @@ export default function Home() {
                     style={{
                       fontFamily: "Hoover, sans-serif",
                       color: "#A7D129",
+                      textShadow: "0 0 20px rgba(167,209,41,0.35), 0 0 40px rgba(167,209,41,0.15)",
                     }}
                   >
                     {typedText}
@@ -318,6 +340,12 @@ export default function Home() {
 
                 {/* Info Block */}
                 <div className="mt-4 flex flex-col gap-y-4 text-sm text-[#A7D129] py-2" style={{ fontFamily: "Satoshi Medium, sans-serif" }}>
+                  <div className="flex items-center gap-4">
+                    <div className="p-1 bg-[#3E432E] rounded-full border border-[#616F39] overflow-hidden">
+                      <Image src="/STANDALONE LOGO COLOUR@4x.png" alt="Uphook.ai" width={22} height={22} className="rounded-full" />
+                    </div>
+                    <a href="https://www.linkedin.com/company/uphook/" target="_blank" className="relative inline-block after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:h-[1.5px] after:w-0 after:bg-[#A7D129] hover:after:w-full after:transition-all after:duration-300">Actively assisting Uphook.ai</a>
+                  </div>
                   <div className="flex items-center gap-4">
                     <div className="p-1.5 bg-[#3E432E] rounded-full border border-[#616F39]">
                       <Code className="w-4 h-4 text-[#A7D129]" />
@@ -348,67 +376,104 @@ export default function Home() {
                     </div>
                     <a href="mailto:sagnikwork20@gmail.com" className="relative inline-block after:content-[''] after:absolute after:-bottom-0.5 after:left-0 after:h-[1.5px] after:w-0 after:bg-[#A7D129] hover:after:w-full after:transition-all after:duration-300">sagnikwork20@gmail.com</a>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="p-1.5 bg-[#3E432E] rounded-full border border-[#616F39]">
-                      <Phone className="w-4 h-4 text-[#A7D129]" />
-                    </div>
-                    <span>+91 6290140165</span>
-                  </div>
                 </div>
               </div>
             </div>
 
             {/* ===== SUMMARY SECTION (Moved below Hero) ===== */}
-            <div
-              id="about"
-              className="space-y-1.5 text-sm text-left mb-8 md:mb-10 text-[#616F39] scroll-mt-6"
-              style={{
-                fontFamily: "Satoshi Medium, sans-serif",
-                color: "#616F39",
-              }}
-            >
-                <p className="flex items-start gap-2">
-                  <span
-                    className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
-                  >
-                    •
-                  </span>
-                  <span>I'm a 23 y/o Full-Stack Developer from India</span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span
-                    className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
-                  >
-                    •
-                  </span>
-                  <span>
-                    Crafting intuitive, responsive web and mobile apps with a
-                    focus on clean design and seamless UI/UX.
-                  </span>
-                </p>
-                {/* skills — gravity gallery on hover (originkit) */}
+                        <div
+                          id="about"
+                          className="space-y-5 text-sm text-left mb-12 md:mb-16 scroll-mt-6 leading-relaxed text-[#D6DDC3]"
+                          style={{
+                            fontFamily: "Satoshi Medium, sans-serif",
+                            color: "#D6DDC3",
+                          }}
+                        >
+                            <p>
+                              Night owl, house music on loop, building things that solve
+                              problems nobody else noticed. I'm currently at{" "}
+                              <Link
+                                href="https://uphook.ai/"
+                                target="_blank"
+                                className="inline-block cursor-pointer"
+                              >
+                                <strong
+                                  className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] bg-gradient-to-r from-[#A7D129] via-[#EEFFA0] to-[#A7D129]`}
+                                >
+                                  Uphook.ai
+                                </strong>
+                              </Link>{" "}
+                              feeding a recruiting platform 10,000+ jobs across 100+
+                              companies, and before that I taught a voice agent at{" "}
+                              <Link
+                                href="https://www.dagagroups.com/"
+                                target="_blank"
+                                className="inline-block cursor-pointer"
+                              >
+                                <strong
+                                  className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] bg-gradient-to-r from-[#A7D129] via-[#EEFFA0] to-[#A7D129]`}
+                                >
+                                  Daga Groups
+                                </strong>
+                              </Link>{" "}
+                              to actually hold a phone conversation — Twilio, Deepgram,
+                              and ElevenLabs stitched into something that listens and
+                              talks back in real time.
+                            </p>
+                            <p>
+                              Somewhere in between shipping an invoice-reading Telegram
+                              bot and an e-commerce platform I built solo end to end, I
+                              got annoyed that my Mac kills the music the second I shut
+                              the lid — so I built{" "}
+                              <Link
+                                href="https://github.com/asapSAGNIK/Sleepify.git"
+                                target="_blank"
+                                className="inline-block cursor-pointer"
+                              >
+                                <strong
+                                  className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] bg-gradient-to-r from-[#A7D129] via-[#EEFFA0] to-[#A7D129]`}
+                                >
+                                  Sleepify
+                                </strong>
+                              </Link>
+                              , a tool that keeps your laptop awake for exactly one
+                              reason: the beat can't drop. When I'm not at the keyboard,
+                              I'm DJing. I'm mildly obsessed with fixing
+                              things that annoy me and always Learning something new.
+                            </p>
+                {/* skills — gravity gallery: hover on desktop, tap on mobile (optimized) */}
                 <p
-                  className="group/skills relative flex items-start gap-2"
-                  onMouseEnter={() => setSkillsHover(true)}
-                  onMouseLeave={() => setSkillsHover(false)}
+                  className="group/skills relative"
+                  onMouseEnter={() => { if (!isMobile) setSkillsHover(true); }}
+                  onMouseLeave={() => { if (!isMobile) setSkillsHover(false); }}
                 >
-                  <span
-                    className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
-                  >
-                    •
-                  </span>
+                  This is what I am working mostly with these days! —{" "}
                   <span className="relative inline-flex items-center">
                     <span
                       ref={skillsAnchorRef}
-                      className={`cursor-pointer underline decoration-dotted underline-offset-4 transition-colors ${skillsHover ? "decoration-[#A7D129] text-[#A7D129]" : "decoration-[#A7D129]/60"}`}
+                      role="button"
+                      tabIndex={0}
+                      aria-expanded={skillsHover}
+                      aria-controls="skills-gravity"
+                      onClick={() => {
+                        if (isMobile) setSkillsHover((v) => !v);
+                      }}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" || e.key === " ") {
+                          e.preventDefault();
+                          setSkillsHover((v) => !v);
+                        }
+                      }}
+                      className={`cursor-pointer underline decoration-dotted underline-offset-4 transition-colors select-none ${skillsHover ? "decoration-[#A7D129] text-[#A7D129]" : "decoration-[#A7D129]/60"}`}
                     >
                       skills
                     </span>
-                    <span className={`ml-1 text-xs transition-opacity ${skillsHover ? "opacity-0" : "opacity-60"}`}>↖ hover</span>
+
                   </span>
-                  {/* fixed gravity box — to the left of skills, clamped to viewport, not clipped by overflow */}
+                  {/* desktop: fixed hover card to the left/right of skills */}
                   <span
-                    className={`fixed z-40 hidden md:block transition-all duration-300 ${skillsHover ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
+                    id="skills-gravity-desktop"
+                    className={`fixed z-40 hidden md:block transition-all duration-300 ${skillsHover && !isMobile ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"}`}
                     style={
                       skillsBoxPos
                         ? { left: skillsBoxPos.left, top: skillsBoxPos.top }
@@ -418,7 +483,7 @@ export default function Home() {
                   >
                     <span className="block w-[280px] h-[184px] rounded-xl border border-white/15 bg-white/[0.06] backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.5),inset_0_1px_0_rgba(255,255,255,0.08),0_0_0_1px_rgba(255,255,255,0.06)] overflow-hidden relative">
                       <span className="absolute inset-0">
-                        {skillsHover ? <GravityGallery key="gravity" /> : null}
+                        {skillsHover && !isMobile ? <GravityGallery key="gravity-desktop" /> : null}
                       </span>
                     </span>
                     {/* arrow — glass to match jar */}
@@ -427,74 +492,73 @@ export default function Home() {
                     />
                   </span>
                 </p>
-                <p className="flex items-start gap-2">
-                  <span
-                    className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
-                  >
-                    •
-                  </span>
-                  <span>
-                    {" "}
-                    I am actively developing automation bots (Telegram) and
-                    Voice Calling Agents for{" "}
-                    <Link
-                      href="https://www.dagagroups.com/"
-                      target="_blank"
-                      className="inline-block cursor-pointer"
+                {/* mobile: tap to open centered bottom-sheet with backdrop — active & optimized */}
+                {isMobile && skillsHover ? (
+                  <div className="md:hidden">
+                    {/* backdrop — tap to close */}
+                    <button
+                      aria-label="Close skills"
+                      onClick={() => setSkillsHover(false)}
+                      className="fixed inset-0 z-40 bg-black/55 backdrop-blur-[2px]"
+                    />
+                    {/* sheet — centered, responsive, no viewport overflow */}
+                    <div
+                      id="skills-gravity"
+                      role="dialog"
+                      aria-modal="true"
+                      aria-label="Skills gravity gallery — drag icons, tap outside to close"
+                      className="fixed z-50 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[92vw] max-w-[360px] animate-in fade-in zoom-in-95 duration-200"
                     >
-                      <strong
-                        className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? "bg-gradient-to-r from-[#616F39] via-[#A7D129] to-[#616F39]" : "bg-gradient-to-r from-[#616F39] via-[#A7D129] to-[#616F39]"}`}
-                      >
-                        Daga Groups, Surat, India
-                      </strong>
-                    </Link>
-                    .
-                  </span>
-                </p>
-                <p className="flex items-start gap-2">
-                  <span
-                    className="inline-block w-2 text-center flex-shrink-0 text-[#A7D129]"
-                  >
-                    •
-                  </span>
-                  <span>
-                    I am actively developing{" "}
-                    <Link
-                      href="https://plate-liard.vercel.app/"
-                      target="_blank"
-                      className="inline-block cursor-pointer"
-                    >
-                      <strong
-                        className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] ${isPlaying ? "bg-gradient-to-r from-[#616F39] via-[#A7D129] to-[#616F39]" : "bg-gradient-to-r from-[#616F39] via-[#A7D129] to-[#616F39]"}`}
-                      >
-                        P.L.A.T.E
-                      </strong>
-                    </Link>{" "}
-                    (Personalized learning and Assistance for Taste
-                    Enhancement)
-                  </span>
-                </p>
+                      <div className="relative w-full h-[58vw] max-h-[320px] max-w-[360px] min-h-[220px] rounded-2xl border border-white/15 bg-white/[0.07] backdrop-blur-xl shadow-[0_20px_60px_rgba(0,0,0,0.6),inset_0_1px_0_rgba(255,255,255,0.08)] overflow-hidden">
+                        {/* header */}
+                        <div className="absolute top-0 inset-x-0 z-10 flex items-center justify-between px-3 py-2 border-b border-white/10 bg-black/20 backdrop-blur-md">
+                          <span className="text-xs font-medium tracking-wide text-white/90" style={{ fontFamily: "Satoshi Medium, sans-serif" }}>
+                            Drag & toss — tap outside to close
+                          </span>
+                          <button
+                            onClick={() => setSkillsHover(false)}
+                            aria-label="Close"
+                            className="w-7 h-7 grid place-items-center rounded-full bg-white/10 border border-white/15 text-white/80 hover:bg-white/15 hover:text-white transition-colors"
+                          >
+                            ✕
+                          </button>
+                        </div>
+                        <div className="absolute inset-0 pt-9">
+                          <GravityGallery key="gravity-mobile" />
+                        </div>
+                      </div>
+                      <p className="mt-2 text-center text-[11px] text-white/50" style={{ fontFamily: "Satoshi Medium, sans-serif" }}>
+                        Tip: drag icons around
+                      </p>
+                    </div>
+                  </div>
+                ) : null}
                 {/* ===== HOBBIES SECTION ===== */}
-            <div id="hobbies" className="mb-8 md:mb-10 text-center scroll-mt-6">
+            <div id="hobbies" className="mb-12 md:mb-20 text-center scroll-mt-6">
               <h2
-                className="text-2xl font-bold mb-2 text-[#A7D129]"
-                style={{ fontFamily: "Hoover, sans-serif" }}
+                className="text-2xl font-bold mb-6 text-[#A7D129]"
+                style={{ fontFamily: "Hoover, sans-serif", textShadow: "0 0 18px rgba(167,209,41,0.38), 0 0 36px rgba(167,209,41,0.15)" }}
               >
                 Off The Clock
               </h2>
-              <div className="flex items-center justify-center -space-x-[14px] pt-3">
+              <div className="flex items-center justify-center -space-x-[14px] pt-2">
                 {/* Basketball */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-all duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
                     if (swishhh.current) {
                       swishhh.current.currentTime = 0;
                       swishhh.current.play().catch(() => {});
                     }
                   }}
-                  onMouseLeave={() => {}}
+                  onMouseLeave={() => {
+                    if (swishhh.current) {
+                      swishhh.current.pause();
+                      swishhh.current.currentTime = 0;
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -514,7 +578,7 @@ export default function Home() {
                 </div>
                 {/* Football */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-all duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
                     if (ankara.current) {
                       if (ankaraTimer.current !== null) {
@@ -529,9 +593,18 @@ export default function Home() {
                       }, 2000);
                     }
                   }}
-                  onMouseLeave={() => {}}
+                  onMouseLeave={() => {
+                    if (ankaraTimer.current !== null) {
+                      window.clearTimeout(ankaraTimer.current);
+                      ankaraTimer.current = null;
+                    }
+                    if (ankara.current) {
+                      ankara.current.pause();
+                      ankara.current.currentTime = 6;
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -551,13 +624,18 @@ export default function Home() {
                 </div>
                 {/* Rekordbox */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-all duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
                     dj.current?.play().catch(() => {});
                   }}
-                  onMouseLeave={() => {}}
+                  onMouseLeave={() => {
+                    if (dj.current) {
+                      dj.current.pause();
+                      dj.current.currentTime = 0;
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -577,13 +655,18 @@ export default function Home() {
                 </div>
                 {/* CS2 */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-all duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
                     cs.current?.play().catch(() => {});
                   }}
-                  onMouseLeave={() => {}}
+                  onMouseLeave={() => {
+                    if (cs.current) {
+                      cs.current.pause();
+                      cs.current.currentTime = 0;
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -603,13 +686,18 @@ export default function Home() {
                 </div>
                 {/* FIFA */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-all duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
                     ea.current?.play().catch(() => {});
                   }}
-                  onMouseLeave={() => {}}
+                  onMouseLeave={() => {
+                    if (ea.current) {
+                      ea.current.pause();
+                      ea.current.currentTime = 0;
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -632,23 +720,23 @@ export default function Home() {
             </div>
 
             {/* ===== WORK EXPERIENCE SECTION ===== */}
-            <div id="work" className="mb-8 md:mb-10 text-center scroll-mt-6">
+            <div id="work" className="mb-12 md:mb-20 text-center scroll-mt-6">
               <h2
-                className="text-2xl font-bold mb-3 text-[#A7D129]"
-                style={{ fontFamily: "Hoover, sans-serif" }}
+                className="text-2xl font-bold mb-6 text-[#A7D129]"
+                style={{ fontFamily: "Hoover, sans-serif", textShadow: "0 0 18px rgba(167,209,41,0.38), 0 0 36px rgba(167,209,41,0.15)" }}
               >
                 WorkEx
               </h2>
-              <div className="flex flex-col gap-3 pl-1 text-left max-w-2xl mx-auto">
+              <div className="flex flex-col gap-5 pl-1 text-left max-w-2xl mx-auto">
                 {workExperience.map((work, index) => (
-                  <div
+                    <div
                     key={index}
-                    className="group flex flex-col cursor-pointer transition-all duration-200 hover:translate-x-1 p-4 rounded-xl border border-transparent hover:border-[#616F39] hover:bg-[#3E432E]"
+                    className="group flex flex-col cursor-pointer transition-all duration-200 hover:translate-x-1 p-4 rounded-xl border border-transparent hover:border-[#A7D129]/30 hover:bg-[#3E432E]"
                     onClick={() => window.open(work.website, "_blank")}
                   >
                     <div className="flex items-center gap-2">
                       <span
-                        className="text-lg font-bold transition-colors text-[#A7D129] group-hover:text-[#616F39]"
+                        className="text-lg font-bold transition-colors text-[#A7D129] group-hover:text-[#EEFFA0]"
                         style={{ fontFamily: "Hoover, sans-serif" }}
                       >
                         {work.title}
@@ -668,17 +756,17 @@ export default function Home() {
                         <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
                       </svg>
                       <span
-                        className="text-xs ml-auto text-[#616F39]"
-                        style={{ color: "#616F39" }}
+                        className="text-xs ml-auto text-[#D6DDC3]"
+                        style={{ color: "#D6DDC3" }}
                       >
                         {work.date}
                       </span>
                     </div>
                     <p
-                      className="text-sm mt-1 leading-relaxed text-[#A7D129]"
+                      className="text-sm mt-1 leading-relaxed text-[#D6DDC3]"
                       style={{
                         fontFamily: "Satoshi Medium, sans-serif",
-                        color: "#616F39",
+                        color: "#D6DDC3",
                       }}
                     >
                       {work.description}
@@ -689,18 +777,18 @@ export default function Home() {
             </div>
 
             {/* ===== PROJECTS SECTION — INLINE ===== */}
-            <div id="projects" className="mb-8 md:mb-10 text-center scroll-mt-6">
+            <div id="projects" className="mb-12 md:mb-20 text-center scroll-mt-6">
               <h2
-                className="text-2xl font-bold mb-3 text-[#A7D129]"
-                style={{ fontFamily: "Hoover, sans-serif" }}
+                className="text-2xl font-bold mb-8 text-[#A7D129]"
+                style={{ fontFamily: "Hoover, sans-serif", textShadow: "0 0 18px rgba(167,209,41,0.38), 0 0 36px rgba(167,209,41,0.15)" }}
               >
                 Projects
               </h2>
-<div className="grid grid-cols-1 sm:grid-cols-2 gap-6 text-left">
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-left">
                 {projects.map((project, index) => (
                   <div
                     key={index}
-                    className="group relative rounded-xl p-4 cursor-pointer border transition-all duration-300 border-[#3E432E] hover:border-[#616F39] bg-[#000000] hover:bg-[#3E432E]"
+                    className="group relative rounded-xl p-4 cursor-pointer border transition-all duration-300 border-[#3E432E] hover:border-[#A7D129]/30 bg-[#000000] hover:bg-[#3E432E]"
                     onClick={() =>
                       window.open(
                         project.website || project.github,
@@ -733,7 +821,7 @@ export default function Home() {
                             {project.tech.map((tech) => (
                               <span
                                 key={tech}
-                                className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border border-[#616F39] text-[#A7D129]"
+                                className="flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full border border-[#D6DDC3]/30 text-[#A7D129]"
                                 style={{ fontFamily: "Satoshi Medium, sans-serif" }}
                               >
                                 <TechIcon name={tech} size={10} />
@@ -756,8 +844,8 @@ export default function Home() {
 
                     {/* One-line subtext */}
                     <p
-                      className="mt-3 text-sm leading-relaxed text-[#616F39]"
-                      style={{ fontFamily: "Satoshi Medium, sans-serif" }}
+                      className="mt-3 text-sm leading-relaxed text-[#D6DDC3]"
+                      style={{ fontFamily: "Satoshi Medium, sans-serif", color: "#D6DDC3" }}
                     >
                       {project.subtext}
                     </p>
@@ -767,17 +855,17 @@ export default function Home() {
 
               {/* GitHub Note */}
               <p
-                className="text-center text-sm mt-6 text-[#616F39]"
+                className="text-center text-sm mt-6 text-[#D6DDC3]"
                 style={{
                   fontFamily: "Satoshi Medium, sans-serif",
-                  color: "#616F39",
+                  color: "#D6DDC3",
                 }}
               >
                 Feel free to visit my{" "}
                 <Link
                   href="https://github.com/asapSAGNIK"
                   target="_blank"
-                  className="underline underline-offset-2 text-[#A7D129] hover:text-[#616F39]"
+                  className="underline underline-offset-2 text-[#A7D129] hover:text-[#EEFFA0]"
                 >
                   github
                 </Link>{" "}
@@ -793,7 +881,7 @@ export default function Home() {
             className={`max-w-4xl mx-auto px-6 md:px-8 lg:px-10 flex justify-between text-sm ${isPlaying ? "text-muted-foreground" : ""}`}
             style={{
               fontFamily: "Satoshi Medium, sans-serif",
-              color: "#616F39",
+              color: "#D6DDC3",
             }}
           >
             <span>© 2025 Sagnik Chowdhury</span>
