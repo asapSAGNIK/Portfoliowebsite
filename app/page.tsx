@@ -419,7 +419,7 @@ export default function Home() {
                               </Link>{" "}
                               and an e-commerce platform I built solo end to end, I
                              got annoyed that my Laptop kills the music the second I shut
-                             the lid — so I built{" "}
+                             the lid!? so I built{" "}
                              <Link
                                href="https://github.com/asapSAGNIK/Sleepify.git"
                                target="_blank"
@@ -445,7 +445,7 @@ export default function Home() {
                   onMouseEnter={() => { if (!isMobile) setSkillsHover(true); }}
                   onMouseLeave={() => { if (!isMobile) setSkillsHover(false); }}
                 >
-                  This is what I am working mostly with these days! —{" "}
+                  This is what I am working mostly with these days! {" "}
                   <span className="relative inline-flex items-center">
                     <span
                       ref={skillsAnchorRef}
