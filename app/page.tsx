@@ -404,7 +404,8 @@ export default function Home() {
                                 </strong>
                               </Link>{" "}
                               feeding a recruiting platform 10,000+ jobs across 100+
-                              companies, and before that I taught a voice agent at{" "}
+                              companies, Somewhere in between shipping an invoice-reading Telegram
+                              bot{" "}
                               <Link
                                 href="https://www.dagagroups.com/"
                                 target="_blank"
@@ -416,31 +417,28 @@ export default function Home() {
                                   Daga Groups
                                 </strong>
                               </Link>{" "}
-                              to actually hold a phone conversation — Twilio, Deepgram,
-                              and ElevenLabs stitched into something that listens and
-                              talks back in real time.
+                              and an e-commerce platform I built solo end to end, I
+                             got annoyed that my Laptop kills the music the second I shut
+                             the lid — so I built{" "}
+                             <Link
+                               href="https://github.com/asapSAGNIK/Sleepify.git"
+                               target="_blank"
+                               className="inline-block cursor-pointer"
+                             >
+                               <strong
+                                 className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] bg-gradient-to-r from-[#A7D129] via-[#EEFFA0] to-[#A7D129]`}
+                               >
+                                 Sleepify
+                               </strong>
+                             </Link>
+                             , a tool that keeps your laptop awake for exactly one
+                             reason: the beat can't drop. When I'm not at the keyboard,
+                             I'm DJing. I'm mildly obsessed with fixing
+                             things that annoy me and always Learning something new.
+
                             </p>
-                            <p>
-                              Somewhere in between shipping an invoice-reading Telegram
-                              bot and an e-commerce platform I built solo end to end, I
-                              got annoyed that my Mac kills the music the second I shut
-                              the lid — so I built{" "}
-                              <Link
-                                href="https://github.com/asapSAGNIK/Sleepify.git"
-                                target="_blank"
-                                className="inline-block cursor-pointer"
-                              >
-                                <strong
-                                  className={`bg-clip-text text-transparent animate-gradient bg-[length:200%_auto] bg-gradient-to-r from-[#A7D129] via-[#EEFFA0] to-[#A7D129]`}
-                                >
-                                  Sleepify
-                                </strong>
-                              </Link>
-                              , a tool that keeps your laptop awake for exactly one
-                              reason: the beat can't drop. When I'm not at the keyboard,
-                              I'm DJing. I'm mildly obsessed with fixing
-                              things that annoy me and always Learning something new.
-                            </p>
+
+
                 {/* skills — gravity gallery: hover on desktop, tap on mobile (optimized) */}
                 <p
                   className="group/skills relative"
