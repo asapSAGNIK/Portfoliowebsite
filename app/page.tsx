@@ -542,21 +542,34 @@ export default function Home() {
               <div className="flex items-center justify-center -space-x-[14px] pt-2">
                 {/* Basketball */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none [@media(hover:hover)]:hover:transition-all [@media(hover:hover)]:hover:duration-300 [@media(hover:hover)]:hover:border-[#A7D129] [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:z-20 [@media(hover:hover)]:hover:shadow-[0_0_25px_rgba(167,209,41,0.45)] active:border-[#A7D129] active:scale-110 active:z-20 active:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (swishhh.current) {
                       swishhh.current.currentTime = 0;
                       swishhh.current.play().catch(() => {});
                     }
                   }}
                   onMouseLeave={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (swishhh.current) {
                       swishhh.current.pause();
                       swishhh.current.currentTime = 0;
                     }
                   }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: none)").matches) return;
+                    if (swishhh.current) {
+                      swishhh.current.currentTime = 0;
+                      swishhh.current.play().catch(() => {});
+                      window.setTimeout(() => {
+                        swishhh.current?.pause();
+                        if (swishhh.current) swishhh.current.currentTime = 0;
+                      }, 1200);
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-none [@media(hover:hover)]:hover:transition-opacity [@media(hover:hover)]:hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -565,19 +578,20 @@ export default function Home() {
                     </span>
                     <span className="block mx-auto -mt-[3px] w-0 h-0 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#A7D129]" />
                   </span>
-                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 group-hover:opacity-100 group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
+                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] active:opacity-100 active:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
                   <Image
                     src="/icons/basketball.svg"
                     alt="Basketball"
                     width={48}
                     height={48}
-                    className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
+                    className="drop-shadow-sm relative z-[1] [@media(hover:hover)]:group-hover:animate-[icon-pop_0.5s_ease] active:animate-[icon-pop_0.5s_ease]"
                   />
                 </div>
                 {/* Football */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none [@media(hover:hover)]:hover:transition-all [@media(hover:hover)]:hover:duration-300 [@media(hover:hover)]:hover:border-[#A7D129] [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:z-20 [@media(hover:hover)]:hover:shadow-[0_0_25px_rgba(167,209,41,0.45)] active:border-[#A7D129] active:scale-110 active:z-20 active:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (ankara.current) {
                       if (ankaraTimer.current !== null) {
                         window.clearTimeout(ankaraTimer.current);
@@ -592,6 +606,7 @@ export default function Home() {
                     }
                   }}
                   onMouseLeave={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (ankaraTimer.current !== null) {
                       window.clearTimeout(ankaraTimer.current);
                       ankaraTimer.current = null;
@@ -601,8 +616,23 @@ export default function Home() {
                       ankara.current.currentTime = 6;
                     }
                   }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: none)").matches) return;
+                    if (ankara.current) {
+                      if (ankaraTimer.current !== null) {
+                        window.clearTimeout(ankaraTimer.current);
+                      }
+                      ankara.current.currentTime = 6;
+                      ankara.current.play().catch(() => {});
+                      ankaraTimer.current = window.setTimeout(() => {
+                        ankara.current?.pause();
+                        if (ankara.current) ankara.current.currentTime = 6;
+                        ankaraTimer.current = null;
+                      }, 2000);
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-none [@media(hover:hover)]:hover:transition-opacity [@media(hover:hover)]:hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -611,29 +641,42 @@ export default function Home() {
                     </span>
                     <span className="block mx-auto -mt-[3px] w-0 h-0 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#A7D129]" />
                   </span>
-                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 group-hover:opacity-100 group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
+                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] active:opacity-100 active:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
                   <Image
                     src="/icons/soccer-ball.svg"
                     alt="Football"
                     width={48}
                     height={48}
-                    className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
+                    className="drop-shadow-sm relative z-[1] [@media(hover:hover)]:group-hover:animate-[icon-pop_0.5s_ease] active:animate-[icon-pop_0.5s_ease]"
                   />
                 </div>
                 {/* Rekordbox */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none [@media(hover:hover)]:hover:transition-all [@media(hover:hover)]:hover:duration-300 [@media(hover:hover)]:hover:border-[#A7D129] [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:z-20 [@media(hover:hover)]:hover:shadow-[0_0_25px_rgba(167,209,41,0.45)] active:border-[#A7D129] active:scale-110 active:z-20 active:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     dj.current?.play().catch(() => {});
                   }}
                   onMouseLeave={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (dj.current) {
                       dj.current.pause();
                       dj.current.currentTime = 0;
                     }
                   }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: none)").matches) return;
+                    if (dj.current) {
+                      dj.current.currentTime = 0;
+                      dj.current.play().catch(() => {});
+                      window.setTimeout(() => {
+                        dj.current?.pause();
+                        if (dj.current) dj.current.currentTime = 0;
+                      }, 1500);
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-none [@media(hover:hover)]:hover:transition-opacity [@media(hover:hover)]:hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -642,29 +685,42 @@ export default function Home() {
                     </span>
                     <span className="block mx-auto -mt-[3px] w-0 h-0 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#A7D129]" />
                   </span>
-                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 group-hover:opacity-100 group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
+                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] active:opacity-100 active:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
                   <Image
                     src="/icons/rekord.svg"
                     alt="Rekordbox"
                     width={48}
                     height={48}
-                    className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
+                    className="drop-shadow-sm relative z-[1] [@media(hover:hover)]:group-hover:animate-[icon-pop_0.5s_ease] active:animate-[icon-pop_0.5s_ease]"
                   />
                 </div>
                 {/* CS2 */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none [@media(hover:hover)]:hover:transition-all [@media(hover:hover)]:hover:duration-300 [@media(hover:hover)]:hover:border-[#A7D129] [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:z-20 [@media(hover:hover)]:hover:shadow-[0_0_25px_rgba(167,209,41,0.45)] active:border-[#A7D129] active:scale-110 active:z-20 active:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     cs.current?.play().catch(() => {});
                   }}
                   onMouseLeave={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (cs.current) {
                       cs.current.pause();
                       cs.current.currentTime = 0;
                     }
                   }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: none)").matches) return;
+                    if (cs.current) {
+                      cs.current.currentTime = 0;
+                      cs.current.play().catch(() => {});
+                      window.setTimeout(() => {
+                        cs.current?.pause();
+                        if (cs.current) cs.current.currentTime = 0;
+                      }, 1500);
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-none [@media(hover:hover)]:hover:transition-opacity [@media(hover:hover)]:hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -673,29 +729,42 @@ export default function Home() {
                     </span>
                     <span className="block mx-auto -mt-[3px] w-0 h-0 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#A7D129]" />
                   </span>
-                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 group-hover:opacity-100 group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
+                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] active:opacity-100 active:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
                   <Image
                     src="/icons/CSicon.svg"
                     alt="CS2"
                     width={48}
                     height={48}
-                    className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
+                    className="drop-shadow-sm relative z-[1] [@media(hover:hover)]:group-hover:animate-[icon-pop_0.5s_ease] active:animate-[icon-pop_0.5s_ease]"
                   />
                 </div>
                 {/* FIFA */}
                 <div
-                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none hover:transition-all hover:duration-300 hover:border-[#A7D129] hover:scale-110 hover:z-20 hover:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
+                  className="group relative z-[1] p-2 rounded-full border-2 border-[#3E432E] bg-[#000000] cursor-pointer transition-none [@media(hover:hover)]:hover:transition-all [@media(hover:hover)]:hover:duration-300 [@media(hover:hover)]:hover:border-[#A7D129] [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:z-20 [@media(hover:hover)]:hover:shadow-[0_0_25px_rgba(167,209,41,0.45)] active:border-[#A7D129] active:scale-110 active:z-20 active:shadow-[0_0_25px_rgba(167,209,41,0.45)]"
                   onMouseEnter={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     ea.current?.play().catch(() => {});
                   }}
                   onMouseLeave={() => {
+                    if (window.matchMedia("(hover: none)").matches) return;
                     if (ea.current) {
                       ea.current.pause();
                       ea.current.currentTime = 0;
                     }
                   }}
+                  onClick={() => {
+                    if (!window.matchMedia("(hover: none)").matches) return;
+                    if (ea.current) {
+                      ea.current.currentTime = 0;
+                      ea.current.play().catch(() => {});
+                      window.setTimeout(() => {
+                        ea.current?.pause();
+                        if (ea.current) ea.current.currentTime = 0;
+                      }, 1500);
+                    }
+                  }}
                 >
-                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 group-hover:opacity-100 transition-none hover:transition-opacity hover:duration-200 pointer-events-none">
+                  <span className="absolute -top-10 left-1/2 -translate-x-1/2 z-30 opacity-0 [@media(hover:hover)]:group-hover:opacity-100 transition-none [@media(hover:hover)]:hover:transition-opacity [@media(hover:hover)]:hover:duration-200 pointer-events-none">
                     <span
                       className="block whitespace-nowrap text-[10px] px-2.5 py-1 rounded-full border border-[#A7D129] bg-[#000000] text-[#A7D129] shadow-[0_0_15px_rgba(167,209,41,0.35)]"
                       style={{ fontFamily: "Satoshi Medium, sans-serif" }}
@@ -704,13 +773,13 @@ export default function Home() {
                     </span>
                     <span className="block mx-auto -mt-[3px] w-0 h-0 border-l-[4px] border-r-[4px] border-t-[5px] border-l-transparent border-r-transparent border-t-[#A7D129]" />
                   </span>
-                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 group-hover:opacity-100 group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
+                  <span className="absolute inset-0 rounded-full border border-[#A7D129] opacity-0 [@media(hover:hover)]:group-hover:opacity-100 [@media(hover:hover)]:group-hover:animate-[pulse-ring_1.4s_ease-out_infinite] active:opacity-100 active:animate-[pulse-ring_1.4s_ease-out_infinite] pointer-events-none" />
                   <Image
                     src="/icons/FIFA.svg"
                     alt="FIFA"
                     width={48}
                     height={48}
-                    className="drop-shadow-sm relative z-[1] group-hover:animate-[icon-pop_0.5s_ease]"
+                    className="drop-shadow-sm relative z-[1] [@media(hover:hover)]:group-hover:animate-[icon-pop_0.5s_ease] active:animate-[icon-pop_0.5s_ease]"
                   />
                 </div>
               </div>
