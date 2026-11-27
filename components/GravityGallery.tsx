@@ -169,8 +169,12 @@ export default function GravityGallery() {
 
     // mouse + touch drag — toss around inside jar
     const mouse = Mouse.create(container);
-    // @ts-ignore
-    mouse.element = container;
+    // Detach Matter's wheel listener so normal page scrolling works over the jar
+    const wheelListener = (mouse as unknown as { mousewheel?: EventListener }).mousewheel;
+    if (wheelListener) {
+      container.removeEventListener("wheel", wheelListener);
+    }
+
     const mouseConstraint = MouseConstraint.create(engine, {
       mouse,
       constraint: {
@@ -207,14 +211,10 @@ export default function GravityGallery() {
       for (let i = 0; i < bodies.length; i++) {
         const b = bodies[i];
         const el = els[i];
-        // Bodies sleeping still update transform — but we can skip rendering tweak?
         const { x, y } = b.position;
         const a = b.angle;
-        // Only update DOM if body is awake or visibly moving; sleeping bodies still need final pos but we always set
         el.style.transform = `translate3d(${x - bodySize / 2}px, ${y - bodySize / 2}px, 0) rotate(${a}rad)`;
-        // hide if somehow far outside (shouldn't)
         const visible = y > -80 && y < H + 80 && x > -40 && x < W + 40;
-        // Use opacity 0 vs display to avoid layout thrash; toggle only when needed
         if (el.style.opacity !== (visible ? "1" : "0")) el.style.opacity = visible ? "1" : "0";
       }
     };
@@ -223,28 +223,51 @@ export default function GravityGallery() {
     return () => {
       cancelAnimationFrame(raf);
       document.removeEventListener("visibilitychange", onVis);
+
+      // Remove every listener attached by Matter.Mouse.setElement before teardown
+      // (prevents Mouse._getRelativeMousePosition from firing on a stale/null element in StrictMode)
+      const m = mouse as unknown as {
+        mousemove?: EventListener;
+        mousedown?: EventListener;
+        mouseup?: EventListener;
+        mousewheel?: EventListener;
+      };
+      if (m.mousemove) {
+        container.removeEventListener("mousemove", m.mousemove);
+        container.removeEventListener("touchmove", m.mousemove);
+      }
+      if (m.mousedown) {
+        container.removeEventListener("mousedown", m.mousedown);
+        container.removeEventListener("touchstart", m.mousedown);
+      }
+      if (m.mouseup) {
+        container.removeEventListener("mouseup", m.mouseup);
+        container.removeEventListener("touchend", m.mouseup);
+      }
+      if (m.mousewheel) {
+        container.removeEventListener("wheel", m.mousewheel);
+      }
+
       try {
+        Matter.Mouse.clearSourceEvents(mouse);
+        Matter.World.remove(engine.world, mouseConstraint);
         Matter.World.clear(engine.world, false);
         Matter.Engine.clear(engine);
       } catch {}
       els.forEach((el) => el.remove());
-      // @ts-ignore clean mouse
-      try { (mouse as any).element = null; } catch {}
     };
   }, []);
 
   return (
     <div
       ref={containerRef}
-      className="relative w-full h-full overflow-hidden rounded-[12px] bg-white/[0.04] backdrop-blur-[2px]"
-      style={{ touchAction: "none", contain: "layout paint size" } as any}
-      aria-hidden
-    >
-      {/* jar glass highlight */}
-      <div className="pointer-events-none absolute inset-0 rounded-[12px] border border-white/[0.10] shadow-[inset_0_1px_0_rgba(255,255,255,0.12),inset_0_0_30px_rgba(255,255,255,0.03)]" />
-      <div className="pointer-events-none absolute inset-0 rounded-[12px] bg-gradient-to-b from-white/[0.07] to-transparent opacity-60" />
-      {/* top open lip */}
-      <div className="pointer-events-none absolute top-0 inset-x-0 h-[1px] bg-white/20" />
-    </div>
+      className="relative h-full w-full overflow-hidden"
+      style={{
+        touchAction: "none",
+        contain: "layout paint size",
+        backgroundColor: "var(--surface-vinyl)",
+      }}
+      aria-hidden="true"
+    />
   );
 }
