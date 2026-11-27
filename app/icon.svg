@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64">
+  <!-- Matte Obsidian square tile -->
+  <rect x="2" y="2" width="60" height="60" rx="14" fill="#0E0E10" stroke="#29292F" stroke-width="2" />
+
+  <!-- Subtle matte vinyl disc & concentric grooves -->
+  <circle cx="30" cy="33" r="20" fill="#17171B" stroke="#2D2D34" stroke-width="1.5" />
+  <circle cx="30" cy="33" r="15.5" fill="none" stroke="#24242A" stroke-width="1.2" />
+  <circle cx="30" cy="33" r="11.5" fill="none" stroke="#24242A" stroke-width="1.2" />
+
+  <!-- Warm studio amber center pressing label -->
+  <circle cx="30" cy="33" r="7.5" fill="#E59A3C" />
+  <circle cx="30" cy="33" r="2.3" fill="#0E0E10" />
+
+  <!-- Minimal studio tonearm in top-right corner -->
+  <circle cx="49.5" cy="14.5" r="3" fill="#F1EEE8" />
+  <line x1="49.5" y1="14.5" x2="41.5" y2="31.5" stroke="#F1EEE8" stroke-width="2.4" stroke-linecap="round" />
+  <circle cx="41.5" cy="31.5" r="1.8" fill="#E59A3C" />
+</svg>
