@@ -1,0 +1,754 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-27T22:20:00Z",
+  "title": "Design System: Sagnik Chowdhury Portfolio",
+  "extensions": {
+    "colorMeta": {
+      "studio-amber": {
+        "role": "primary",
+        "displayName": "Studio Amber",
+        "canonical": "#e59a3c",
+        "tonalRamp": [
+          "oklch(22% 0.045 68)",
+          "oklch(34% 0.075 68)",
+          "oklch(47% 0.105 68)",
+          "oklch(59% 0.130 68)",
+          "oklch(74% 0.135 68)",
+          "oklch(81% 0.115 68)",
+          "oklch(89% 0.065 68)",
+          "oklch(96% 0.020 68)"
+        ]
+      },
+      "studio-amber-bright": {
+        "role": "primary",
+        "displayName": "Studio Amber Bright",
+        "canonical": "#f0ab52",
+        "tonalRamp": [
+          "oklch(22% 0.045 70)",
+          "oklch(35% 0.075 70)",
+          "oklch(48% 0.105 70)",
+          "oklch(62% 0.130 70)",
+          "oklch(78% 0.132 70)",
+          "oklch(84% 0.105 70)",
+          "oklch(91% 0.055 70)",
+          "oklch(97% 0.018 70)"
+        ]
+      },
+      "studio-amber-ink": {
+        "role": "primary",
+        "displayName": "Studio Amber Ink",
+        "canonical": "#13100b",
+        "tonalRamp": [
+          "oklch(17% 0.012 72)",
+          "oklch(28% 0.014 72)",
+          "oklch(40% 0.014 72)",
+          "oklch(53% 0.014 72)",
+          "oklch(66% 0.012 72)",
+          "oklch(78% 0.010 72)",
+          "oklch(88% 0.008 72)",
+          "oklch(96% 0.004 72)"
+        ]
+      },
+      "studio-amber-wash": {
+        "role": "primary",
+        "displayName": "Studio Amber Wash",
+        "canonical": "rgba(229, 154, 60, 0.14)",
+        "tonalRamp": [
+          "oklch(18% 0.025 68)",
+          "oklch(29% 0.040 68)",
+          "oklch(42% 0.055 68)",
+          "oklch(55% 0.065 68)",
+          "oklch(68% 0.065 68)",
+          "oklch(80% 0.050 68)",
+          "oklch(90% 0.030 68)",
+          "oklch(96% 0.012 68)"
+        ]
+      },
+      "burnt-ochre": {
+        "role": "primary",
+        "displayName": "Burnt Ochre",
+        "canonical": "#9e4c0b",
+        "tonalRamp": [
+          "oklch(19% 0.055 52)",
+          "oklch(31% 0.088 52)",
+          "oklch(45% 0.122 52)",
+          "oklch(56% 0.130 52)",
+          "oklch(68% 0.115 52)",
+          "oklch(79% 0.085 52)",
+          "oklch(89% 0.045 52)",
+          "oklch(96% 0.015 52)"
+        ]
+      },
+      "burnt-ochre-deep": {
+        "role": "primary",
+        "displayName": "Burnt Ochre Deep",
+        "canonical": "#853e07",
+        "tonalRamp": [
+          "oklch(17% 0.050 50)",
+          "oklch(28% 0.082 50)",
+          "oklch(41% 0.112 50)",
+          "oklch(52% 0.120 50)",
+          "oklch(65% 0.105 50)",
+          "oklch(77% 0.075 50)",
+          "oklch(88% 0.040 50)",
+          "oklch(95% 0.014 50)"
+        ]
+      },
+      "burnt-ochre-wash": {
+        "role": "primary",
+        "displayName": "Burnt Ochre Wash",
+        "canonical": "rgba(158, 76, 11, 0.12)",
+        "tonalRamp": [
+          "oklch(19% 0.028 52)",
+          "oklch(31% 0.042 52)",
+          "oklch(44% 0.052 52)",
+          "oklch(57% 0.058 52)",
+          "oklch(70% 0.052 52)",
+          "oklch(82% 0.038 52)",
+          "oklch(91% 0.022 52)",
+          "oklch(96% 0.010 52)"
+        ]
+      },
+      "obsidian-ground": {
+        "role": "neutral",
+        "displayName": "Obsidian Ground",
+        "canonical": "#0e0e10",
+        "tonalRamp": [
+          "oklch(16% 0.005 285)",
+          "oklch(25% 0.006 285)",
+          "oklch(37% 0.006 285)",
+          "oklch(50% 0.006 285)",
+          "oklch(64% 0.005 285)",
+          "oklch(76% 0.004 285)",
+          "oklch(87% 0.003 285)",
+          "oklch(96% 0.002 285)"
+        ]
+      },
+      "obsidian-raised": {
+        "role": "neutral",
+        "displayName": "Obsidian Raised",
+        "canonical": "#151518",
+        "tonalRamp": [
+          "oklch(19% 0.006 285)",
+          "oklch(28% 0.007 285)",
+          "oklch(40% 0.007 285)",
+          "oklch(53% 0.007 285)",
+          "oklch(66% 0.006 285)",
+          "oklch(78% 0.005 285)",
+          "oklch(88% 0.004 285)",
+          "oklch(96% 0.002 285)"
+        ]
+      },
+      "obsidian-subtle": {
+        "role": "neutral",
+        "displayName": "Obsidian Subtle",
+        "canonical": "#1c1c20",
+        "tonalRamp": [
+          "oklch(22% 0.007 285)",
+          "oklch(31% 0.008 285)",
+          "oklch(43% 0.008 285)",
+          "oklch(56% 0.008 285)",
+          "oklch(68% 0.007 285)",
+          "oklch(80% 0.005 285)",
+          "oklch(89% 0.004 285)",
+          "oklch(96% 0.002 285)"
+        ]
+      },
+      "obsidian-vinyl": {
+        "role": "neutral",
+        "displayName": "Obsidian Vinyl",
+        "canonical": "#09090b",
+        "tonalRamp": [
+          "oklch(14% 0.004 285)",
+          "oklch(24% 0.005 285)",
+          "oklch(36% 0.005 285)",
+          "oklch(49% 0.005 285)",
+          "oklch(62% 0.004 285)",
+          "oklch(75% 0.004 285)",
+          "oklch(86% 0.003 285)",
+          "oklch(95% 0.002 285)"
+        ]
+      },
+      "obsidian-groove": {
+        "role": "neutral",
+        "displayName": "Obsidian Groove",
+        "canonical": "#1b1b20",
+        "tonalRamp": [
+          "oklch(22% 0.009 285)",
+          "oklch(32% 0.010 285)",
+          "oklch(44% 0.010 285)",
+          "oklch(56% 0.009 285)",
+          "oklch(68% 0.008 285)",
+          "oklch(80% 0.006 285)",
+          "oklch(89% 0.004 285)",
+          "oklch(96% 0.002 285)"
+        ]
+      },
+      "warm-bone": {
+        "role": "neutral",
+        "displayName": "Warm Bone",
+        "canonical": "#f1eee8",
+        "tonalRamp": [
+          "oklch(19% 0.006 82)",
+          "oklch(31% 0.008 82)",
+          "oklch(44% 0.009 82)",
+          "oklch(57% 0.010 82)",
+          "oklch(70% 0.010 82)",
+          "oklch(82% 0.009 82)",
+          "oklch(91% 0.008 82)",
+          "oklch(96% 0.006 82)"
+        ]
+      },
+      "linen-ash": {
+        "role": "neutral",
+        "displayName": "Linen Ash",
+        "canonical": "#c4bfb5",
+        "tonalRamp": [
+          "oklch(19% 0.008 80)",
+          "oklch(31% 0.010 80)",
+          "oklch(44% 0.012 80)",
+          "oklch(58% 0.013 80)",
+          "oklch(71% 0.013 80)",
+          "oklch(81% 0.012 80)",
+          "oklch(90% 0.009 80)",
+          "oklch(96% 0.005 80)"
+        ]
+      },
+      "studio-slate": {
+        "role": "neutral",
+        "displayName": "Studio Slate",
+        "canonical": "#938e84",
+        "tonalRamp": [
+          "oklch(19% 0.008 80)",
+          "oklch(30% 0.011 80)",
+          "oklch(43% 0.013 80)",
+          "oklch(56% 0.014 80)",
+          "oklch(65% 0.014 80)",
+          "oklch(78% 0.012 80)",
+          "oklch(88% 0.008 80)",
+          "oklch(95% 0.004 80)"
+        ]
+      },
+      "hairline-dark": {
+        "role": "neutral",
+        "displayName": "Hairline Dark",
+        "canonical": "#26262c",
+        "tonalRamp": [
+          "oklch(18% 0.008 285)",
+          "oklch(27% 0.010 285)",
+          "oklch(39% 0.011 285)",
+          "oklch(52% 0.010 285)",
+          "oklch(65% 0.009 285)",
+          "oklch(77% 0.007 285)",
+          "oklch(88% 0.005 285)",
+          "oklch(95% 0.003 285)"
+        ]
+      },
+      "rule-strong-dark": {
+        "role": "neutral",
+        "displayName": "Strong Rule Dark",
+        "canonical": "#393942",
+        "tonalRamp": [
+          "oklch(19% 0.010 285)",
+          "oklch(29% 0.013 285)",
+          "oklch(35% 0.014 285)",
+          "oklch(49% 0.013 285)",
+          "oklch(63% 0.011 285)",
+          "oklch(76% 0.008 285)",
+          "oklch(87% 0.005 285)",
+          "oklch(95% 0.003 285)"
+        ]
+      },
+      "dot-matrix-dark": {
+        "role": "neutral",
+        "displayName": "Dot Matrix Dark",
+        "canonical": "rgba(241, 238, 232, 0.11)",
+        "tonalRamp": [
+          "oklch(18% 0.005 82)",
+          "oklch(29% 0.006 82)",
+          "oklch(42% 0.007 82)",
+          "oklch(55% 0.007 82)",
+          "oklch(68% 0.007 82)",
+          "oklch(80% 0.006 82)",
+          "oklch(89% 0.005 82)",
+          "oklch(96% 0.004 82)"
+        ]
+      },
+      "dot-glow-dark": {
+        "role": "primary",
+        "displayName": "Dot Glow Dark",
+        "canonical": "rgba(229, 154, 60, 0.34)",
+        "tonalRamp": [
+          "oklch(21% 0.040 68)",
+          "oklch(33% 0.068 68)",
+          "oklch(46% 0.092 68)",
+          "oklch(59% 0.112 68)",
+          "oklch(72% 0.115 68)",
+          "oklch(82% 0.088 68)",
+          "oklch(90% 0.048 68)",
+          "oklch(96% 0.016 68)"
+        ]
+      },
+      "cord-wire-dark": {
+        "role": "neutral",
+        "displayName": "Cord Wire Dark",
+        "canonical": "#7c7870",
+        "tonalRamp": [
+          "oklch(19% 0.008 80)",
+          "oklch(30% 0.010 80)",
+          "oklch(43% 0.012 80)",
+          "oklch(57% 0.012 80)",
+          "oklch(69% 0.011 80)",
+          "oklch(80% 0.009 80)",
+          "oklch(89% 0.006 80)",
+          "oklch(96% 0.003 80)"
+        ]
+      },
+      "cord-cap-dark": {
+        "role": "neutral",
+        "displayName": "Cord Cap Dark",
+        "canonical": "#2c2c33",
+        "tonalRamp": [
+          "oklch(18% 0.009 285)",
+          "oklch(29% 0.011 285)",
+          "oklch(41% 0.011 285)",
+          "oklch(54% 0.010 285)",
+          "oklch(67% 0.009 285)",
+          "oklch(79% 0.007 285)",
+          "oklch(89% 0.005 285)",
+          "oklch(96% 0.003 285)"
+        ]
+      },
+      "linen-ground": {
+        "role": "neutral",
+        "displayName": "Linen Ground",
+        "canonical": "#f5f3ee",
+        "tonalRamp": [
+          "oklch(19% 0.006 85)",
+          "oklch(31% 0.008 85)",
+          "oklch(44% 0.009 85)",
+          "oklch(57% 0.010 85)",
+          "oklch(71% 0.010 85)",
+          "oklch(83% 0.009 85)",
+          "oklch(92% 0.008 85)",
+          "oklch(96% 0.007 85)"
+        ]
+      },
+      "linen-raised": {
+        "role": "neutral",
+        "displayName": "Linen Raised",
+        "canonical": "#fbf9f5",
+        "tonalRamp": [
+          "oklch(19% 0.006 82)",
+          "oklch(32% 0.008 82)",
+          "oklch(45% 0.009 82)",
+          "oklch(58% 0.009 82)",
+          "oklch(72% 0.009 82)",
+          "oklch(84% 0.008 82)",
+          "oklch(93% 0.007 82)",
+          "oklch(98% 0.006 82)"
+        ]
+      },
+      "linen-subtle": {
+        "role": "neutral",
+        "displayName": "Linen Subtle",
+        "canonical": "#ece8df",
+        "tonalRamp": [
+          "oklch(19% 0.008 84)",
+          "oklch(31% 0.011 84)",
+          "oklch(44% 0.012 84)",
+          "oklch(58% 0.013 84)",
+          "oklch(71% 0.013 84)",
+          "oklch(83% 0.012 84)",
+          "oklch(91% 0.011 84)",
+          "oklch(96% 0.007 84)"
+        ]
+      },
+      "linen-vinyl": {
+        "role": "neutral",
+        "displayName": "Linen Vinyl",
+        "canonical": "#191817",
+        "tonalRamp": [
+          "oklch(20% 0.004 75)",
+          "oklch(30% 0.005 75)",
+          "oklch(42% 0.005 75)",
+          "oklch(55% 0.005 75)",
+          "oklch(68% 0.004 75)",
+          "oklch(79% 0.004 75)",
+          "oklch(89% 0.003 75)",
+          "oklch(96% 0.002 75)"
+        ]
+      },
+      "linen-groove": {
+        "role": "neutral",
+        "displayName": "Linen Groove",
+        "canonical": "#2d2b29",
+        "tonalRamp": [
+          "oklch(20% 0.005 75)",
+          "oklch(29% 0.007 75)",
+          "oklch(41% 0.007 75)",
+          "oklch(54% 0.007 75)",
+          "oklch(67% 0.006 75)",
+          "oklch(79% 0.005 75)",
+          "oklch(89% 0.004 75)",
+          "oklch(96% 0.002 75)"
+        ]
+      },
+      "charcoal-ink": {
+        "role": "neutral",
+        "displayName": "Charcoal Ink",
+        "canonical": "#171614",
+        "tonalRamp": [
+          "oklch(19% 0.005 78)",
+          "oklch(29% 0.006 78)",
+          "oklch(41% 0.007 78)",
+          "oklch(54% 0.007 78)",
+          "oklch(67% 0.006 78)",
+          "oklch(79% 0.005 78)",
+          "oklch(89% 0.004 78)",
+          "oklch(96% 0.002 78)"
+        ]
+      },
+      "espresso-ink": {
+        "role": "neutral",
+        "displayName": "Espresso Ink",
+        "canonical": "#433f39",
+        "tonalRamp": [
+          "oklch(19% 0.009 76)",
+          "oklch(31% 0.012 76)",
+          "oklch(37% 0.013 76)",
+          "oklch(51% 0.013 76)",
+          "oklch(65% 0.012 76)",
+          "oklch(78% 0.009 76)",
+          "oklch(88% 0.006 76)",
+          "oklch(96% 0.003 76)"
+        ]
+      },
+      "warm-stone": {
+        "role": "neutral",
+        "displayName": "Warm Stone",
+        "canonical": "#686259",
+        "tonalRamp": [
+          "oklch(19% 0.010 78)",
+          "oklch(31% 0.013 78)",
+          "oklch(44% 0.015 78)",
+          "oklch(50% 0.015 78)",
+          "oklch(65% 0.014 78)",
+          "oklch(78% 0.011 78)",
+          "oklch(88% 0.007 78)",
+          "oklch(96% 0.004 78)"
+        ]
+      },
+      "hairline-light": {
+        "role": "neutral",
+        "displayName": "Hairline Light",
+        "canonical": "#dcd6ca",
+        "tonalRamp": [
+          "oklch(19% 0.010 82)",
+          "oklch(31% 0.013 82)",
+          "oklch(44% 0.015 82)",
+          "oklch(58% 0.016 82)",
+          "oklch(72% 0.016 82)",
+          "oklch(83% 0.015 82)",
+          "oklch(88% 0.014 82)",
+          "oklch(96% 0.007 82)"
+        ]
+      },
+      "rule-strong-light": {
+        "role": "neutral",
+        "displayName": "Strong Rule Light",
+        "canonical": "#c2bab0",
+        "tonalRamp": [
+          "oklch(19% 0.009 76)",
+          "oklch(31% 0.012 76)",
+          "oklch(44% 0.014 76)",
+          "oklch(58% 0.014 76)",
+          "oklch(71% 0.014 76)",
+          "oklch(79% 0.013 76)",
+          "oklch(89% 0.009 76)",
+          "oklch(96% 0.005 76)"
+        ]
+      },
+      "dot-matrix-light": {
+        "role": "neutral",
+        "displayName": "Dot Matrix Light",
+        "canonical": "rgba(23, 22, 20, 0.12)",
+        "tonalRamp": [
+          "oklch(19% 0.004 78)",
+          "oklch(30% 0.005 78)",
+          "oklch(43% 0.006 78)",
+          "oklch(56% 0.006 78)",
+          "oklch(69% 0.005 78)",
+          "oklch(80% 0.005 78)",
+          "oklch(89% 0.004 78)",
+          "oklch(96% 0.002 78)"
+        ]
+      },
+      "dot-glow-light": {
+        "role": "primary",
+        "displayName": "Dot Glow Light",
+        "canonical": "rgba(196, 104, 24, 0.32)",
+        "tonalRamp": [
+          "oklch(20% 0.050 56)",
+          "oklch(32% 0.082 56)",
+          "oklch(46% 0.112 56)",
+          "oklch(59% 0.130 56)",
+          "oklch(71% 0.118 56)",
+          "oklch(81% 0.088 56)",
+          "oklch(90% 0.048 56)",
+          "oklch(96% 0.016 56)"
+        ]
+      },
+      "cord-wire-light": {
+        "role": "neutral",
+        "displayName": "Cord Wire Light",
+        "canonical": "#7f786e",
+        "tonalRamp": [
+          "oklch(19% 0.009 78)",
+          "oklch(30% 0.012 78)",
+          "oklch(43% 0.013 78)",
+          "oklch(57% 0.014 78)",
+          "oklch(70% 0.012 78)",
+          "oklch(80% 0.010 78)",
+          "oklch(89% 0.007 78)",
+          "oklch(96% 0.003 78)"
+        ]
+      },
+      "cord-cap-light": {
+        "role": "neutral",
+        "displayName": "Cord Cap Light",
+        "canonical": "#d6cfc3",
+        "tonalRamp": [
+          "oklch(19% 0.009 80)",
+          "oklch(31% 0.012 80)",
+          "oklch(44% 0.014 80)",
+          "oklch(58% 0.015 80)",
+          "oklch(71% 0.015 80)",
+          "oklch(84% 0.014 80)",
+          "oklch(90% 0.011 80)",
+          "oklch(96% 0.006 80)"
+        ]
+      },
+      "cord-tip-light": {
+        "role": "primary",
+        "displayName": "Cord Tip Light",
+        "canonical": "#c46818",
+        "tonalRamp": [
+          "oklch(20% 0.052 56)",
+          "oklch(32% 0.086 56)",
+          "oklch(46% 0.118 56)",
+          "oklch(60% 0.136 56)",
+          "oklch(72% 0.120 56)",
+          "oklch(82% 0.088 56)",
+          "oklch(90% 0.046 56)",
+          "oklch(96% 0.015 56)"
+        ]
+      },
+      "print-paper": {
+        "role": "neutral",
+        "displayName": "Print Paper",
+        "canonical": "#faf9f6",
+        "tonalRamp": [
+          "oklch(19% 0.004 88)",
+          "oklch(32% 0.006 88)",
+          "oklch(45% 0.007 88)",
+          "oklch(58% 0.007 88)",
+          "oklch(72% 0.007 88)",
+          "oklch(84% 0.006 88)",
+          "oklch(93% 0.005 88)",
+          "oklch(98% 0.004 88)"
+        ]
+      }
+    },
+    "typographyMeta": {
+      "display": {
+        "displayName": "Display",
+        "purpose": "Page identity h1 (48px desktop / 28px mobile on home, 42px /projects, 36px /resume)."
+      },
+      "headline": {
+        "displayName": "Headline",
+        "purpose": "Section titles (20px home, 22px /projects entries, 18px /resume sections)."
+      },
+      "title": {
+        "displayName": "Title",
+        "purpose": "Experience company names and featured project row links (17px semibold)."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Editorial narrative prose and summaries constrained to 56ch-64ch (15px-16px)."
+      },
+      "label": {
+        "displayName": "Mono Label",
+        "purpose": "Tabular dates, IST clock, stack lists, BPM deck status, and pad shortcut indices (12px Geist Mono)."
+      }
+    },
+    "shadows": [
+      {
+        "name": "shadow-float-dark",
+        "value": "0 18px 44px -16px rgba(0, 0, 0, 0.65)",
+        "purpose": "Floating desktop Hover Preview card over Selected Projects in Obsidian Liner Notes mode."
+      },
+      {
+        "name": "shadow-float-light",
+        "value": "0 18px 40px -18px rgba(23, 22, 20, 0.22)",
+        "purpose": "Floating desktop Hover Preview card over Selected Projects in Linen Studio Paper mode."
+      }
+    ],
+    "motion": [
+      {
+        "name": "dur-fast",
+        "value": "140ms",
+        "purpose": "Hover color, border, underline, and 1px button lift transitions."
+      },
+      {
+        "name": "dur-mid",
+        "value": "240ms",
+        "purpose": "Medium state transitions such as deck controls and tonearm pivot."
+      },
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Primary deceleration curve across UI transitions, hover preview tracking, and VU oscillation."
+      },
+      {
+        "name": "cord-flood",
+        "value": "520ms cubic-bezier(0.22, 1, 0.36, 1)",
+        "purpose": "Circular View Transition clip-path expansion radiating from the Pull Cord bead."
+      },
+      {
+        "name": "vinyl-spin",
+        "value": "5.5s linear infinite",
+        "purpose": "Continuous vinyl platter rotation while Desk Sound Deck playback is active (disabled under prefers-reduced-motion)."
+      },
+      {
+        "name": "vu-level",
+        "value": "780ms cubic-bezier(0.22, 1, 0.36, 1) infinite alternate",
+        "purpose": "Staggered 4-bar studio VU meter animation while desk audio is active."
+      }
+    ],
+    "breakpoints": [
+      { "name": "sm", "value": "640px" },
+      { "name": "md", "value": "768px" },
+      { "name": "lg", "value": "1024px" },
+      { "name": "xl", "value": "1280px" }
+    ]
+  },
+  "components": [
+    {
+      "name": "Primary Button",
+      "kind": "button",
+      "refersTo": "button-primary",
+      "description": "High-contrast studio amber CTA for direct contact and PDF resume download.",
+      "html": "<a href=\"#contact\" class=\"ds-btn-primary\">Get in touch</a>",
+      "css": ".ds-btn-primary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: var(--radius-md, 6px); border: 1px solid var(--accent, #e59a3c); background-color: var(--accent, #e59a3c); color: var(--accent-ink, #13100b); font-family: var(--font-sans, Archivo, sans-serif); font-size: 14px; font-weight: 600; text-decoration: none; cursor: pointer; transition: background-color 140ms cubic-bezier(0.22, 1, 0.36, 1), transform 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-primary:hover { background-color: var(--accent-hover, #f0ab52); transform: translateY(-1px); } .ds-btn-primary:active { transform: translateY(0); } .ds-btn-primary:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Secondary Button",
+      "kind": "button",
+      "refersTo": "button-secondary",
+      "description": "Flat hairline-bordered action for secondary navigation such as Read resume and Print.",
+      "html": "<a href=\"#resume\" class=\"ds-btn-secondary\">Read resume</a>",
+      "css": ".ds-btn-secondary { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 0 20px; border-radius: var(--radius-md, 6px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-raised, #151518); color: var(--ink-primary, #f1eee8); font-family: var(--font-sans, Archivo, sans-serif); font-size: 14px; font-weight: 500; text-decoration: none; cursor: pointer; transition: border-color 140ms cubic-bezier(0.22, 1, 0.36, 1), background-color 140ms cubic-bezier(0.22, 1, 0.36, 1), transform 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-btn-secondary:hover { border-color: var(--rule-strong, #393942); background-color: var(--surface-subtle, #1c1c20); transform: translateY(-1px); } .ds-btn-secondary:active { transform: translateY(0); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Discipline Filter Bar",
+      "kind": "chip",
+      "refersTo": "filter-chip",
+      "description": "Compact 4px category filter chips used on /projects with solid accent active state.",
+      "html": "<div class=\"ds-filter-group\" role=\"group\" aria-label=\"Filter projects\"><button type=\"button\" class=\"ds-chip ds-chip-active\" aria-pressed=\"true\">All builds</button><button type=\"button\" class=\"ds-chip\" aria-pressed=\"false\">AI &amp; Automation</button><button type=\"button\" class=\"ds-chip\" aria-pressed=\"false\">Full-Stack Web</button></div>",
+      "css": ".ds-filter-group { display: flex; flex-wrap: wrap; gap: 8px; } .ds-chip { border-radius: var(--radius-sm, 4px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-raised, #151518); color: var(--ink-secondary, #c4bfb5); padding: 6px 14px; font-family: var(--font-sans, Archivo, sans-serif); font-size: 13px; font-weight: 500; cursor: pointer; transition: border-color 140ms cubic-bezier(0.22, 1, 0.36, 1), background-color 140ms cubic-bezier(0.22, 1, 0.36, 1), color 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-chip:hover { border-color: var(--rule-strong, #393942); color: var(--ink-primary, #f1eee8); } .ds-chip-active { border-color: var(--accent, #e59a3c); background-color: var(--accent, #e59a3c); color: var(--accent-ink, #13100b); } .ds-chip-active:hover { color: var(--accent-ink, #13100b); } .ds-chip:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Sticky Header Navigation",
+      "kind": "nav",
+      "refersTo": "header-nav",
+      "description": "64px translucent sticky bar with identity wordmark, three plain links, and a 2px amber active underline.",
+      "html": "<header class=\"ds-header\"><div class=\"ds-header-inner\"><a href=\"#\" class=\"ds-brand\">Sagnik Chowdhury</a><nav class=\"ds-nav\" aria-label=\"Primary\"><a href=\"#\" class=\"ds-nav-link ds-nav-active\" aria-current=\"page\">Home</a><a href=\"#projects\" class=\"ds-nav-link\">Projects</a><a href=\"#resume\" class=\"ds-nav-link\">Resume</a></nav></div></header>",
+      "css": ".ds-header { border-bottom: 1px solid var(--rule-hair, #26262c); background-color: color-mix(in srgb, var(--surface-ground, #0e0e10) 88%, transparent); backdrop-filter: blur(12px); } .ds-header-inner { max-width: 1000px; height: 64px; margin: 0 auto; padding: 0 24px; display: flex; align-items: center; justify-content: space-between; gap: 16px; font-family: var(--font-sans, Archivo, sans-serif); } .ds-brand { font-size: 15px; font-weight: 600; letter-spacing: -0.02em; color: var(--ink-primary, #f1eee8); text-decoration: none; } .ds-nav { display: flex; align-items: center; gap: 24px; } .ds-nav-link { position: relative; padding: 4px 0; font-size: 14px; font-weight: 400; color: var(--ink-muted, #938e84); text-decoration: none; transition: color 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-nav-link:hover { color: var(--ink-primary, #f1eee8); } .ds-nav-active { color: var(--ink-primary, #f1eee8); font-weight: 600; } .ds-nav-active::after { content: \"\"; position: absolute; left: 0; right: 0; bottom: -2px; height: 2px; border-radius: 999px; background-color: var(--accent, #e59a3c); } .ds-nav-link:focus-visible, .ds-brand:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Desk Sound Deck",
+      "kind": "custom",
+      "refersTo": "sound-deck",
+      "description": "Muted-by-default studio transport bar with grooved vinyl play trigger, pivoting tonearm, track switcher, and VU bars.",
+      "html": "<section class=\"ds-deck\" aria-label=\"Desk Sound Deck\"><div class=\"ds-deck-left\"><button type=\"button\" class=\"ds-vinyl-btn\" aria-pressed=\"false\" aria-label=\"Play Desk Session\"><span class=\"ds-vinyl-disc\"><span class=\"ds-vinyl-label\"><svg viewBox=\"0 0 24 24\" width=\"10\" height=\"10\" fill=\"currentColor\" aria-hidden=\"true\"><polygon points=\"6,4 20,12 6,20\"/></svg></span></span><span class=\"ds-tonearm\"><span class=\"ds-tonearm-pivot\"></span></span></button><div class=\"ds-deck-meta\"><div class=\"ds-deck-title\">Desk Session — House Loop</div><div class=\"ds-deck-sub\">Muted by default / 122 BPM / Click vinyl to play</div></div></div><div class=\"ds-deck-right\"><div class=\"ds-seg\"><button type=\"button\" class=\"ds-seg-btn ds-seg-selected\">House</button><button type=\"button\" class=\"ds-seg-btn\">GTA</button></div><button type=\"button\" class=\"ds-tick-btn\">UI ticks: off</button><div class=\"ds-vu\" aria-hidden=\"true\"><span></span><span></span><span></span><span></span></div></div></section>",
+      "css": ".ds-deck { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 16px 20px; border-radius: var(--radius-md, 6px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-raised, #151518); font-family: var(--font-sans, Archivo, sans-serif); } .ds-deck-left { display: flex; align-items: center; gap: 14px; } .ds-vinyl-btn { position: relative; width: 56px; height: 56px; display: flex; align-items: center; justify-content: center; border-radius: var(--radius-sm, 4px); border: 1px solid var(--rule-strong, #393942); background-color: var(--surface-subtle, #1c1c20); cursor: pointer; transition: border-color 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-vinyl-btn:hover { border-color: var(--accent, #e59a3c); } .ds-vinyl-disc { position: relative; display: block; width: 44px; height: 44px; border-radius: 999px; border: 1px solid var(--rule-strong, #393942); background: repeating-radial-gradient(circle at center, var(--surface-vinyl, #09090b) 0px, var(--surface-vinyl, #09090b) 2px, var(--surface-vinyl-groove, #1b1b20) 2.5px, var(--surface-vinyl, #09090b) 4px); } .ds-vinyl-label { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); width: 20px; height: 20px; border-radius: 999px; background-color: var(--accent, #e59a3c); color: var(--accent-ink, #13100b); display: flex; align-items: center; justify-content: center; } .ds-tonearm { position: absolute; right: 5px; top: 5px; width: 2px; height: 26px; border-radius: 999px; background-color: var(--ink-muted, #938e84); transform-origin: top; transform: rotate(4deg); transition: transform 240ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-vinyl-btn:hover .ds-tonearm { transform: rotate(16deg); background-color: var(--accent, #e59a3c); } .ds-tonearm-pivot { position: absolute; left: -2px; top: -2px; width: 6px; height: 6px; border-radius: 999px; background-color: var(--ink-secondary, #c4bfb5); } .ds-deck-title { font-size: 14px; font-weight: 600; color: var(--ink-primary, #f1eee8); } .ds-deck-sub { margin-top: 4px; font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 12px; font-variant-numeric: tabular-nums; color: var(--ink-muted, #938e84); } .ds-deck-right { display: flex; align-items: center; gap: 10px; } .ds-seg { display: inline-flex; padding: 2px; border-radius: var(--radius-sm, 4px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-ground, #0e0e10); } .ds-seg-btn { border: none; border-radius: 3px; padding: 4px 10px; font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 12px; background: transparent; color: var(--ink-muted, #938e84); cursor: pointer; } .ds-seg-selected { background-color: var(--surface-subtle, #1c1c20); color: var(--ink-primary, #f1eee8); } .ds-tick-btn { border-radius: var(--radius-sm, 4px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-subtle, #1c1c20); color: var(--ink-secondary, #c4bfb5); padding: 6px 10px; font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 12px; cursor: pointer; } .ds-tick-btn:hover { border-color: var(--rule-strong, #393942); color: var(--ink-primary, #f1eee8); } .ds-vu { display: flex; align-items: flex-end; gap: 3px; height: 16px; } .ds-vu span { display: block; width: 2px; height: 4px; border-radius: 999px; background-color: var(--rule-strong, #393942); } .ds-vinyl-btn:focus-visible, .ds-seg-btn:focus-visible, .ds-tick-btn:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Studio Sampler Pad",
+      "kind": "custom",
+      "refersTo": "sampler-pad",
+      "description": "Tactile 76px hardware pad with icon, numeric shortcut key, amber status LED, and active wash state.",
+      "html": "<div class=\"ds-pad-grid\"><button type=\"button\" class=\"ds-pad ds-pad-active\" aria-pressed=\"true\"><div class=\"ds-pad-top\"><svg class=\"ds-pad-ico\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><circle cx=\"12\" cy=\"12\" r=\"2\"/></svg><span class=\"ds-pad-idx\">1<span class=\"ds-pad-led\"></span></span></div><span class=\"ds-pad-label\">Rekordbox</span></button><button type=\"button\" class=\"ds-pad\" aria-pressed=\"false\"><div class=\"ds-pad-top\"><svg class=\"ds-pad-ico\" viewBox=\"0 0 24 24\" width=\"16\" height=\"16\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.75\" aria-hidden=\"true\"><circle cx=\"12\" cy=\"12\" r=\"10\"/><line x1=\"22\" y1=\"12\" x2=\"18\" y2=\"12\"/><line x1=\"6\" y1=\"12\" x2=\"2\" y2=\"12\"/><line x1=\"12\" y1=\"6\" x2=\"12\" y2=\"2\"/><line x1=\"12\" y1=\"22\" x2=\"12\" y2=\"18\"/></svg><span class=\"ds-pad-idx\">2<span class=\"ds-pad-led\"></span></span></div><span class=\"ds-pad-label\">CS2</span></button></div>",
+      "css": ".ds-pad-grid { display: grid; grid-template-columns: repeat(2, minmax(120px, 160px)); gap: 10px; } .ds-pad { display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start; min-height: 76px; padding: 12px; border-radius: var(--radius-sm, 4px); border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-raised, #151518); color: var(--ink-primary, #f1eee8); font-family: var(--font-sans, Archivo, sans-serif); cursor: pointer; text-align: left; transition: border-color 140ms cubic-bezier(0.22, 1, 0.36, 1), transform 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-pad:hover { border-color: var(--rule-strong, #393942); } .ds-pad:active { transform: translateY(1px); } .ds-pad-active { border-color: var(--accent, #e59a3c); background-color: var(--accent-soft, rgba(229, 154, 60, 0.14)); } .ds-pad-top { width: 100%; display: flex; align-items: center; justify-content: space-between; } .ds-pad-ico { color: var(--ink-secondary, #c4bfb5); } .ds-pad-active .ds-pad-ico { color: var(--accent, #e59a3c); } .ds-pad-idx { display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 11px; color: var(--ink-muted, #938e84); } .ds-pad-led { width: 6px; height: 6px; border-radius: 999px; background-color: var(--rule-strong, #393942); } .ds-pad-active .ds-pad-led { background-color: var(--accent, #e59a3c); } .ds-pad-label { margin-top: 12px; font-size: 13px; font-weight: 500; } .ds-pad:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    },
+    {
+      "name": "Hover Preview Card",
+      "kind": "card",
+      "refersTo": "hover-preview-card",
+      "description": "The single shadowed surface in the system: a 224px floating desktop preview over Selected Projects rows.",
+      "html": "<div class=\"ds-preview\"><div class=\"ds-preview-media\"><span class=\"ds-preview-cat\">AI &amp; Automation</span><span class=\"ds-preview-stack\">Python, SQLite, Next.js, React</span></div><div class=\"ds-preview-foot\"><div class=\"ds-preview-title\">The Teatime</div><div class=\"ds-preview-meta\">AI &amp; Automation / 2025</div></div></div>",
+      "css": ".ds-preview { width: 224px; overflow: hidden; border-radius: var(--radius-md, 6px); border: 1px solid var(--rule-strong, #393942); background-color: var(--surface-raised, #151518); box-shadow: var(--shadow-float, 0 18px 44px -16px rgba(0, 0, 0, 0.65)); font-family: var(--font-sans, Archivo, sans-serif); } .ds-preview-media { height: 96px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; border-bottom: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-subtle, #1c1c20); } .ds-preview-cat { font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 11px; color: var(--accent, #e59a3c); } .ds-preview-stack { font-size: 12px; line-height: 1.35; color: var(--ink-secondary, #c4bfb5); } .ds-preview-foot { padding: 8px 12px; } .ds-preview-title { font-size: 12px; font-weight: 600; color: var(--ink-primary, #f1eee8); } .ds-preview-meta { margin-top: 2px; font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 11px; color: var(--ink-muted, #938e84); }"
+    },
+    {
+      "name": "Pull Cord Theme Switch",
+      "kind": "custom",
+      "refersTo": "pull-cord",
+      "description": "Weighted ceiling pull cord anchored in the right gutter that flips between Obsidian Liner Notes and Linen Studio Paper.",
+      "html": "<div class=\"ds-cord-wrap\"><div class=\"ds-cord-cap\"></div><svg class=\"ds-cord-svg\" viewBox=\"0 0 52 96\" width=\"52\" height=\"96\" aria-hidden=\"true\"><path d=\"M26 4 Q27 30 26 54\" fill=\"none\" stroke=\"var(--cord-wire, #7c7870)\" stroke-width=\"1.75\" stroke-linecap=\"round\"/></svg><button type=\"button\" role=\"switch\" aria-checked=\"false\" aria-label=\"Pull cord for light mode\" class=\"ds-cord-btn\"><span class=\"ds-cord-bead\"><span class=\"ds-cord-tip\"></span></span><span class=\"ds-cord-hint\">pull for light</span></button></div>",
+      "css": ".ds-cord-wrap { position: relative; width: 52px; height: 96px; } .ds-cord-cap { position: absolute; left: 18px; top: 0; width: 16px; height: 8px; border-radius: 0 0 4px 4px; background-color: var(--cord-cap, #2c2c33); } .ds-cord-svg { position: absolute; inset: 0; pointer-events: none; } .ds-cord-btn { position: absolute; left: 6px; top: 44px; width: 40px; height: 44px; display: flex; align-items: center; justify-content: center; background: transparent; border: none; border-radius: 6px; cursor: grab; } .ds-cord-btn:active { cursor: grabbing; transform: translateY(8px); transition: transform 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-cord-bead { display: flex; flex-direction: column; justify-content: flex-end; width: 12px; height: 22px; overflow: hidden; border-radius: 999px; border: 1px solid var(--rule-strong, #393942); background-color: var(--cord-bead, #f1eee8); } .ds-cord-tip { display: block; width: 100%; height: 6px; background-color: var(--cord-bead-tip, #e59a3c); } .ds-cord-hint { position: absolute; right: 42px; top: 10px; white-space: nowrap; padding: 4px 8px; border-radius: 4px; border: 1px solid var(--rule-hair, #26262c); background-color: var(--surface-raised, #151518); color: var(--ink-secondary, #c4bfb5); font-family: var(--font-mono, \"Geist Mono\", monospace); font-size: 11px; opacity: 0; pointer-events: none; transition: opacity 140ms cubic-bezier(0.22, 1, 0.36, 1); } .ds-cord-btn:hover .ds-cord-hint, .ds-cord-btn:focus-visible .ds-cord-hint { opacity: 1; } .ds-cord-btn:focus-visible { outline: 2px solid var(--accent, #e59a3c); outline-offset: 2px; }"
+    }
+  ],
+  "narrative": {
+    "northStar": "Obsidian Liner Notes",
+    "overview": "This portfolio behaves like the printed sleeve of a late-night house record laid across an engineer's drafting desk. Its default dark mode (Obsidian Liner Notes) sets matte charcoal surfaces over a fixed 22px architectural dot matrix, carrying crisp warm-bone prose and a single studio-amber accent drawn from hardware LEDs and vinyl center labels. Pulling the weighted ceiling cord in the top-right gutter floods the viewport via a circular View Transition into Linen Studio Paper, a warm daylight paper palette calibrated for extended reading and clean printing.\n\nThe layout rejects developer-template spectacle—no Inter, no purple gradients, no glowing pills, no particle canvases, no autoplay sound, and no decorative eyebrows above headings. Proof is carried by clear engineering prose, hairline structural rules, and three restrained tactile instruments: a muted-by-default Desk Sound Deck, a 5-pad Off-the-Clock audio sampler, and a spring-physics Pull Cord theme switch.",
+    "keyCharacteristics": [
+      "Dual-polarity studio material: matte obsidian dark default paired with warm linen daylight mode via a physics-simulated Pull Cord.",
+      "Architectural 22px dot-grid backdrop with a subtle 240px pointer-warmth mask on fine-pointer desktops.",
+      "Single-accent discipline: Studio Amber in dark mode and high-contrast Burnt Ochre in light mode reserved for primary actions, live audio states, focus rings, and hover highlights.",
+      "Editorial text density: 1000px reading frame, 200px left section labels, hairline horizontal rules, and 56ch–64ch prose measures.",
+      "Strictly opt-in audio and full prefers-reduced-motion support across every animation and physics spring."
+    ],
+    "rules": [
+      {
+        "name": "The Single-Accent Discipline Rule",
+        "body": "Only one hue family (Studio Amber in dark mode, Burnt Ochre in light mode) carries chromatic emphasis. It marks primary CTAs, active audio or filter states, focus rings, and link hover states—never large card fills, decorative gradients, or competing secondary accents.",
+        "section": "colors"
+      },
+      {
+        "name": "The Polarity-Matched Contrast Rule",
+        "body": "Every semantic surface, ink, rule, and accent token resolves through CSS custom properties under :root and :root[data-theme=\"light\"], darkening amber (#e59a3c) to burnt ochre (#9e4c0b) on linen paper so text and borders preserve legibility across both modes.",
+        "section": "colors"
+      },
+      {
+        "name": "The Slash-Separator Rule",
+        "body": "Inline metadata pairs and sequences use forward slashes (Kolkata, India / 03:48 IST, Uphook.ai / Technical Intern, Playing / 122 BPM / Click vinyl to pause) rather than middle-dot (·) chains.",
+        "section": "typography"
+      },
+      {
+        "name": "The No-Eyebrow Rule",
+        "body": "Section headings stand directly at the top of their left column in sentence case, followed below by a quiet 13px muted descriptor—never preceded by an uppercase tracked kicker or pill badge.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat-By-Default Rule",
+        "body": "Resting containers, buttons, sampler pads, and the resume sheet carry zero box-shadow. Elevation is reserved strictly for transient overlays floating over page content (the desktop Hover Preview card) and the sticky header's 88% translucent backdrop blur.",
+        "section": "elevation"
+      }
+    ],
+    "dos": [
+      "Do author all color, border, and surface assignments through the CSS custom properties in app/globals.css so Obsidian Liner Notes and Linen Studio Paper remain in sync.",
+      "Do keep audio muted by default on page load and require explicit user interaction (click, tap, or 1–5 pad shortcut) for any playback or UI tick sound.",
+      "Do preserve prefers-reduced-motion: reduce behavior by disabling vinyl spin, VU oscillation, pointer dot glow, View Transition clip animations, and spring overshoot.",
+      "Do format dates, BPM, coordinates, stack tags, and status counters in Geist Mono with tabular-nums and / separators.",
+      "Do constrain narrative prose lines to 56ch–64ch and keep resting cards flat with 1px --rule-hair borders."
+    ],
+    "donts": [
+      "Don't introduce Inter, decorative serif headlines, purple gradients, glowing neon buttons, or background particle canvases.",
+      "Don't add uppercase tracked eyebrows or pill badges above section headings, or middle-dot (·) metadata chains.",
+      "Don't apply drop shadows to static inline cards, buttons, or sampler pads; reserve --shadow-float strictly for transient floating overlays.",
+      "Don't trigger hover audio or autoplay background loops when visitors enter the site or move across project rows.",
+      "Don't style interactive components with Tailwind's bg-accent or text-accent utility classes until the tailwind.config.ts hsl(var(--accent)) bridge is reconciled; reference var(--accent) directly."
+    ]
+  }
+}
